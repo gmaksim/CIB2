@@ -1,57 +1,53 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using System.Drawing;
 
 namespace NlgDBcredProg
 {
     public partial class Form1 : Form
 
     {
-        private int nc;
-        private int nr;
+        SqlConnection connection;
+        SqlDataAdapter adapterUsers;
+        SqlDataAdapter adapterFiles;
+        // students = files, groups = users
+        DataSet dataSet;
+        BindingSource bindingSourceUsers;
+        BindingSource bindingSourceFiles;
+        DataGridView gridUsers;
+        DataGridView gridFiles;
 
         public Form1()
-        { //need usersdb DB and Users TABLES
+
+
+        {
+
             InitializeComponent();
-            string connectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=usersdb;Integrated Security=True";
-            string sql = "SELECT * FROM Users";
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
-                // Создаем объект DataAdapter
-                SqlDataAdapter adapter = new SqlDataAdapter(sql, connection);
-                // Создаем объект Dataset
-                DataSet ds = new DataSet();
-                // Заполняем Dataset
-                adapter.Fill(ds);
-                // Отображаем данные
-                dataGridView1.DataSource = ds.Tables[0];
-            
+            this.Size = new Size(500, 500);
+            connection = new SqlConnection(@"Data Source=.\SQLEXPRESS;Initial Catalog=usersdb;Integrated Security=True");
+            adapterUsers = new SqlDataAdapter("SELECT * FROM Users;", connection);
+            adapterFiles = new SqlDataAdapter("SELECT * FROM Files", connection);
+            dataSet = new DataSet();
+            adapterUsers.Fill(dataSet, "Users");
+            adapterFiles.Fill(dataSet, "Files");
+            dataSet.Relations.Add("users-files", //название связи
+                dataSet.Tables["Users"].Columns["Id"],//первичный ключ главной таблицы
+                dataSet.Tables["Files"].Columns["UsersId"]);//внешний ключ подчиненной таблицы
+            bindingSourceUsers = new BindingSource(dataSet, "Users");
+            bindingSourceFiles = new BindingSource(bindingSourceUsers, "groups-students");
+            gridUsers = new DataGridView();
+            gridUsers.Size = new Size(this.ClientRectangle.Width - 20, (this.ClientRectangle.Height >> 1) - 15);
+            gridUsers.Location = new Point(10, 10);
+            gridUsers.DataSource = bindingSourceUsers;
+            gridFiles = new DataGridView();
+            gridFiles.Size = gridUsers.Size;
+            gridFiles.Location = new Point(10, gridUsers.Bottom + 10);
+            gridFiles.DataSource = bindingSourceFiles;
+            this.Controls.AddRange(new Control[] { gridUsers, gridFiles });
 
-            }
 
-            string sql2 = "SELECT * FROM Files";
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                connection.Open();
-                // Создаем объект DataAdapter
-                SqlDataAdapter adapter = new SqlDataAdapter(sql2, connection);
-                // Создаем объект Dataset
-                DataSet ds = new DataSet();
-                // Заполняем Dataset
-                adapter.Fill(ds);
-                // Отображаем данные
-          
-                dataGridView2.DataSource = ds.Tables[0];
-
-            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -60,31 +56,12 @@ namespace NlgDBcredProg
         }
 
 
+    }
 
- 
+       
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            nc = e.ColumnIndex;
-            nr = e.RowIndex;
-            dataGridView2.Rows[nr].Cells[nc].Selected = true;
-        }
-
-
-
-
-        /*  private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-          {
-              label1.Text = dataGridView2.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
-          }
-
-
-          private void label1_Changed(object sender, EventArgs e)
-          {
-              this.ИМЯBindingSource.Filter = string.Format("CONVERT(СТОЛБЕЦ, 'System.String') LIKE '{0}'", this.label1.Text);
-          }*/
 
 
     }
-}
+
 
