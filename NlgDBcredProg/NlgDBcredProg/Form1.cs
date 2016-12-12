@@ -22,10 +22,12 @@ namespace NlgDBcredProg
         public Form1()
 
 
+            
+
         {
 
             InitializeComponent();
-            this.Size = new Size(500, 500);
+            //this.Size = new Size(1000, 1000);
             connection = new SqlConnection(@"Data Source=.\SQLEXPRESS;Initial Catalog=usersdb;Integrated Security=True");
             adapterUsers = new SqlDataAdapter("SELECT * FROM Users;", connection);
             adapterFiles = new SqlDataAdapter("SELECT * FROM Files", connection);
@@ -36,7 +38,7 @@ namespace NlgDBcredProg
                 dataSet.Tables["Users"].Columns["Id"],//первичный ключ главной таблицы
                 dataSet.Tables["Files"].Columns["UsersId"]);//внешний ключ подчиненной таблицы
             bindingSourceUsers = new BindingSource(dataSet, "Users");
-            bindingSourceFiles = new BindingSource(bindingSourceUsers, "groups-students");
+            bindingSourceFiles = new BindingSource(bindingSourceUsers, "users-files");
             gridUsers = new DataGridView();
             gridUsers.Size = new Size(this.ClientRectangle.Width - 20, (this.ClientRectangle.Height >> 1) - 15);
             gridUsers.Location = new Point(10, 10);
