@@ -11,7 +11,6 @@ namespace NlgDBcredProg
     {
         SqlConnection connection;
         DataSet dataSet;
-        DataSet dataSet2;
         SqlDataAdapter adapterUsers;
         SqlDataAdapter adapterFiles;
         SqlDataAdapter adapterOOO;
@@ -22,38 +21,34 @@ namespace NlgDBcredProg
         DataGridView gridFiles;
         DataGridView gridOOO;
         
-        
-
         public Form1()
         
         {
             InitializeComponent();
-            Size = new Size(450, 450); //РАЗМЕР ДАТАГРИДОВ
-            connection = new SqlConnection(@"Data Source=.\cibEXPRESS;Initial Catalog=usersdb;Integrated Security=True"); //измени дома инстанс для синхронизации БД
-            adapterUsers = new SqlDataAdapter("SELECT * FROM Users;", connection);                                       //инстансы - home-sqlexpress, work - cibexpress
+            Size = new Size(450, 450); 
+            connection = new SqlConnection(@"Data Source=.\cibEXPRESS;Initial Catalog=usersdb;Integrated Security=True"); //инстансы - home-sqlexpress, work - cibexpress
+
+            adapterUsers = new SqlDataAdapter("SELECT * FROM Users;", connection);
             adapterFiles = new SqlDataAdapter("SELECT * FROM Files", connection);
             adapterOOO = new SqlDataAdapter("SELECT * FROM OOO", connection);
-
+       
             dataSet = new DataSet(); 
             adapterUsers.Fill(dataSet, "Users");
             adapterFiles.Fill(dataSet, "Files");
             adapterOOO.Fill(dataSet, "OOO");
 
-            dataSet.Relations.Add("users-files", //название связи
-            dataSet.Tables["Users"].Columns["FILESid"],//первичный ключ главной таблицы
-            dataSet.Tables["Files"].Columns["UsersId"]);//внешний ключ подчиненной таблицы
-            bindingSourceUsers = new BindingSource(dataSet, "Users");
-            bindingSourceFiles = new BindingSource(bindingSourceUsers, "users-files");
-          
+            dataSet.Relations.Add("ooo-users",                  //название связи
+            dataSet.Tables["OOO"].Columns["IdOOO"],             //первичный ключ главной таблицы
+            dataSet.Tables["Users"].Columns["OOOid"]);          //внешний ключ подчиненной таблицы
+            dataSet.Relations.Add("users-files", 
+            dataSet.Tables["Users"].Columns["FILESid"],
+            dataSet.Tables["Files"].Columns["UsersId"]);
 
-            dataSet.Relations.Add("ooo-users", //название связи
-            dataSet.Tables["OOO"].Columns["IdOOO"],//первичный ключ главной таблицы
-            dataSet.Tables["Users"].Columns["OOOid"]);//внешний ключ подчиненной таблицы
             bindingSourceOOO = new BindingSource(dataSet, "OOO");
-            //bindingSourceUsers = new BindingSource(bindingSourceOOO, "ooo-users");
-            
+            bindingSourceUsers = new BindingSource(dataSet, "Users");
+            bindingSourceUsers = new BindingSource(bindingSourceOOO, "ooo-users");
+            bindingSourceFiles = new BindingSource(bindingSourceUsers, "users-files");
 
-            //рисовка формы
             gridUsers = new DataGridView(); //форма Users
             gridUsers.Size = new Size(this.ClientRectangle.Width - 20, (this.ClientRectangle.Height >> 1) - 15);
             gridUsers.Location = new Point(170, 10); 
@@ -65,15 +60,12 @@ namespace NlgDBcredProg
             gridFiles.DataSource = bindingSourceFiles;
 
             gridOOO = new DataGridView(); //форма OOO
-            gridUsers.Size = new Size(this.ClientRectangle.Width - 20, (this.ClientRectangle.Height >> 1) - 15);
+            gridOOO.Size = new Size(this.ClientRectangle.Width - 20, (this.ClientRectangle.Height >> 1) - 15);
             gridOOO.Location = new Point(20, gridFiles.Bottom + 10); 
             gridOOO.DataSource = bindingSourceOOO;
 
             this.Controls.AddRange(new Control[] { gridUsers, gridFiles, gridOOO });
-
             dataSet.Tables["Users"].Columns["Id"].ReadOnly = true; // R/O на ид в юзер таблице 
-
-
 
         }
 //кнопки для грида ФИО
