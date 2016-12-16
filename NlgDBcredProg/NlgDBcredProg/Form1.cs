@@ -26,60 +26,73 @@ namespace NlgDBcredProg
         {
             InitializeComponent();
             Size = new Size(450, 450); 
-            connection = new SqlConnection(@"Data Source=.\cibEXPRESS;Initial Catalog=usersdb;Integrated Security=True"); //инстансы - home-sqlexpress, work - cibexpress
-
-            adapterUsers = new SqlDataAdapter("SELECT * FROM Users;", connection);
+            connection = new SqlConnection(@"Data Source=.\cibEXPRESS;Initial Catalog=usersdb;Integrated Security=True"); //connection to SQL
+            adapterUsers = new SqlDataAdapter("SELECT * FROM Users;", connection); //select from tables
             adapterFiles = new SqlDataAdapter("SELECT * FROM Files", connection);
             adapterOOO = new SqlDataAdapter("SELECT * FROM OOO", connection);
-       
-            dataSet = new DataSet(); 
+
+            dataSet = new DataSet(); //create dataset with tables
             adapterUsers.Fill(dataSet, "Users");
             adapterFiles.Fill(dataSet, "Files");
             adapterOOO.Fill(dataSet, "OOO");
 
-            dataSet.Relations.Add("ooo-users",                  //название связи
-            dataSet.Tables["OOO"].Columns["IdOOO"],             //первичный ключ главной таблицы
-            dataSet.Tables["Users"].Columns["OOOid"]);          //внешний ключ подчиненной таблицы
-            dataSet.Relations.Add("users-files", 
+            dataSet.Relations.Add("ooo-users", //relations OOO and Users      
+            dataSet.Tables["OOO"].Columns["IdOOO"],             
+            dataSet.Tables["Users"].Columns["OOOid"]);         
+
+            dataSet.Relations.Add("users-files", //relations Users and Files
             dataSet.Tables["Users"].Columns["FILESid"],
             dataSet.Tables["Files"].Columns["UsersId"]);
 
-            bindingSourceOOO = new BindingSource(dataSet, "OOO");
+
+            bindingSourceOOO = new BindingSource(dataSet, "OOO"); //bs dataset
             bindingSourceUsers = new BindingSource(dataSet, "Users");
-            bindingSourceUsers = new BindingSource(bindingSourceOOO, "ooo-users");
+
+            bindingSourceUsers = new BindingSource(bindingSourceOOO, "ooo-users"); //bs with relations
             bindingSourceFiles = new BindingSource(bindingSourceUsers, "users-files");
 
-            gridUsers = new DataGridView(); //форма Users
-            gridUsers.Size = new Size(this.ClientRectangle.Width - 20, (this.ClientRectangle.Height >> 1) - 15);
-            gridUsers.Location = new Point(170, 10); 
+            gridUsers = new DataGridView(); //dg Users
+            gridUsers.Size = new Size(670, 380);
+            gridUsers.Location = new Point(310, 5); 
             gridUsers.DataSource = bindingSourceUsers;
 
-            gridFiles = new DataGridView(); //форма Files
-            gridFiles.Size = gridUsers.Size;
-            gridFiles.Location = new Point(170, gridUsers.Bottom + 10); 
+            gridFiles = new DataGridView(); //dg Files
+            gridFiles.Size = new Size(670, 200);
+            gridFiles.Location = new Point(310, gridUsers.Bottom + 30); 
             gridFiles.DataSource = bindingSourceFiles;
 
-            gridOOO = new DataGridView(); //форма OOO
-            gridOOO.Size = new Size(this.ClientRectangle.Width - 20, (this.ClientRectangle.Height >> 1) - 15);
-            gridOOO.Location = new Point(20, gridFiles.Bottom + 10); 
+            gridOOO = new DataGridView(); //dg OOO
+            gridOOO.Size = new Size (300, 610);
+            gridOOO.Location = new Point(5, 5);
             gridOOO.DataSource = bindingSourceOOO;
 
-            this.Controls.AddRange(new Control[] { gridUsers, gridFiles, gridOOO });
-            dataSet.Tables["Users"].Columns["Id"].ReadOnly = true; // R/O на ид в юзер таблице 
-
-        }
-//кнопки для грида ФИО
-        private void addButton_Click(object sender, EventArgs e)
-        {
-            DataRow row = dataSet.Tables[0].NewRow(); // добавляем новую строку в DataTable
-            dataSet.Tables[0].Rows.Add(row);
+            this.Controls.AddRange(new Control[] { gridUsers, gridFiles, gridOOO }); //control with 3 dg
+            dataSet.Tables["Users"].Columns["Id"].ReadOnly = true; // R/O for 3 id in tables (temporary security)
+            dataSet.Tables["OOO"].Columns["IdOOO"].ReadOnly = true;
+            dataSet.Tables["Files"].Columns["UsersId"].ReadOnly = true;
         }
 
-        private void saveButton_Click(object sender, EventArgs e) 
+        private void saveButtonOOO_Click(object sender, EventArgs e) //save for OOO in DB 
         {
             using (SqlConnection connection = new SqlConnection(@"Data Source=.\cibEXPRESS;Initial Catalog=usersdb;Integrated Security=True"))
             {
                 connection.Open();
+                adapterUsers = new SqlDataAdapter("SELECT * FROM Users;", connection);
+                SqlCommandBuilder commandBuilder = new SqlCommandBuilder(adapterUsers);
+                adapterUsers.InsertCommand = new SqlCommand("sp_Users", connection);
+                adapterUsers.InsertCommand.CommandType = CommandType.StoredProcedure;
+                adapterUsers.InsertCommand.Parameters.Add(new SqlParameter("@name", SqlDbType.NText, 10, "Name"));
+                adapterUsers.InsertCommand.Parameters.Add(new SqlParameter("@age", SqlDbType.NText, 10, "Age"));
+                SqlParameter parameter = adapterUsers.InsertCommand.Parameters.Add("@Id", SqlDbType.Int, 10, "Id");
+                parameter.Direction = ParameterDirection.Output;
+                adapterUsers.Update(dataSet.Tables["Users"]);
+            }
+        }
+        private void saveButtonUsers_Click(object sender, EventArgs e) //save for Users in DB 
+        {
+            using (SqlConnection connection = new SqlConnection(@"Data Source=.\cibEXPRESS;Initial Catalog=usersdb;Integrated Security=True"))
+            {
+                connection.Open(); 
                 adapterUsers = new SqlDataAdapter("SELECT * FROM Users;", connection);
                 SqlCommandBuilder commandBuilder = new SqlCommandBuilder(adapterUsers);
                 adapterUsers.InsertCommand = new SqlCommand("sp_Users", connection);
@@ -91,13 +104,28 @@ namespace NlgDBcredProg
                 adapterUsers.Update(dataSet.Tables["Users"]);
             }
         }
+        private void saveButtonFiles_Click(object sender, EventArgs e) //save for OOO in DB 
+        {
+            using (SqlConnection connection = new SqlConnection(@"Data Source=.\cibEXPRESS;Initial Catalog=usersdb;Integrated Security=True"))
+            {
+                connection.Open();
+                adapterUsers = new SqlDataAdapter("SELECT * FROM Users;", connection);
+                SqlCommandBuilder commandBuilder = new SqlCommandBuilder(adapterUsers);
+                adapterUsers.InsertCommand = new SqlCommand("sp_Users", connection);
+                adapterUsers.InsertCommand.CommandType = CommandType.StoredProcedure;
+                adapterUsers.InsertCommand.Parameters.Add(new SqlParameter("@name", SqlDbType.NText, 10, "Name"));
+                adapterUsers.InsertCommand.Parameters.Add(new SqlParameter("@age", SqlDbType.NText, 10, "Age"));
+                SqlParameter parameter = adapterUsers.InsertCommand.Parameters.Add("@Id", SqlDbType.Int, 10, "Id");
+                parameter.Direction = ParameterDirection.Output;
+                adapterUsers.Update(dataSet.Tables["Users"]);
+            }
+        }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            StartPosition = FormStartPosition.CenterScreen;
+            StartPosition = FormStartPosition.CenterScreen; //form position and size
             this.Left += 400;
-            Size = new Size(1000, 700); //размер основной формы и позиция
-            
+            Size = new Size(1000, 700); 
         }
 
     }
