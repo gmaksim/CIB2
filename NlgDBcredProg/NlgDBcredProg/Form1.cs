@@ -130,17 +130,22 @@ namespace NlgDBcredProg
         {
             using (SqlConnection connection = new SqlConnection(@"Data Source=.\cibEXPRESS;Initial Catalog=usersdb;Integrated Security=True"))
             {
-
+                //some text to save information from Files (later)
             }
         }
 
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e) 
         {
-            StartPosition = FormStartPosition.CenterScreen; //form position and size
+            StartPosition = FormStartPosition.CenterScreen; //main form position and size
             this.Left += 400;
             Size = new Size(1000, 800); 
         }
 
+        private void searchForm_Click(object sender, EventArgs e) //button to open Search form
+        {
+            Search src = new Search();
+            src.Show();
+        }
     }
- }
+}
