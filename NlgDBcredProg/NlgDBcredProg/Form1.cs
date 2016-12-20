@@ -62,11 +62,10 @@ namespace NlgDBcredProg
             gridFiles.Location = new Point(310, gridUsers.Bottom + 30); 
             gridFiles.DataSource = bindingSourceFiles;
             this.Controls.AddRange(new Control[] { gridUsers, gridFiles, gridOOO, gridLoan }); //control with 4 dg
-
-    //      dataSet.Tables["Users"].Columns["Id"].ReadOnly = true; // R/O for 3 id in tables (temporary security, in future hide in SELECT query)
-    //      dataSet.Tables["OOO"].Columns["IdOOO"].ReadOnly = true;
-    //      dataSet.Tables["Files"].Columns["UsersId"].ReadOnly = true;
-    //      dataSet.Tables["Files"].Columns["UsersId"].ReadOnly = true;
+            //      dataSet.Tables["Users"].Columns["Id"].ReadOnly = true; // R/O for 3 id in tables (temporary security, in future hide ID's in SELECT query)
+            dataSet.Tables["OOO"].Columns["IdOOO"].ReadOnly = true;
+            //      dataSet.Tables["Files"].Columns["UsersId"].ReadOnly = true;
+            //      dataSet.Tables["Files"].Columns["UsersId"].ReadOnly = true;
         }
 
         private void saveButtonOOO_Click(object sender, EventArgs e) //save for OOO in DB - TO-DO
@@ -96,7 +95,8 @@ namespace NlgDBcredProg
                 adapterUsers.InsertCommand.CommandType = CommandType.StoredProcedure;
                 adapterUsers.InsertCommand.Parameters.Add(new SqlParameter("@name", SqlDbType.NText, 10, "Name"));
                 adapterUsers.InsertCommand.Parameters.Add(new SqlParameter("@age", SqlDbType.NText, 10,"Age"));
-                SqlParameter parameter = adapterUsers.InsertCommand.Parameters.Add("@Id", SqlDbType.Int, 10,"Id");
+                adapterUsers.InsertCommand.Parameters.Add(new SqlParameter("@idusers", SqlDbType.Int, 10, "IdUsers"));
+                SqlParameter parameter = adapterUsers.InsertCommand.Parameters.Add("@FILESId", SqlDbType.Int, 10,"FILESId");
                 parameter.Direction = ParameterDirection.Output;
                 adapterUsers.Update(dataSet.Tables["Users"]);
             }
@@ -128,7 +128,7 @@ namespace NlgDBcredProg
                 adapterUsers.InsertCommand.CommandType = CommandType.StoredProcedure;
                 adapterUsers.InsertCommand.Parameters.Add(new SqlParameter("@name", SqlDbType.NText, 10, "Name"));
                 adapterUsers.InsertCommand.Parameters.Add(new SqlParameter("@age", SqlDbType.NText, 10, "Age"));
-                SqlParameter parameter = adapterUsers.InsertCommand.Parameters.Add("@Id", SqlDbType.Int, 10, "Id");
+                SqlParameter parameter = adapterUsers.InsertCommand.Parameters.Add("@FILESId", SqlDbType.Int, 10, "FILESId");
                 parameter.Direction = ParameterDirection.Output;
                 adapterUsers.Update(dataSet.Tables["Users"]);
             }
