@@ -11,9 +11,9 @@ namespace NlgDBcredProg
     {
         SqlConnection connection;
         DataSet dataSet;
-        SqlDataAdapter adapterUsers, adapterFiles, adapterOOO, adapterLoan;
-        BindingSource bindingSourceUsers, bindingSourceFiles, bindingSourceOOO, bindingSourceLoan;
-        DataGridView gridUsers, gridFiles, gridOOO, gridLoan;
+        SqlDataAdapter adapterUsers, adapterFiles, adapterOOO, adapterLoan, adapterZalogodat, adapterPoruchit, adapterGroupObj, adapterFilesGrOb;
+        BindingSource bindingSourceUsers, bindingSourceFiles, bindingSourceOOO, bindingSourceLoan, bindingSourceZalogodat, bindingSourcePoruchit, bindingSourceGroupObj, bindingSourceFilesGrOb;
+        DataGridView gridUsers, gridFiles, gridOOO, gridLoan, gridZalogodat, gridPoruchit, gridGroupObj, gridFilesGrOb;
 
         public Form1()
         
@@ -21,33 +21,59 @@ namespace NlgDBcredProg
             InitializeComponent();
             Size = new Size(450, 450); 
             connection = new SqlConnection(@"Data Source=.\cibEXPRESS;Initial Catalog=usersdb;Integrated Security=True"); //connection to SQL
-            adapterUsers = new SqlDataAdapter("SELECT * FROM Users;", connection); //select from tables
-            adapterFiles = new SqlDataAdapter("SELECT * FROM Files", connection);
+            adapterUsers = new SqlDataAdapter("SELECT * FROM Users;", connection); //select from tables+
             adapterOOO = new SqlDataAdapter("SELECT * FROM OOO", connection);
             adapterLoan = new SqlDataAdapter("SELECT * FROM LoanAgr", connection);
+            adapterZalogodat = new SqlDataAdapter("SELECT * FROM Zalogodat", connection);
+            adapterPoruchit = new SqlDataAdapter("SELECT * FROM Poruchit", connection);
+            adapterFiles = new SqlDataAdapter("SELECT * FROM Files", connection);
+            //adapterGroupObj = new SqlDataAdapter("SELECT * FROM GroupObj", connection);
+            //adapterFilesGrOb = new SqlDataAdapter("SELECT * FROM FilesGrOb", connection);
 
-            dataSet = new DataSet(); //create dataset with tables
+            dataSet = new DataSet(); //create dataset with tables+
             adapterUsers.Fill(dataSet, "Users");
-            adapterFiles.Fill(dataSet, "Files");
             adapterOOO.Fill(dataSet, "OOO");
             adapterLoan.Fill(dataSet, "LoanAgr");
+            adapterZalogodat.Fill(dataSet, "Zalogodat");
+            adapterPoruchit.Fill(dataSet, "Poruchit");
+            adapterFiles.Fill(dataSet, "Files");
+            //adapterGroupObj.Fill(dataSet, "GroupObj");
+            //adapterFilesGrOb.Fill(dataSet, "FilesGrOb");
 
             dataSet.Relations.Add("ooo-loanagr", //relations OOO and LoanAgr      
             dataSet.Tables["OOO"].Columns["IdOOO"],             
             dataSet.Tables["LoanAgr"].Columns["LoanId"]);
-            dataSet.Relations.Add("loanagr-users", //relations LoanAgr and Users      
+            dataSet.Relations.Add("loanagr-users", //relations LoanAgr and Users (main data)  
             dataSet.Tables["LoanAgr"].Columns["Id"],
             dataSet.Tables["Users"].Columns["IdUsers"]);
-            dataSet.Relations.Add("users-files", //relations Users and Files
-            dataSet.Tables["Users"].Columns["FILESid"],
-            dataSet.Tables["Files"].Columns["UsersId"]);
+            dataSet.Relations.Add("loanagr-zalogodat", //relations LoanAgr and Zalogodat
+            dataSet.Tables["LoanAgr"].Columns["Id"],
+            dataSet.Tables["Zalogodat"].Columns["ZalId"]);
+            dataSet.Relations.Add("loanagr-poruchit", //relations LoanAgr and Poruchit
+            dataSet.Tables["LoanAgr"].Columns["Id"],
+            dataSet.Tables["Poruchit"].Columns["PorId"]);
+            dataSet.Relations.Add("zalogodat-files", //relations Zalogod and Files      
+            dataSet.Tables["Zalogodat"].Columns["FilesId"],             
+            dataSet.Tables["Files"].Columns["ZalFilId"]);
+            dataSet.Relations.Add("poruchit-files", //relations Poruchit and Files      
+            dataSet.Tables["Poruchit"].Columns["FilesId"],
+            dataSet.Tables["Files"].Columns["PorlFilId"]);
 
-            bindingSourceLoan = new BindingSource(dataSet, "LoanAgr"); //bs dataset
-            bindingSourceOOO = new BindingSource(dataSet, "OOO"); 
+            bindingSourceOOO = new BindingSource(dataSet, "OOO"); //bs dataset+
+            bindingSourceLoan = new BindingSource(dataSet, "LoanAgr");
             bindingSourceUsers = new BindingSource(dataSet, "Users");
+            bindingSourceZalogodat = new BindingSource(dataSet, "Zalogodat");
+            bindingSourcePoruchit = new BindingSource(dataSet, "Poruchit");
+            bindingSourceFiles = new BindingSource(dataSet, "Files");
+            //bindingSourceGroupObj = new BindingSource(dataSet, "GroupObj");
+            //bindingSourceFilesGrOb = new BindingSource(dataSet, "FilesGrOb");
+
             bindingSourceLoan = new BindingSource(bindingSourceOOO, "ooo-loanagr"); //bs with relations
-            bindingSourceUsers = new BindingSource(bindingSourceLoan, "loanagr-users"); 
-            bindingSourceFiles = new BindingSource(bindingSourceUsers, "users-files");
+            bindingSourceZalogodat = new BindingSource(bindingSourceLoan, "loanagr-zalogodat");
+            bindingSourcePoruchit = new BindingSource(bindingSourceLoan, "loanagr-poruchit");
+            bindingSourceUsers = new BindingSource(bindingSourceLoan, "loanagr-users");
+            bindingSourceFiles = new BindingSource(bindingSourceZalogodat, "zalogodat-files");
+            bindingSourceFiles = new BindingSource(bindingSourcePoruchit, "poruchit-files");
 
             gridOOO = new DataGridView(); //dg OOO
             gridOOO.Size = new Size(300, 610);
@@ -61,12 +87,20 @@ namespace NlgDBcredProg
             gridUsers.Size = new Size(350, 200);
             gridUsers.Location = new Point(570, 5);
             gridUsers.DataSource = bindingSourceUsers;
+            gridZalogodat = new DataGridView(); //dg Zalogodat
+            gridZalogodat.Size = new Size(300, 200);
+            gridZalogodat.Location = new Point(310, 240);
+            gridZalogodat.DataSource = bindingSourceZalogodat;
+            gridPoruchit = new DataGridView(); //dg Poruchit
+            gridPoruchit.Size = new Size(300, 200);
+            gridPoruchit.Location = new Point(620, 240);
+            gridPoruchit.DataSource = bindingSourcePoruchit;
             gridFiles = new DataGridView(); //dg Files
             gridFiles.Size = new Size(670, 200);
-            gridFiles.Location = new Point(310, gridUsers.Bottom + 30); 
+            gridFiles.Location = new Point(310, gridUsers.Bottom + 250); 
             gridFiles.DataSource = bindingSourceFiles;
 
-            this.Controls.AddRange(new Control[] { gridUsers, gridFiles, gridOOO, gridLoan }); //control with 4 dg
+            this.Controls.AddRange(new Control[] { gridUsers, gridFiles, gridOOO, gridLoan, gridZalogodat, gridPoruchit, gridGroupObj, gridFilesGrOb }); //control with 4 dg
 
             dataSet.Tables["OOO"].Columns["IdOOO"].ColumnMapping = MappingType.Hidden; // hidden ID's 
             dataSet.Tables["LoanAgr"].Columns["Id"].ColumnMapping = MappingType.Hidden;

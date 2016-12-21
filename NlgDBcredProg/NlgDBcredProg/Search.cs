@@ -16,13 +16,13 @@ namespace NlgDBcredProg
 
         public Search()
         {
-            InitializeComponent();
-            connection = new SqlConnection(@"Data Source=.\cibEXPRESS;Initial Catalog=usersdb;Integrated Security=True"); //connection to SQL
-            adapterUsers = new SqlDataAdapter("SELECT * FROM Users;", connection); //select from tables
-            dataSet = new DataSet(); //create dataset with tables
+            InitializeComponent(); //connect and view of table "Users"
+            connection = new SqlConnection(@"Data Source=.\cibEXPRESS;Initial Catalog=usersdb;Integrated Security=True"); //all comments u can see in main code 
+            adapterUsers = new SqlDataAdapter("SELECT * FROM Users;", connection);                                        // (it's copy-paste "Users" grid)
+            dataSet = new DataSet(); 
             adapterUsers.Fill(dataSet, "Users");
             bindingSourceUsers = new BindingSource(dataSet, "Users");
-            gridUsers = new DataGridView(); //dg Users
+            gridUsers = new DataGridView(); 
             gridUsers.Size = new Size(500, 500);
             gridUsers.Location = new Point(5, 5);
             gridUsers.DataSource = bindingSourceUsers;
@@ -34,6 +34,11 @@ namespace NlgDBcredProg
             StartPosition = FormStartPosition.CenterScreen; //position like main form
             this.Left += 400;
             Size = new Size(1000, 800);
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e) 
+        {
+            bindingSourceUsers.Filter = "Name LIKE '%' + '" + textBox1.Text + "%'"; //search in tables
         }
     }
 }
