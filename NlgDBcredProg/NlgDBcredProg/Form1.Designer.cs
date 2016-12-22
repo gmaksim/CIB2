@@ -33,25 +33,28 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(577, 208);
+            this.button2.Location = new System.Drawing.Point(613, 208);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(185, 23);
+            this.button2.Size = new System.Drawing.Size(213, 23);
             this.button2.TabIndex = 0;
-            this.button2.Text = "Сохранить данные договора";
+            this.button2.Text = "Сохранить кредитную документацию";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.saveButtonUsers_Click);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(315, 618);
+            this.button3.Location = new System.Drawing.Point(315, 707);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(135, 23);
             this.button3.TabIndex = 1;
-            this.button3.Text = "Сохранить документы";
+            this.button3.Text = "Сохранить файлы";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.saveButtonFiles_Click);
             // 
@@ -85,11 +88,44 @@
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.searchForm_Click);
             // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(548, 457);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(167, 23);
+            this.button7.TabIndex = 5;
+            this.button7.Text = "Документы по залогу";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.groupObjForm_Click);
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(315, 458);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(158, 23);
+            this.button8.TabIndex = 6;
+            this.button8.Text = "Сохранить залогодателя";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.saveButtonZalog_Click);
+            // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(790, 457);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(172, 23);
+            this.button9.TabIndex = 7;
+            this.button9.Text = "Сохранить поручителя";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.saveButtonPoruchit_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1204, 876);
+            this.Controls.Add(this.button9);
+            this.Controls.Add(this.button8);
+            this.Controls.Add(this.button7);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
@@ -110,6 +146,9 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button button9;
     }
 }
 
