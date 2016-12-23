@@ -7,7 +7,7 @@ using System.Drawing;
 namespace NlgDBcredProg
 {
     public partial class Form1 : Form
-
+        //tet
     {
         SqlConnection connection;
         DataSet dataSet;
