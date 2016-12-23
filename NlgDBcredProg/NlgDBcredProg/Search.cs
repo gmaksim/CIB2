@@ -7,8 +7,8 @@ using System.Drawing;
 namespace NlgDBcredProg
 {
     public partial class Search : Form
-    {
-        SqlConnection connection;
+    {                                                                           //CredDogCIB CHANGE IT
+        SqlConnection connection = new SqlConnection(@"Data Source=.\cibEXPRESS;Initial Catalog=usersdb;Integrated Security=True");
         DataSet dataSet;
         SqlDataAdapter adapterUsers;
         BindingSource bindingSourceUsers;
@@ -16,9 +16,8 @@ namespace NlgDBcredProg
 
         public Search()
         {
-            InitializeComponent(); //connect and view of table "Users"
-            connection = new SqlConnection(@"Data Source=.\cibEXPRESS;Initial Catalog=usersdb;Integrated Security=True"); //all comments u can see in main code 
-            adapterUsers = new SqlDataAdapter("SELECT * FROM Users;", connection);                                        // (it's copy-paste "Users" grid)
+            InitializeComponent(); //connect and view of table "Users"  (all comments u can see in main form, it's copy-paste "Users" grid)
+            adapterUsers = new SqlDataAdapter("SELECT * FROM Users;", connection);                             
             dataSet = new DataSet(); 
             adapterUsers.Fill(dataSet, "Users");
             bindingSourceUsers = new BindingSource(dataSet, "Users");
