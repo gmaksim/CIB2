@@ -81,6 +81,7 @@ namespace NlgDBcredProg
 
 
             //DATA GRID LOCATION AND SIZE AREA
+
             gridOOO = new DataGridView(); //dg OOO
             gridOOO.Size = new Size(300, 610);
             gridOOO.Location = new Point(5, 5);
