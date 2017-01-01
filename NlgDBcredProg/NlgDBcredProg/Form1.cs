@@ -9,11 +9,15 @@ namespace NlgDBcredProg
     public partial class Form1 : Form
         
     {
-        DataSet dataSet;                                                        //CredDogCIB CHANGE IT
-        SqlConnection connection = new SqlConnection(@"Data Source=.\cibEXPRESS;Initial Catalog=usersdb;Integrated Security=True");
-        SqlDataAdapter adapterOOO;
-        BindingSource bindingSourceOOO;
-        DataGridView gridOOO;
+        DataSet dataSet;                                                        
+        SqlConnection connection = new SqlConnection(@"Data Source=.\cibEXPRESS;
+                                   Initial Catalog=CredDogCIB;Integrated Security=True");
+        SqlDataAdapter adOOO, adKredDog, adZaemwik, adKredDocum, adOsnSdelkVdch, adSpDopSog, adZalogPoruch, adDopSog, 
+                       adOsnovnSd, adSpDSZalPor, adGrpObject, adDocsZalPor, adDopSogZalPor, adObjData;
+        BindingSource bsOOO, bsKredDog, bsZaemwik, bsKredDocum, bsOsnSdelkVdch, bsSpDopSog, bsZalogPoruch, bsDopSog,
+                      bsOsnovnSd, bsSpDSZalPor, bsGrpObject, bsDocsZalPor, bsDopSogZalPor, bsObjData;
+        DataGridView gdOOO, gdKredDog, gdZaemwik, gdKredDocum, gdOsnSdelkVdch, gdSpDopSog, gdZalogPoruch, gdDopSog,
+                     gdOsnovnSd, gdSpDSZalPor, gdGrpObject, gdDocsZalPor, gdDopSogZalPor, gdObjData;
 
         public Form1()
         
@@ -21,17 +25,56 @@ namespace NlgDBcredProg
             InitializeComponent();
 
             //SELECT FROM TABLES AREA
-            adapterOOO = new SqlDataAdapter("SELECT * FROM OOO", connection); 
+            adOOO = new SqlDataAdapter("SELECT * FROM OOO", connection);
+            adKredDog = new SqlDataAdapter("SELECT * FROM KredDog", connection);
+            adZaemwik = new SqlDataAdapter("SELECT * FROM Zaemwik", connection);
+            adKredDocum = new SqlDataAdapter("SELECT * FROM KredDocum", connection);
+            adOsnSdelkVdch = new SqlDataAdapter("SELECT * FROM OsnSdelkVdch", connection);
+            adSpDopSog = new SqlDataAdapter("SELECT * FROM SpDopSog", connection);
+            adZalogPoruch = new SqlDataAdapter("SELECT * FROM ZalogPoruch", connection);
+            adDopSog = new SqlDataAdapter("SELECT * FROM DopSog", connection);
+            adOsnovnSd = new SqlDataAdapter("SELECT * FROM OsnovnSd", connection);
+            adSpDSZalPor = new SqlDataAdapter("SELECT * FROM SpDSZalPor", connection);
+            adGrpObject = new SqlDataAdapter("SELECT * FROM GrpObject", connection);
+            adDocsZalPor = new SqlDataAdapter("SELECT * FROM DocsZalPor", connection);
+            adDopSogZalPor = new SqlDataAdapter("SELECT * FROM DopSogZalPor", connection);
+            adObjData = new SqlDataAdapter("SELECT * FROM ObjData;
 
             //CREATE DATASET WITH TABLES AREA
-            dataSet = new DataSet(); 
-            adapterOOO.Fill(dataSet, "OOO");
+            dataSet = new DataSet();
+            adOOO.Fill(dataSet, "OOO");
+            adKredDog.Fill(dataSet, "KredDog");
+            adZaemwik.Fill(dataSet, "Zaemwik");
+            adKredDocum.Fill(dataSet, "KredDocum");
+            adOsnSdelkVdch.Fill(dataSet, "OsnSdelkVdch");
+            adSpDopSog.Fill(dataSet, "SpDopSog");
+            adZalogPoruch.Fill(dataSet, "ZalogPoruch");
+            adDopSog.Fill(dataSet, "DopSog");
+            adOsnovnSd.Fill(dataSet, "OsnovnSd");
+            adSpDSZalPor.Fill(dataSet, "SpDSZalPor");
+            adGrpObject.Fill(dataSet, "GrpObject");
+            adDocsZalPor.Fill(dataSet, "DocsZalPor");
+            adDopSogZalPor.Fill(dataSet, "DopSogZalPor");
+            adObjData.Fill(dataSet, "ObjData");
 
             //RELATIONS IN DB AREA
             //dataSet.Relations.Add("ooo-loanagr",dataSet.Tables["OOO"].Columns["IdOOO"],dataSet.Tables["LoanAgr"].Columns["LoanId"]);   
-            
+
             //BIND.SOURCE AREA
-            bindingSourceOOO = new BindingSource(dataSet, "OOO");  //bs dataset
+            bsOOO = new BindingSource(dataSet, "OOO");
+            bsKredDog = new BindingSource(dataSet, "KredDog");
+            bsZaemwik = new BindingSource(dataSet, "Zaemwik");
+            bsKredDocum = new BindingSource(dataSet, "KredDocum");
+            bsOsnSdelkVdch = new BindingSource(dataSet, "OsnSdelkVdch");
+            bsSpDopSog = new BindingSource(dataSet, "SpDopSog");
+            bsZalogPoruch = new BindingSource(dataSet, "ZalogPoruch");
+            bsDopSog = new BindingSource(dataSet, "DopSog");
+            bsOsnovnSd = new BindingSource(dataSet, "OsnovnSd");
+            bsSpDSZalPor = new BindingSource(dataSet, "SpDSZalPor");
+            bsGrpObject = new BindingSource(dataSet, "GrpObject");
+            bsDocsZalPor = new BindingSource(dataSet, "DocsZalPor");
+            bsDopSogZalPor = new BindingSource(dataSet, "DopSogZalPor");
+            bsObjData = new BindingSource(dataSet, "ObjData");
 
             //BIND.SOURCE WITH RELATIONS AREA
             //bindingSourceLoan = new BindingSource(bindingSourceOOO, "ooo-loanagr"); 
