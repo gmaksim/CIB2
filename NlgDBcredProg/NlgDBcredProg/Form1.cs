@@ -10,21 +10,20 @@ namespace NlgDBcredProg
         
     {
         DataSet dataSet;                                                        
-        SqlConnection connection = new SqlConnection(@"Data Source=.\cibEXPRESS;
-                                   Initial Catalog=CredDogCIB;Integrated Security=True");
+        SqlConnection  connection = new SqlConnection(@"Data Source=.\cibEXPRESS; Initial Catalog=CredDogCIB; Integrated Security=True");
         SqlDataAdapter adOOO, adKredDog, adZaemwik, adKredDocum, adOsnSdelkVdch, adSpDopSog, adZalogPoruch, adDopSog, 
                        adOsnovnSd, adSpDSZalPor, adGrpObject, adDocsZalPor, adDopSogZalPor, adObjData;
-        BindingSource bsOOO, bsKredDog, bsZaemwik, bsKredDocum, bsOsnSdelkVdch, bsSpDopSog, bsZalogPoruch, bsDopSog,
-                      bsOsnovnSd, bsSpDSZalPor, bsGrpObject, bsDocsZalPor, bsDopSogZalPor, bsObjData;
-        DataGridView gdOOO, gdKredDog, gdZaemwik, gdKredDocum, gdOsnSdelkVdch, gdSpDopSog, gdZalogPoruch, gdDopSog,
-                     gdOsnovnSd, gdSpDSZalPor, gdGrpObject, gdDocsZalPor, gdDopSogZalPor, gdObjData;
+        BindingSource  bsOOO, bsKredDog, bsZaemwik, bsKredDocum, bsOsnSdelkVdch, bsSpDopSog, bsZalogPoruch, bsDopSog,
+                       bsOsnovnSd, bsSpDSZalPor, bsGrpObject, bsDocsZalPor, bsDopSogZalPor, bsObjData;
+        DataGridView   gdOOO, gdKredDog, gdZaemwik, gdKredDocum, gdOsnSdelkVdch, gdSpDopSog, gdZalogPoruch, gdDopSog,
+                       gdOsnovnSd, gdSpDSZalPor, gdGrpObject, gdDocsZalPor, gdDopSogZalPor, gdObjData;
 
         public Form1()
         
         {
             InitializeComponent();
 
-            //SELECT FROM TABLES AREA
+            //SELECT FROM TABLES AREA (+)
             adOOO = new SqlDataAdapter("SELECT * FROM OOO", connection);
             adKredDog = new SqlDataAdapter("SELECT * FROM KredDog", connection);
             adZaemwik = new SqlDataAdapter("SELECT * FROM Zaemwik", connection);
@@ -38,9 +37,9 @@ namespace NlgDBcredProg
             adGrpObject = new SqlDataAdapter("SELECT * FROM GrpObject", connection);
             adDocsZalPor = new SqlDataAdapter("SELECT * FROM DocsZalPor", connection);
             adDopSogZalPor = new SqlDataAdapter("SELECT * FROM DopSogZalPor", connection);
-            adObjData = new SqlDataAdapter("SELECT * FROM ObjData;
+            adObjData = new SqlDataAdapter("SELECT * FROM ObjData", connection);
 
-            //CREATE DATASET WITH TABLES AREA
+            //CREATE DATASET WITH TABLES AREA (+)
             dataSet = new DataSet();
             adOOO.Fill(dataSet, "OOO");
             adKredDog.Fill(dataSet, "KredDog");
@@ -57,10 +56,22 @@ namespace NlgDBcredProg
             adDopSogZalPor.Fill(dataSet, "DopSogZalPor");
             adObjData.Fill(dataSet, "ObjData");
 
-            //RELATIONS IN DB AREA
-            //dataSet.Relations.Add("ooo-loanagr",dataSet.Tables["OOO"].Columns["IdOOO"],dataSet.Tables["LoanAgr"].Columns["LoanId"]);   
+            //RELATIONS IN DB AREA (+)
+            dataSet.Relations.Add("OOO-KredDog",dataSet.Tables["OOO"].Columns["idOOO"],dataSet.Tables["KredDog"].Columns["id"]);
+            dataSet.Relations.Add("OOO-Zaemwik", dataSet.Tables["OOO"].Columns["idOOO"], dataSet.Tables["Zaemwik"].Columns["id"]);
+            dataSet.Relations.Add("KredDog-KredDocum", dataSet.Tables["KredDog"].Columns["idKredDog"], dataSet.Tables["KredDocum"].Columns["id"]);
+            dataSet.Relations.Add("KredDog-OsnSdelkVdch", dataSet.Tables["KredDog"].Columns["idKredDog"], dataSet.Tables["OsnSdelkVdch"].Columns["id"]);
+            dataSet.Relations.Add("KredDog-SpDopSog", dataSet.Tables["KredDog"].Columns["idKredDog"], dataSet.Tables["SpDopSog"].Columns["id"]);
+            dataSet.Relations.Add("KredDog-ZalogPoruch", dataSet.Tables["KredDog"].Columns["idKredDog"], dataSet.Tables["ZalogPoruch"].Columns["id"]);
+            dataSet.Relations.Add("SpDopSog-DopSog", dataSet.Tables["SpDopSog"].Columns["idSpDpSg"], dataSet.Tables["DopSog"].Columns["id"]);
+            dataSet.Relations.Add("ZalogPoruch-OsnovnSd", dataSet.Tables["ZalogPoruch"].Columns["idZalPor"], dataSet.Tables["OsnovnSd"].Columns["id"]);
+            dataSet.Relations.Add("ZalogPoruch-SpDSZalPor", dataSet.Tables["ZalogPoruch"].Columns["idZalPor"], dataSet.Tables["SpDSZalPor"].Columns["id"]);
+            dataSet.Relations.Add("ZalogPoruch-GrpObject", dataSet.Tables["ZalogPoruch"].Columns["idZalPor"], dataSet.Tables["GrpObject"].Columns["id"]);
+            dataSet.Relations.Add("ZalogPoruch-DocsZalPor", dataSet.Tables["ZalogPoruch"].Columns["idZalPor"], dataSet.Tables["DocsZalPor"].Columns["id"]);
+            dataSet.Relations.Add("SpDSZalPor-DopSogZalPor", dataSet.Tables["SpDSZalPor"].Columns["idSpDSZP"], dataSet.Tables["DopSogZalPor"].Columns["id"]);
+            dataSet.Relations.Add("GrpObject-ObjData", dataSet.Tables["GrpObject"].Columns["idGrObj"], dataSet.Tables["ObjData"].Columns["id"]);
 
-            //BIND.SOURCE AREA
+            //BIND.SOURCE AREA (+)
             bsOOO = new BindingSource(dataSet, "OOO");
             bsKredDog = new BindingSource(dataSet, "KredDog");
             bsZaemwik = new BindingSource(dataSet, "Zaemwik");
@@ -76,9 +87,20 @@ namespace NlgDBcredProg
             bsDopSogZalPor = new BindingSource(dataSet, "DopSogZalPor");
             bsObjData = new BindingSource(dataSet, "ObjData");
 
-            //BIND.SOURCE WITH RELATIONS AREA
-            //bindingSourceLoan = new BindingSource(bindingSourceOOO, "ooo-loanagr"); 
-
+            //BIND.SOURCE WITH RELATIONS AREA (+)
+            bsKredDog = new BindingSource(bsOOO, "OOO-KredDog");
+            bsZaemwik = new BindingSource(bsOOO, "OOO-Zaemwik");
+            bsKredDocum = new BindingSource(bsKredDog, "KredDog-KredDocum");
+            bsOsnSdelkVdch = new BindingSource(bsKredDog, "KredDog-OsnSdelkVdch");
+            bsSpDopSog = new BindingSource(bsKredDog, "KredDog-SpDopSog");
+            bsZalogPoruch = new BindingSource(bsKredDog, "KredDog-ZalogPoruch");
+            bsDopSog = new BindingSource(bsSpDopSog, "SpDopSog-DopSog");
+            bsOsnovnSd = new BindingSource(bsZalogPoruch, "ZalogPoruch-OsnovnSd");
+            bsSpDSZalPor = new BindingSource(bsZalogPoruch, "ZalogPoruch-SpDSZalPor");
+            bsGrpObject = new BindingSource(bsZalogPoruch, "ZalogPoruch-GrpObject");
+            bsDocsZalPor = new BindingSource(bsZalogPoruch, "ZalogPoruch-DocsZalPor");
+            bsDopSogZalPor = new BindingSource(bsSpDSZalPor, "SpDSZalPor-DopSogZalPor");
+            bsObjData = new BindingSource(bsGrpObject, "GrpObject-ObjData");
 
             //DATA GRID LOCATION AND SIZE AREA
 
