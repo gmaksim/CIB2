@@ -104,15 +104,30 @@ namespace NlgDBcredProg
 
             //DATA GRID LOCATION AND SIZE AREA
             gdOOO = new DataGridView(); //dg OOO
-            gdOOO.Size = new Size(300, 610);
+            gdOOO.Size = new Size(315, 610);
             gdOOO.Location = new Point(5, 5);
             gdOOO.DataSource = bsOOO;
 
             gdKredDog = new DataGridView(); //dg KredDog
             gdKredDog.Size = new Size(300, 150);
-            gdKredDog.Location = new Point(310, 5);
+            gdKredDog.Location = new Point(325, 5);
             gdKredDog.DataSource = bsKredDog;
-            //gridFiles.Location = new Point(310, gridUsers.Bottom + 300); 
+
+            gdZaemwik = new DataGridView(); //dg Zaemwik
+            gdZaemwik.Size = new Size(630, 150);
+            gdZaemwik.Location = new Point(630, 5);
+            gdZaemwik.DataSource = bsZaemwik;
+
+            gdKredDocum = new DataGridView(); //dg KredDocum
+            gdKredDocum.Size = new Size(330, 150);
+            gdKredDocum.Location = new Point(325, gdKredDog.Bottom + 50);
+            gdKredDocum.DataSource = bsKredDocum; 
+
+            gdOsnSdelkVdch = new DataGridView(); //dg OsnSdelkVdch
+            gdOsnSdelkVdch.Size = new Size(530, 150);
+            gdOsnSdelkVdch.Location = new Point(680, gdZaemwik.Bottom + 50);
+            gdOsnSdelkVdch.DataSource = bsOsnSdelkVdch;
+
 
 
             this.Controls.AddRange(new Control[] { gdOOO, gdKredDog, gdZaemwik, gdKredDocum, gdOsnSdelkVdch, gdSpDopSog, gdZalogPoruch, gdDopSog,
@@ -120,7 +135,11 @@ namespace NlgDBcredProg
 
             //HIDDEN ID'S AREA
             dataSet.Tables["OOO"].Columns["IdOOO"].ColumnMapping = MappingType.Hidden;
-            dataSet.Tables["OOO"].Columns["IdOOO"].ColumnMapping = MappingType.Hidden;
+            dataSet.Tables["KredDog"].Columns["id"].ColumnMapping = MappingType.Hidden;
+            dataSet.Tables["KredDog"].Columns["idKredDog"].ColumnMapping = MappingType.Hidden;
+            dataSet.Tables["Zaemwik"].Columns["id"].ColumnMapping = MappingType.Hidden;
+            dataSet.Tables["KredDocum"].Columns["id"].ColumnMapping = MappingType.Hidden;
+            dataSet.Tables["OsnSdelkVdch"].Columns["id"].ColumnMapping = MappingType.Hidden;
 
         }
 
