@@ -103,27 +103,33 @@ namespace NlgDBcredProg
             bsObjData = new BindingSource(bsGrpObject, "GrpObject-ObjData");
 
             //DATA GRID LOCATION AND SIZE AREA
+            gdOOO = new DataGridView(); //dg OOO
+            gdOOO.Size = new Size(300, 610);
+            gdOOO.Location = new Point(5, 5);
+            gdOOO.DataSource = bsOOO;
 
-            gridOOO = new DataGridView(); //dg OOO
-            gridOOO.Size = new Size(300, 610);
-            gridOOO.Location = new Point(5, 5);
-            gridOOO.DataSource = bindingSourceOOO; 
+            gdKredDog = new DataGridView(); //dg KredDog
+            gdKredDog.Size = new Size(300, 150);
+            gdKredDog.Location = new Point(310, 5);
+            gdKredDog.DataSource = bsKredDog;
             //gridFiles.Location = new Point(310, gridUsers.Bottom + 300); 
 
 
-            this.Controls.AddRange(new Control[] { gridOOO }); //control with dg
+            this.Controls.AddRange(new Control[] { gdOOO, gdKredDog, gdZaemwik, gdKredDocum, gdOsnSdelkVdch, gdSpDopSog, gdZalogPoruch, gdDopSog,
+                                                   gdOsnovnSd, gdSpDSZalPor, gdGrpObject, gdDocsZalPor, gdDopSogZalPor, gdObjData }); //control with dg
 
             //HIDDEN ID'S AREA
-            dataSet.Tables["OOO"].Columns["IdOOO"].ColumnMapping = MappingType.Hidden; 
+            dataSet.Tables["OOO"].Columns["IdOOO"].ColumnMapping = MappingType.Hidden;
+            dataSet.Tables["OOO"].Columns["IdOOO"].ColumnMapping = MappingType.Hidden;
 
         }
 
 
-private void saveButtonOOO_Click(object sender, EventArgs e) //save for OOO
+        private void saveButtonOOO_Click(object sender, EventArgs e) //save for OOO
         {
             using (SqlConnection connection = new SqlConnection(@"Data Source=.\cibEXPRESS;Initial Catalog=usersdb;Integrated Security=True"))
             {
-                connection.Open();
+                /*connection.Open();
                 adapterOOO = new SqlDataAdapter("SELECT * FROM OOO;", connection);
                 SqlCommandBuilder commandBuilder = new SqlCommandBuilder(adapterOOO);
                 adapterOOO.InsertCommand = new SqlCommand("sp_OOO", connection);
@@ -132,7 +138,7 @@ private void saveButtonOOO_Click(object sender, EventArgs e) //save for OOO
                 adapterOOO.InsertCommand.Parameters.Add(new SqlParameter("@принят", SqlDbType.Date, 30, "Принят"));
                 SqlParameter parameter = adapterOOO.InsertCommand.Parameters.Add("@IdOOO", SqlDbType.Int, 10, "IdOOO");
                 parameter.Direction = ParameterDirection.Output;
-                adapterOOO.Update(dataSet.Tables["OOO"]);
+                adapterOOO.Update(dataSet.Tables["OOO"]);*/
             }
         }
      
