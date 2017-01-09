@@ -60,6 +60,18 @@
     <Compile Include="Search.Designer.cs">
       <DependentUpon>Search.cs</DependentUpon>
     </Compile>
+    <Compile Include="Spid_ds_and_grob.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Spid_ds_and_grob.Designer.cs">
+      <DependentUpon>Spid_ds_and_grob.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Spis_dop_sog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Spis_dop_sog.Designer.cs">
+      <DependentUpon>Spis_dop_sog.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -74,6 +86,12 @@
     </Compile>
     <EmbeddedResource Include="Search.resx">
       <DependentUpon>Search.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Spid_ds_and_grob.resx">
+      <DependentUpon>Spid_ds_and_grob.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Spis_dop_sog.resx">
+      <DependentUpon>Spis_dop_sog.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
