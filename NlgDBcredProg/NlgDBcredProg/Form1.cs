@@ -7,6 +7,9 @@ using System.Diagnostics;
 
 namespace NlgDBcredProg
 {
+
+
+
     public partial class Form1 : Form
         
     {
@@ -14,7 +17,9 @@ namespace NlgDBcredProg
         SqlConnection  connection = new SqlConnection(@"Data Source=.\cibEXPRESS; Initial Catalog=CredDogCIB; Integrated Security=True");
         SqlDataAdapter adOOO, adKredDog, adZaemwik, adKredDocum, adOsnSdelkVdch, adSpDopSog, adZalogPoruch, 
                        adOsnovnSd, adSpDSZalPor, adGrpObject, adDocsZalPor, adDopSogZalPor, adObjData;
-        BindingSource  bsOOO, bsKredDog, bsZaemwik, bsKredDocum, bsOsnSdelkVdch, bsSpDopSog, bsZalogPoruch,
+
+
+        BindingSource bsOOO, bsKredDog, bsZaemwik, bsKredDocum, bsOsnSdelkVdch, bsSpDopSog, bsZalogPoruch,
                        bsOsnovnSd, bsSpDSZalPor, bsGrpObject, bsDocsZalPor, bsDopSogZalPor, bsObjData;
         DataGridView   gdOOO, gdKredDog, gdZaemwik, gdKredDocum, gdOsnSdelkVdch, gdZalogPoruch,
                        gdOsnovnSd, gdDocsZalPor;
@@ -134,7 +139,7 @@ namespace NlgDBcredProg
 
 
             this.Controls.AddRange(new Control[] { gdOOO, gdKredDog, gdZaemwik, gdKredDocum, gdOsnSdelkVdch, gdZalogPoruch, gdOsnovnSd, gdDocsZalPor }); //control with dg
-            this.gdZaemwik.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gdZaemwik_CellContentClick); //clockable cells in Zaemwik
+            this.gdZaemwik.CellContentClick += new DataGridViewCellEventHandler(this.gdZaemwik_CellContentClick); //clockable cells in Zaemwik
 
             //HIDDEN ID'S AREA
             dataSet.Tables["OOO"].Columns["IdOOO"].ColumnMapping = MappingType.Hidden;

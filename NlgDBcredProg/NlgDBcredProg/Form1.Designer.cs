@@ -34,6 +34,9 @@
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
+            this.button10 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button6
@@ -48,7 +51,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(597, 371);
+            this.button2.Location = new System.Drawing.Point(505, 370);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(221, 23);
             this.button2.TabIndex = 5;
@@ -88,7 +91,7 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(663, 159);
+            this.button7.Location = new System.Drawing.Point(629, 159);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(75, 23);
             this.button7.TabIndex = 9;
@@ -96,11 +99,44 @@
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.saveZaemwik_Click);
             // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(327, 370);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(75, 23);
+            this.button8.TabIndex = 10;
+            this.button8.Text = "SK";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.saveKredDocum_Click);
+            // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(771, 369);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(75, 23);
+            this.button9.TabIndex = 11;
+            this.button9.Text = "SO";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.saveOsnSdelkVdch_Click);
+            // 
+            // button10
+            // 
+            this.button10.Location = new System.Drawing.Point(327, 566);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(75, 23);
+            this.button10.TabIndex = 12;
+            this.button10.Text = "SZ";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.saveZalogPoruch_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1187, 858);
+            this.Controls.Add(this.button10);
+            this.Controls.Add(this.button9);
+            this.Controls.Add(this.button8);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
@@ -123,6 +159,9 @@
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Button button10;
     }
 }
 
