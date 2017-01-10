@@ -37,7 +37,6 @@ namespace NlgDBcredProg
             gdSpDopSog.Size = new Size(315, 315);
             gdSpDopSog.Location = new Point(5, 5);
             gdSpDopSog.DataSource = bsSpDopSog;
-
             gdDopSog = new DataGridView(); //dg DopSog
             gdDopSog.Size = new Size(600, 315);
             gdDopSog.Location = new Point(325, 5);

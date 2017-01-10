@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 
 namespace NlgDBcredProg
+
 {
     public partial class Spid_ds_and_grob : Form
     {
@@ -12,11 +13,8 @@ namespace NlgDBcredProg
         DataSet dataSet;
         SqlConnection connection = new SqlConnection(@"Data Source=.\cibEXPRESS; Initial Catalog=CredDogCIB; Integrated Security=True");
         SqlDataAdapter adSpDSZalPor, adGrpObject, adDopSogZalPor, adObjData;
-        BindingSource bsOOO, bsKredDog, bsZaemwik, bsKredDocum, bsOsnSdelkVdch, bsSpDopSog, bsZalogPoruch, bsDopSog,
-                       bsOsnovnSd, bsSpDSZalPor, bsGrpObject, bsDocsZalPor, bsDopSogZalPor, bsObjData;
-        DataGridView gdOOO, gdKredDog, gdZaemwik, gdKredDocum, gdOsnSdelkVdch, gdSpDopSog, gdZalogPoruch, gdDopSog,
-                       gdOsnovnSd, gdSpDSZalPor, gdGrpObject, gdDocsZalPor, gdDopSogZalPor, gdObjData;
-
+        BindingSource bsSpDSZalPor, bsGrpObject, bsDopSogZalPor, bsObjData;
+        DataGridView gdSpDSZalPor, gdGrpObject, gdDopSogZalPor, gdObjData;
 
         public Spid_ds_and_grob()
         {
@@ -44,14 +42,31 @@ namespace NlgDBcredProg
             bsDopSogZalPor = new BindingSource(bsSpDSZalPor, "SpDSZalPor-DopSogZalPor");
             bsObjData = new BindingSource(bsGrpObject, "GrpObject-ObjData");
 
-            //DATA GRID LOCATION AND SIZE AREA
-            gdSpDSZalPor = new DataGridView(); //dg OOO
-            gdSpDSZalPor.Size = new Size(315, 610);
+            gdSpDSZalPor = new DataGridView(); //dg SpDSZalPor
+            gdSpDSZalPor.Size = new Size(250, 250);
             gdSpDSZalPor.Location = new Point(5, 5);
             gdSpDSZalPor.DataSource = bsSpDSZalPor;
-
+            gdDopSogZalPor = new DataGridView(); //dg DopSogZalPor
+            gdDopSogZalPor.Size = new Size(600, 250);
+            gdDopSogZalPor.Location = new Point(275, 5);
+            gdDopSogZalPor.DataSource = bsDopSogZalPor;
+            gdGrpObject = new DataGridView(); //dg GrpObject
+            gdGrpObject.Size = new Size(250, 250);
+            gdGrpObject.Location = new Point(5, gdSpDSZalPor.Bottom + 10);
+            gdGrpObject.DataSource = bsGrpObject;
+            gdObjData = new DataGridView(); //dg ObjData
+            gdObjData.Size = new Size(600, 250);
+            gdObjData.Location = new Point(275, gdDopSogZalPor.Bottom + 10);
+            gdObjData.DataSource = bsObjData;
 
             this.Controls.AddRange(new Control[] {  gdSpDSZalPor, gdGrpObject, gdDopSogZalPor, gdObjData });
+
+            dataSet.Tables["SpDSZalPor"].Columns["id"].ColumnMapping = MappingType.Hidden;
+            dataSet.Tables["SpDSZalPor"].Columns["idSpDSZP"].ColumnMapping = MappingType.Hidden;
+            dataSet.Tables["DopSogZalPor"].Columns["id"].ColumnMapping = MappingType.Hidden;
+            dataSet.Tables["GrpObject"].Columns["id"].ColumnMapping = MappingType.Hidden;
+            dataSet.Tables["ObjData"].Columns["id"].ColumnMapping = MappingType.Hidden;
+            dataSet.Tables["GrpObject"].Columns["idGrObj"].ColumnMapping = MappingType.Hidden;
 
         }
 
@@ -59,7 +74,7 @@ namespace NlgDBcredProg
         {
             StartPosition = FormStartPosition.WindowsDefaultBounds; //main form position and size
             this.Left += 400;
-            Size = new Size(1300, 900);
+            Size = new Size(900, 700);
         }
     }
 }
