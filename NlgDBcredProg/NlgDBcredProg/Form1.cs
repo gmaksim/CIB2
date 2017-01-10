@@ -3,6 +3,7 @@ using System.Data;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Diagnostics; 
 
 namespace NlgDBcredProg
 {
@@ -23,7 +24,7 @@ namespace NlgDBcredProg
         {
             InitializeComponent();
 
-            //SELECT FROM TABLES AREA (+)
+            //SELECT FROM TABLES AREA 
             adOOO = new SqlDataAdapter("SELECT * FROM OOO", connection);
             adKredDog = new SqlDataAdapter("SELECT * FROM KredDog", connection);
             adZaemwik = new SqlDataAdapter("SELECT * FROM Zaemwik", connection);
@@ -38,7 +39,7 @@ namespace NlgDBcredProg
             adDopSogZalPor = new SqlDataAdapter("SELECT * FROM DopSogZalPor", connection);
             adObjData = new SqlDataAdapter("SELECT * FROM ObjData", connection);
 
-            //CREATE DATASET WITH TABLES AREA (+)
+            //CREATE DATASET WITH TABLES AREA 
             dataSet = new DataSet();
             adOOO.Fill(dataSet, "OOO");
             adKredDog.Fill(dataSet, "KredDog");
@@ -54,7 +55,7 @@ namespace NlgDBcredProg
             adDopSogZalPor.Fill(dataSet, "DopSogZalPor");
             adObjData.Fill(dataSet, "ObjData");
 
-            //RELATIONS IN DB AREA (+)
+            //RELATIONS IN DB AREA 
             dataSet.Relations.Add("OOO-KredDog",dataSet.Tables["OOO"].Columns["idOOO"],dataSet.Tables["KredDog"].Columns["id"]);
             dataSet.Relations.Add("OOO-Zaemwik", dataSet.Tables["OOO"].Columns["idOOO"], dataSet.Tables["Zaemwik"].Columns["id"]);
             dataSet.Relations.Add("KredDog-KredDocum", dataSet.Tables["KredDog"].Columns["idKredDog"], dataSet.Tables["KredDocum"].Columns["id"]);
@@ -68,7 +69,7 @@ namespace NlgDBcredProg
             dataSet.Relations.Add("SpDSZalPor-DopSogZalPor", dataSet.Tables["SpDSZalPor"].Columns["idSpDSZP"], dataSet.Tables["DopSogZalPor"].Columns["id"]);
             dataSet.Relations.Add("GrpObject-ObjData", dataSet.Tables["GrpObject"].Columns["idGrObj"], dataSet.Tables["ObjData"].Columns["id"]);
 
-            //BIND.SOURCE AREA (+)
+            //BIND.SOURCE AREA 
             bsOOO = new BindingSource(dataSet, "OOO");
             bsKredDog = new BindingSource(dataSet, "KredDog");
             bsZaemwik = new BindingSource(dataSet, "Zaemwik");
@@ -83,7 +84,7 @@ namespace NlgDBcredProg
             bsDopSogZalPor = new BindingSource(dataSet, "DopSogZalPor");
             bsObjData = new BindingSource(dataSet, "ObjData");
 
-            //BIND.SOURCE WITH RELATIONS AREA (+)
+            //BIND.SOURCE WITH RELATIONS AREA 
             bsKredDog = new BindingSource(bsOOO, "OOO-KredDog");
             bsZaemwik = new BindingSource(bsOOO, "OOO-Zaemwik");
             bsKredDocum = new BindingSource(bsKredDog, "KredDog-KredDocum");
@@ -133,6 +134,7 @@ namespace NlgDBcredProg
 
 
             this.Controls.AddRange(new Control[] { gdOOO, gdKredDog, gdZaemwik, gdKredDocum, gdOsnSdelkVdch, gdZalogPoruch, gdOsnovnSd, gdDocsZalPor }); //control with dg
+            this.gdZaemwik.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gdZaemwik_CellContentClick); //clockable cells in Zaemwik
 
             //HIDDEN ID'S AREA
             dataSet.Tables["OOO"].Columns["IdOOO"].ColumnMapping = MappingType.Hidden;
@@ -173,25 +175,14 @@ namespace NlgDBcredProg
             src.Show();
         }
 
-
-        /*
-        private void saveButtonOOO_Click(object sender, EventArgs e) //save for OOO
+        private void gdZaemwik_CellContentClick(object sender, DataGridViewCellEventArgs e) //make clickable Zaemwik cells
         {
-            using (SqlConnection connection = new SqlConnection(@"Data Source=.\cibEXPRESS;Initial Catalog=usersdb;Integrated Security=True"))
-            {
-                connection.Open();
-                adapterOOO = new SqlDataAdapter("SELECT * FROM OOO;", connection);
-                SqlCommandBuilder commandBuilder = new SqlCommandBuilder(adapterOOO);
-                adapterOOO.InsertCommand = new SqlCommand("sp_OOO", connection);
-                adapterOOO.InsertCommand.CommandType = CommandType.StoredProcedure;
-                adapterOOO.InsertCommand.Parameters.Add(new SqlParameter("@наименование", SqlDbType.NVarChar, 50, "Наименование"));
-                adapterOOO.InsertCommand.Parameters.Add(new SqlParameter("@принят", SqlDbType.Date, 30, "Принят"));
-                SqlParameter parameter = adapterOOO.InsertCommand.Parameters.Add("@IdOOO", SqlDbType.Int, 10, "IdOOO");
-                parameter.Direction = ParameterDirection.Output;
-                adapterOOO.Update(dataSet.Tables["OOO"]);
+             //if (e.ColumnIndex == 1)
+             {
+                 Process.Start(gdZaemwik.SelectedCells[0].Value.ToString());
              }
         }
-           */
+
 
     }
 }
