@@ -11,23 +11,25 @@ namespace NlgDBcredProg
 
 
     public partial class Form1 : Form
-        
+
+
     {
-        DataSet dataSet;                                                        
-        SqlConnection  connection = new SqlConnection(@"Data Source=.\cibEXPRESS; Initial Catalog=CredDogCIB; Integrated Security=True");
-        SqlDataAdapter adOOO, adKredDog, adZaemwik, adKredDocum, adOsnSdelkVdch, adSpDopSog, adZalogPoruch, 
+        DataSet dataSet;
+        SqlConnection connection = new SqlConnection(@"Data Source=.\cibEXPRESS; Initial Catalog=CredDogCIB; Integrated Security=True");
+        SqlDataAdapter adOOO, adKredDog, adZaemwik, adKredDocum, adOsnSdelkVdch, adSpDopSog, adZalogPoruch,
                        adOsnovnSd, adSpDSZalPor, adGrpObject, adDocsZalPor, adDopSogZalPor, adObjData;
 
 
         BindingSource bsOOO, bsKredDog, bsZaemwik, bsKredDocum, bsOsnSdelkVdch, bsSpDopSog, bsZalogPoruch,
                        bsOsnovnSd, bsSpDSZalPor, bsGrpObject, bsDocsZalPor, bsDopSogZalPor, bsObjData;
-        DataGridView   gdOOO, gdKredDog, gdZaemwik, gdKredDocum, gdOsnSdelkVdch, gdZalogPoruch,
+        DataGridView gdOOO, gdKredDog, gdZaemwik, gdKredDocum, gdOsnSdelkVdch, gdZalogPoruch,
                        gdOsnovnSd, gdDocsZalPor;
 
         public Form1()
-        
+
         {
             InitializeComponent();
+
 
             //SELECT FROM TABLES AREA 
             adOOO = new SqlDataAdapter("SELECT * FROM OOO", connection);
@@ -61,7 +63,7 @@ namespace NlgDBcredProg
             adObjData.Fill(dataSet, "ObjData");
 
             //RELATIONS IN DB AREA 
-            dataSet.Relations.Add("OOO-KredDog",dataSet.Tables["OOO"].Columns["idOOO"],dataSet.Tables["KredDog"].Columns["id"]);
+            dataSet.Relations.Add("OOO-KredDog", dataSet.Tables["OOO"].Columns["idOOO"], dataSet.Tables["KredDog"].Columns["id"]);
             dataSet.Relations.Add("OOO-Zaemwik", dataSet.Tables["OOO"].Columns["idOOO"], dataSet.Tables["Zaemwik"].Columns["id"]);
             dataSet.Relations.Add("KredDog-KredDocum", dataSet.Tables["KredDog"].Columns["idKredDog"], dataSet.Tables["KredDocum"].Columns["id"]);
             dataSet.Relations.Add("KredDog-OsnSdelkVdch", dataSet.Tables["KredDog"].Columns["idKredDog"], dataSet.Tables["OsnSdelkVdch"].Columns["id"]);
@@ -119,7 +121,7 @@ namespace NlgDBcredProg
             gdKredDocum = new DataGridView(); //dg KredDocum
             gdKredDocum.Size = new Size(330, 150);
             gdKredDocum.Location = new Point(325, gdKredDog.Bottom + 50);
-            gdKredDocum.DataSource = bsKredDocum; 
+            gdKredDocum.DataSource = bsKredDocum;
             gdOsnSdelkVdch = new DataGridView(); //dg OsnSdelkVdch
             gdOsnSdelkVdch.Size = new Size(530, 150);
             gdOsnSdelkVdch.Location = new Point(680, gdZaemwik.Bottom + 50);
@@ -139,7 +141,9 @@ namespace NlgDBcredProg
 
 
             this.Controls.AddRange(new Control[] { gdOOO, gdKredDog, gdZaemwik, gdKredDocum, gdOsnSdelkVdch, gdZalogPoruch, gdOsnovnSd, gdDocsZalPor }); //control with dg
-            this.gdZaemwik.CellContentClick += new DataGridViewCellEventHandler(this.gdZaemwik_CellContentClick); //clockable cells in Zaemwik
+            this.gdZaemwik.CellContentClick += new DataGridViewCellEventHandler(this.gdZaemwik_CellContentClick); //clickable cells in Zaemwik
+
+
 
             //HIDDEN ID'S AREA
             dataSet.Tables["OOO"].Columns["IdOOO"].ColumnMapping = MappingType.Hidden;
@@ -152,14 +156,19 @@ namespace NlgDBcredProg
             dataSet.Tables["ZalogPoruch"].Columns["id"].ColumnMapping = MappingType.Hidden;
             dataSet.Tables["OsnovnSd"].Columns["id"].ColumnMapping = MappingType.Hidden;
             dataSet.Tables["DocsZalPor"].Columns["id"].ColumnMapping = MappingType.Hidden;
+
+         
+
         }
 
-     
-        private void Form1_Load(object sender, EventArgs e) 
+
+        public DataGridViewRow CurrentRow { get; }
+
+        private void Form1_Load(object sender, EventArgs e)
         {
             StartPosition = FormStartPosition.WindowsDefaultBounds; //main form position and size
             this.Left += 400;
-            Size = new Size(1300, 900); 
+            Size = new Size(1300, 900);
         }
 
         private void searchForm_Click(object sender, EventArgs e) //button to open Search form
@@ -168,11 +177,27 @@ namespace NlgDBcredProg
             src.Show();
         }
 
+
+
+
         private void spis_dop_sog_Click(object sender, EventArgs e) //button to open Spisok dopolnit. soglash form
         {
-            Spis_dop_sog src = new Spis_dop_sog();
-            src.Show();
+
+
+           // Spis_dop_sog f = new Spis_dop_sog(this);
+          //  f.ShowDialog();
+          
+            
+
+             Spis_dop_sog src = new Spis_dop_sog();
+             src.Show();
+
         }
+
+
+
+
+
 
         private void spis_dop_sog_and__gr_obj_Click(object sender, EventArgs e) //button to open Spisok dop.sogl i grup.obj form
         {
@@ -182,12 +207,18 @@ namespace NlgDBcredProg
 
         private void gdZaemwik_CellContentClick(object sender, DataGridViewCellEventArgs e) //make clickable Zaemwik cells
         {
-             //if (e.ColumnIndex == 1)
-             {
-                 Process.Start(gdZaemwik.SelectedCells[0].Value.ToString());
-             }
+
+            {
+                Process.Start(gdZaemwik.SelectedCells[0].Value.ToString());
+            }
         }
 
 
+      
+
+
+
     }
+
+
 }

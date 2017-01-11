@@ -19,4 +19,9 @@ namespace NlgDBcredProg
             Application.Run(new Form1());
         }
     }
+
+    
+
+
+
 }
