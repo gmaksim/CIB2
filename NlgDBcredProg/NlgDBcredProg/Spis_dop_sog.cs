@@ -6,51 +6,39 @@ using System.Drawing;
 
 namespace NlgDBcredProg
 { 
-
-    
     public partial class Spis_dop_sog : Form
     {
-
         DataSet dataSet;
         SqlConnection connection = new SqlConnection(@"Data Source=.\cibEXPRESS; Initial Catalog=CredDogCIB; Integrated Security=True");
-        SqlDataAdapter adSpDopSog, adDopSog, adKredDog, adOOO;
-        BindingSource bsSpDopSog, bsDopSog, bsKredDog, bsOOO;
-        DataGridView gdSpDopSog, gdDopSog, gdKredDog, gdOOO;
+        SqlDataAdapter adSpDopSog, adDopSog, adKredDog;
+        BindingSource bsSpDopSog, bsDopSog, bsKredDog;
+        DataGridView gdSpDopSog, gdDopSog;
 
         public Spis_dop_sog()
         { }
 
-        public Spis_dop_sog(int idKredDog)
+        public Spis_dop_sog(int id)
         {
             InitializeComponent();
 
-           
-       
-
-            //adOOO = new SqlDataAdapter("SELECT * FROM OOO", connection);
-           // adKredDog = new SqlDataAdapter("SELECT * FROM KredDog", connection);
-          //  adKredDog = new SqlDataAdapter("SELECT * FROM KredDog where idKredDog=" + idKredDog.ToString(), connection);
-            adSpDopSog = new SqlDataAdapter("SELECT * FROM SpDopSog where id=" + idKredDog.ToString(), connection);
+          adKredDog = new SqlDataAdapter("SELECT * FROM KredDog", connection);
+            adSpDopSog = new SqlDataAdapter("SELECT * FROM SpDopSog where id=" + id.ToString(), connection);
             adDopSog = new SqlDataAdapter("SELECT * FROM DopSog", connection);
 
             dataSet = new DataSet();
-            //adOOO.Fill(dataSet, "OOO");
-           // adKredDog.Fill(dataSet, "KredDog");
+        adKredDog.Fill(dataSet, "KredDog");
             adSpDopSog.Fill(dataSet, "SpDopSog");
             adDopSog.Fill(dataSet, "DopSog");
 
-            //dataSet.Relations.Add("OOO-KredDog", dataSet.Tables["OOO"].Columns["idOOO"], dataSet.Tables["KredDog"].Columns["id"]);
-            //dataSet.Relations.Add("KredDog-SpDopSog", dataSet.Tables["KredDog"].Columns["idKredDog"], dataSet.Tables["SpDopSog"].Columns["id"]);
-            dataSet.Relations.Add("SpDopSog-DopSog", dataSet.Tables["SpDopSog"].Columns["idSpDpSg"], dataSet.Tables["DopSog"].Columns["id"]);
+           dataSet.Relations.Add("SpDopSog-DopSog", dataSet.Tables["SpDopSog"].Columns["idSpDpSg"], dataSet.Tables["DopSog"].Columns["id"]);
+        dataSet.Relations.Add("KredDog-SpDopSog", dataSet.Tables["KredDog"].Columns["idKredDog"], dataSet.Tables["SpDopSog"].Columns["id"]);
 
-            //bsOOO = new BindingSource(dataSet, "OOO");
-           //bsKredDog = new BindingSource(dataSet, "KredDog");
+         bsKredDog = new BindingSource(dataSet, "KredDog");
             bsSpDopSog = new BindingSource(dataSet, "SpDopSog");
             bsDopSog = new BindingSource(dataSet, "DopSog");
 
-           // bsKredDog = new BindingSource(bsOOO, "OOO-KredDog");
-          //  bsSpDopSog = new BindingSource(bsKredDog, "KredDog-SpDopSog");
-            bsDopSog = new BindingSource(bsSpDopSog, "SpDopSog-DopSog");
+          bsSpDopSog = new BindingSource(bsKredDog, "KredDog-SpDopSog");
+           bsDopSog = new BindingSource(bsSpDopSog, "SpDopSog-DopSog");
 
             gdSpDopSog = new DataGridView(); //dg SpDopSog
             gdSpDopSog.Size = new Size(315, 315);
@@ -61,38 +49,18 @@ namespace NlgDBcredProg
             gdDopSog.Location = new Point(325, 5);
             gdDopSog.DataSource = bsDopSog;
 
-          /*  gdKredDog = new DataGridView(); //dg 
-            gdKredDog.Size = new Size(315, 315);
-            gdKredDog.Location = new Point(600, 600);
-            gdKredDog.DataSource = bsKredDog;*/
+            this.Controls.AddRange(new Control[] { gdSpDopSog, gdDopSog });
 
-            this.Controls.AddRange(new Control[] { gdSpDopSog, gdDopSog, gdKredDog });
-
-            dataSet.Tables["SpDopSog"].Columns["idSpDpSg"].ColumnMapping = MappingType.Hidden;
-            dataSet.Tables["SpDopSog"].Columns["id"].ColumnMapping = MappingType.Hidden;
-            dataSet.Tables["DopSog"].Columns["id"].ColumnMapping = MappingType.Hidden;
-
-            
-
+            //dataSet.Tables["SpDopSog"].Columns["idSpDpSg"].ColumnMapping = MappingType.Hidden;
+            //dataSet.Tables["SpDopSog"].Columns["id"].ColumnMapping = MappingType.Hidden;
+            //dataSet.Tables["DopSog"].Columns["id"].ColumnMapping = MappingType.Hidden;
         }
-
-
-
-     /*   internal void LoadOrders(int idKredDog)
-        {
-            adKredDog = new SqlDataAdapter("SELECT * FROM KredDog where idKredDog=" + idKredDog.ToString() , connection);
-        }*/
-
 
         private void Spis_dop_sog_Load(object sender, EventArgs e)
         {
             StartPosition = FormStartPosition.WindowsDefaultBounds; //main form position and size
-            this.Left += 400;
-            Size = new Size(1000, 1000);
-
-           
+            Size = new Size(950, 400);
         }
-
 
         private void saveSpDopSog_Click(object sender, EventArgs e) //save for SpDopSog
         {

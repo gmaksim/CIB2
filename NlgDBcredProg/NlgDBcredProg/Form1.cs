@@ -7,29 +7,22 @@ using System.Diagnostics;
 
 namespace NlgDBcredProg
 {
-
-
-
     public partial class Form1 : Form
-
 
     {
         DataSet dataSet;
         SqlConnection connection = new SqlConnection(@"Data Source=.\cibEXPRESS; Initial Catalog=CredDogCIB; Integrated Security=True");
         SqlDataAdapter adOOO, adKredDog, adZaemwik, adKredDocum, adOsnSdelkVdch, adSpDopSog, adZalogPoruch,
                        adOsnovnSd, adSpDSZalPor, adGrpObject, adDocsZalPor, adDopSogZalPor, adObjData;
-
-
         BindingSource bsOOO, bsKredDog, bsZaemwik, bsKredDocum, bsOsnSdelkVdch, bsSpDopSog, bsZalogPoruch,
-                       bsOsnovnSd, bsSpDSZalPor, bsGrpObject, bsDocsZalPor, bsDopSogZalPor, bsObjData;
+                      bsOsnovnSd, bsSpDSZalPor, bsGrpObject, bsDocsZalPor, bsDopSogZalPor, bsObjData;
         DataGridView gdOOO, gdKredDog, gdZaemwik, gdKredDocum, gdOsnSdelkVdch, gdZalogPoruch,
-                       gdOsnovnSd, gdDocsZalPor;
+                     gdOsnovnSd, gdDocsZalPor;
 
         public Form1()
 
         {
             InitializeComponent();
-
 
             //SELECT FROM TABLES AREA 
             adOOO = new SqlDataAdapter("SELECT * FROM OOO", connection);
@@ -139,73 +132,34 @@ namespace NlgDBcredProg
             gdDocsZalPor.Location = new Point(325, gdZalogPoruch.Bottom + 50);
             gdDocsZalPor.DataSource = bsDocsZalPor;
 
-
             this.Controls.AddRange(new Control[] { gdOOO, gdKredDog, gdZaemwik, gdKredDocum, gdOsnSdelkVdch, gdZalogPoruch, gdOsnovnSd, gdDocsZalPor }); //control with dg
             this.gdZaemwik.CellContentClick += new DataGridViewCellEventHandler(this.gdZaemwik_CellContentClick); //clickable cells in Zaemwik
-            //this.gdKredDog.CellContentClick += new DataGridViewCellEventHandler(this.gdKredDog_CellContentClick);
-
 
             //HIDDEN ID'S AREA
-            dataSet.Tables["OOO"].Columns["IdOOO"].ColumnMapping = MappingType.Hidden;
-            dataSet.Tables["KredDog"].Columns["id"].ColumnMapping = MappingType.Hidden;
+          //  dataSet.Tables["OOO"].Columns["IdOOO"].ColumnMapping = MappingType.Hidden;
+            //dataSet.Tables["KredDog"].Columns["id"].ColumnMapping = MappingType.Hidden;
             //dataSet.Tables["KredDog"].Columns["idKredDog"].ColumnMapping = MappingType.Hidden;
-            dataSet.Tables["Zaemwik"].Columns["id"].ColumnMapping = MappingType.Hidden;
-            dataSet.Tables["KredDocum"].Columns["id"].ColumnMapping = MappingType.Hidden;
-            dataSet.Tables["OsnSdelkVdch"].Columns["id"].ColumnMapping = MappingType.Hidden;
-            dataSet.Tables["ZalogPoruch"].Columns["idZalPor"].ColumnMapping = MappingType.Hidden;
-            dataSet.Tables["ZalogPoruch"].Columns["id"].ColumnMapping = MappingType.Hidden;
+         //   dataSet.Tables["Zaemwik"].Columns["id"].ColumnMapping = MappingType.Hidden;
+        //    dataSet.Tables["KredDocum"].Columns["id"].ColumnMapping = MappingType.Hidden;
+         //   dataSet.Tables["OsnSdelkVdch"].Columns["id"].ColumnMapping = MappingType.Hidden;
+         //   dataSet.Tables["ZalogPoruch"].Columns["idZalPor"].ColumnMapping = MappingType.Hidden;
+         //   dataSet.Tables["ZalogPoruch"].Columns["id"].ColumnMapping = MappingType.Hidden;
             dataSet.Tables["OsnovnSd"].Columns["id"].ColumnMapping = MappingType.Hidden;
             dataSet.Tables["DocsZalPor"].Columns["id"].ColumnMapping = MappingType.Hidden;
-
-
-        
-
-
         }
 
-        //gdKredDog_CellContentClick
         private void spis_dop_sog_Click(object sender, EventArgs e)
         {
-          
-
-            //System.Data.DataRowView SelectedRowView;
-            //int idKredDog = (int)dataSet.Tables["KredDog"].Rows[0]["idKredDog"];
-            int idKredDog = (int)gdKredDog.CurrentRow.Cells[0].Value;
-
-            //adKredDog.Fill(dataSet, "KredDog");
-            //NorthwindDataSet.CustomersRow SelectedRow;
-
-            //SelectedRowView = (System.Data.DataRowView)bsKredDog.Current;
-            //SelectedRow = (NorthwindDataSet.CustomersRow)SelectedRowView.Row;
-
-            Spis_dop_sog OrdersForm = new Spis_dop_sog(idKredDog);
-            //OrdersForm.LoadOrders(idKredDog);
-           OrdersForm.Show();
-           
-            
+           // int idKredDog = (int)gdKredDog.CurrentRow.Cells[0].Value;
+            int id = (int)gdKredDog.CurrentRow.Cells[0].Value;
+            Spis_dop_sog SDS = new Spis_dop_sog(id);
+           // Spis_dop_sog SDS = new Spis_dop_sog(idKredDog);
+            SDS.Show();
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         private void Form1_Load(object sender, EventArgs e)
         {
             StartPosition = FormStartPosition.WindowsDefaultBounds; //main form position and size
-            this.Left += 400;
             Size = new Size(1300, 900);
         }
 
@@ -214,27 +168,6 @@ namespace NlgDBcredProg
             Search src = new Search();
             src.Show();
         }
-
-
-
-
-      /* private void spis_dop_sog_Click(object sender, EventArgs e) //button to open Spisok dopolnit. soglash form
-        {
-
-
-         
-
-
-           Spis_dop_sog src = new Spis_dop_sog();
-            src.Show();
-
-        }*/
-        
-
-
-
-
-
 
         private void spis_dop_sog_and__gr_obj_Click(object sender, EventArgs e) //button to open Spisok dop.sogl i grup.obj form
         {
@@ -250,12 +183,5 @@ namespace NlgDBcredProg
             }
         }
 
-
-      
-
-
-
     }
-
-
 }

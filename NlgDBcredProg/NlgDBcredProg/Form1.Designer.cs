@@ -121,11 +121,11 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(513, 369);
+            this.button2.Location = new System.Drawing.Point(509, 369);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(140, 23);
             this.button2.TabIndex = 13;
-            this.button2.Text = "button2";
+            this.button2.Text = "Список доп.соглашенй";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.spis_dop_sog_Click);
             // 
