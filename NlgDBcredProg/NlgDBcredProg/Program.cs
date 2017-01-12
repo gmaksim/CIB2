@@ -20,8 +20,4 @@ namespace NlgDBcredProg
         }
     }
 
-    
-
-
-
 }

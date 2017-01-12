@@ -142,13 +142,13 @@ namespace NlgDBcredProg
 
             this.Controls.AddRange(new Control[] { gdOOO, gdKredDog, gdZaemwik, gdKredDocum, gdOsnSdelkVdch, gdZalogPoruch, gdOsnovnSd, gdDocsZalPor }); //control with dg
             this.gdZaemwik.CellContentClick += new DataGridViewCellEventHandler(this.gdZaemwik_CellContentClick); //clickable cells in Zaemwik
-
+            //this.gdKredDog.CellContentClick += new DataGridViewCellEventHandler(this.gdKredDog_CellContentClick);
 
 
             //HIDDEN ID'S AREA
             dataSet.Tables["OOO"].Columns["IdOOO"].ColumnMapping = MappingType.Hidden;
             dataSet.Tables["KredDog"].Columns["id"].ColumnMapping = MappingType.Hidden;
-            dataSet.Tables["KredDog"].Columns["idKredDog"].ColumnMapping = MappingType.Hidden;
+            //dataSet.Tables["KredDog"].Columns["idKredDog"].ColumnMapping = MappingType.Hidden;
             dataSet.Tables["Zaemwik"].Columns["id"].ColumnMapping = MappingType.Hidden;
             dataSet.Tables["KredDocum"].Columns["id"].ColumnMapping = MappingType.Hidden;
             dataSet.Tables["OsnSdelkVdch"].Columns["id"].ColumnMapping = MappingType.Hidden;
@@ -157,12 +157,50 @@ namespace NlgDBcredProg
             dataSet.Tables["OsnovnSd"].Columns["id"].ColumnMapping = MappingType.Hidden;
             dataSet.Tables["DocsZalPor"].Columns["id"].ColumnMapping = MappingType.Hidden;
 
-         
+
+        
+
 
         }
 
+        //gdKredDog_CellContentClick
+        private void spis_dop_sog_Click(object sender, EventArgs e)
+        {
+          
 
-        public DataGridViewRow CurrentRow { get; }
+            //System.Data.DataRowView SelectedRowView;
+            //int idKredDog = (int)dataSet.Tables["KredDog"].Rows[0]["idKredDog"];
+            int idKredDog = (int)gdKredDog.CurrentRow.Cells[0].Value;
+
+            //adKredDog.Fill(dataSet, "KredDog");
+            //NorthwindDataSet.CustomersRow SelectedRow;
+
+            //SelectedRowView = (System.Data.DataRowView)bsKredDog.Current;
+            //SelectedRow = (NorthwindDataSet.CustomersRow)SelectedRowView.Row;
+
+            Spis_dop_sog OrdersForm = new Spis_dop_sog(idKredDog);
+            //OrdersForm.LoadOrders(idKredDog);
+           OrdersForm.Show();
+           
+            
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -180,19 +218,18 @@ namespace NlgDBcredProg
 
 
 
-        private void spis_dop_sog_Click(object sender, EventArgs e) //button to open Spisok dopolnit. soglash form
+      /* private void spis_dop_sog_Click(object sender, EventArgs e) //button to open Spisok dopolnit. soglash form
         {
 
 
-           // Spis_dop_sog f = new Spis_dop_sog(this);
-          //  f.ShowDialog();
-          
-            
+         
 
-             Spis_dop_sog src = new Spis_dop_sog();
-             src.Show();
 
-        }
+           Spis_dop_sog src = new Spis_dop_sog();
+            src.Show();
+
+        }*/
+        
 
 
 
