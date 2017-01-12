@@ -17,12 +17,12 @@ namespace NlgDBcredProg
         public Spis_dop_sog()
         { }
 
-        public Spis_dop_sog(int id)
+        public Spis_dop_sog(int trans1)
         {
             InitializeComponent();
 
-          adKredDog = new SqlDataAdapter("SELECT * FROM KredDog", connection);
-            adSpDopSog = new SqlDataAdapter("SELECT * FROM SpDopSog where id=" + id.ToString(), connection);
+          adKredDog = new SqlDataAdapter("SELECT * FROM KredDog where idKredDog=" + trans1.ToString(), connection);
+            adSpDopSog = new SqlDataAdapter("SELECT * FROM SpDopSog where id=" + trans1.ToString(), connection);
             adDopSog = new SqlDataAdapter("SELECT * FROM DopSog", connection);
 
             dataSet = new DataSet();
@@ -30,10 +30,12 @@ namespace NlgDBcredProg
             adSpDopSog.Fill(dataSet, "SpDopSog");
             adDopSog.Fill(dataSet, "DopSog");
 
-           dataSet.Relations.Add("SpDopSog-DopSog", dataSet.Tables["SpDopSog"].Columns["idSpDpSg"], dataSet.Tables["DopSog"].Columns["id"]);
-        dataSet.Relations.Add("KredDog-SpDopSog", dataSet.Tables["KredDog"].Columns["idKredDog"], dataSet.Tables["SpDopSog"].Columns["id"]);
 
-         bsKredDog = new BindingSource(dataSet, "KredDog");
+       dataSet.Relations.Add("KredDog-SpDopSog", dataSet.Tables["KredDog"].Columns["idKredDog"], dataSet.Tables["SpDopSog"].Columns["id"]);
+            dataSet.Relations.Add("SpDopSog-DopSog", dataSet.Tables["SpDopSog"].Columns["idSpDpSg"], dataSet.Tables["DopSog"].Columns["id"]);
+
+
+           bsKredDog = new BindingSource(dataSet, "KredDog");
             bsSpDopSog = new BindingSource(dataSet, "SpDopSog");
             bsDopSog = new BindingSource(dataSet, "DopSog");
 

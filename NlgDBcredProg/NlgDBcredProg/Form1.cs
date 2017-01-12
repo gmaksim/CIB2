@@ -150,10 +150,9 @@ namespace NlgDBcredProg
 
         private void spis_dop_sog_Click(object sender, EventArgs e)
         {
-           // int idKredDog = (int)gdKredDog.CurrentRow.Cells[0].Value;
-            int id = (int)gdKredDog.CurrentRow.Cells[0].Value;
-            Spis_dop_sog SDS = new Spis_dop_sog(id);
-           // Spis_dop_sog SDS = new Spis_dop_sog(idKredDog);
+            int trans1 = (int)gdKredDog.CurrentRow.Cells[0].Value;
+           
+            Spis_dop_sog SDS = new Spis_dop_sog(trans1);
             SDS.Show();
         }
 
