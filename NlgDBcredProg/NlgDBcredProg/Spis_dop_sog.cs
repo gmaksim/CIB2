@@ -32,7 +32,8 @@ namespace NlgDBcredProg
 
 
        dataSet.Relations.Add("KredDog-SpDopSog", dataSet.Tables["KredDog"].Columns["idKredDog"], dataSet.Tables["SpDopSog"].Columns["id"]);
-            dataSet.Relations.Add("SpDopSog-DopSog", dataSet.Tables["SpDopSog"].Columns["idSpDpSg"], dataSet.Tables["DopSog"].Columns["id"]);
+            //dataSet.Relations.Add("SpDopSog-DopSog", dataSet.Tables["SpDopSog"].Columns["idSpDpSg"], dataSet.Tables["DopSog"].Columns["id"]);
+           dataSet.Relations.Add("SpDopSog-DopSog", dataSet.Tables["SpDopSog"].Columns["idSpDpSg"], dataSet.Tables["DopSog"].Columns["id"], false);
 
 
            bsKredDog = new BindingSource(dataSet, "KredDog");
@@ -96,6 +97,8 @@ namespace NlgDBcredProg
                 adSpDopSog.InsertCommand.Parameters.Add(new SqlParameter("@Одобрение_сделки", SqlDbType.NVarChar, 300, "Одобрение_сделки"));
                 adSpDopSog.InsertCommand.Parameters.Add(new SqlParameter("@ЕГРЮЛ_на_дату_подп", SqlDbType.NVarChar, 300, "ЕГРЮЛ_на_дату_подп"));
                 adSpDopSog.InsertCommand.Parameters.Add(new SqlParameter("@Список_участн_на_дату", SqlDbType.NVarChar, 300, "Список_участн_на_дату"));
+             //   SqlParameter parameter = adSpDopSog.InsertCommand.Parameters.Add("@idINside", SqlDbType.Int, 10, "idINside");
+            //    parameter.Direction = ParameterDirection.Output;
                 adSpDopSog.Update(dataSet.Tables["DopSog"]);
             }
         }
