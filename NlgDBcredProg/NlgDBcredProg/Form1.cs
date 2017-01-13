@@ -136,14 +136,14 @@ namespace NlgDBcredProg
             this.gdZaemwik.CellContentClick += new DataGridViewCellEventHandler(this.gdZaemwik_CellContentClick); //clickable cells in Zaemwik
 
             //HIDDEN ID'S AREA
-          //  dataSet.Tables["OOO"].Columns["IdOOO"].ColumnMapping = MappingType.Hidden;
-            //dataSet.Tables["KredDog"].Columns["id"].ColumnMapping = MappingType.Hidden;
-            //dataSet.Tables["KredDog"].Columns["idKredDog"].ColumnMapping = MappingType.Hidden;
-         //   dataSet.Tables["Zaemwik"].Columns["id"].ColumnMapping = MappingType.Hidden;
-        //    dataSet.Tables["KredDocum"].Columns["id"].ColumnMapping = MappingType.Hidden;
-         //   dataSet.Tables["OsnSdelkVdch"].Columns["id"].ColumnMapping = MappingType.Hidden;
-         //   dataSet.Tables["ZalogPoruch"].Columns["idZalPor"].ColumnMapping = MappingType.Hidden;
-         //   dataSet.Tables["ZalogPoruch"].Columns["id"].ColumnMapping = MappingType.Hidden;
+          dataSet.Tables["OOO"].Columns["IdOOO"].ColumnMapping = MappingType.Hidden;
+           // dataSet.Tables["KredDog"].Columns["id"].ColumnMapping = MappingType.Hidden;
+           // dataSet.Tables["KredDog"].Columns["idKredDog"].ColumnMapping = MappingType.Hidden;
+            dataSet.Tables["Zaemwik"].Columns["id"].ColumnMapping = MappingType.Hidden;
+            dataSet.Tables["KredDocum"].Columns["id"].ColumnMapping = MappingType.Hidden;
+           dataSet.Tables["OsnSdelkVdch"].Columns["id"].ColumnMapping = MappingType.Hidden;
+           dataSet.Tables["ZalogPoruch"].Columns["idZalPor"].ColumnMapping = MappingType.Hidden;
+          dataSet.Tables["ZalogPoruch"].Columns["id"].ColumnMapping = MappingType.Hidden;
             dataSet.Tables["OsnovnSd"].Columns["id"].ColumnMapping = MappingType.Hidden;
             dataSet.Tables["DocsZalPor"].Columns["id"].ColumnMapping = MappingType.Hidden;
         }
