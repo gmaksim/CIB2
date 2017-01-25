@@ -118,5 +118,26 @@ namespace NlgDBcredProg
             }
         }
 
+        private void saveOsnovnSd_Click(object sender, EventArgs e) //save for OsnovnSd
+        {
+            using (SqlConnection connection = new SqlConnection(@"Data Source=.\cibEXPRESS;Initial Catalog=CredDogCIB;Integrated Security=True"))
+            {
+                connection.Open();
+                adOsnovnSd = new SqlDataAdapter("SELECT * FROM OsnovnSd;", connection);
+                SqlCommandBuilder commandBuilder = new SqlCommandBuilder(adOsnovnSd);
+                adOsnovnSd.InsertCommand = new SqlCommand("sp_OsnovnSd", connection);
+                adOsnovnSd.InsertCommand.CommandType = CommandType.StoredProcedure;
+                adOsnovnSd.InsertCommand.Parameters.Add(new SqlParameter("@id", SqlDbType.Int, 10, "id"));
+                adOsnovnSd.InsertCommand.Parameters.Add(new SqlParameter("@Дог_поруч_залога", SqlDbType.NVarChar, 300, "Дог_поруч_залога"));
+                adOsnovnSd.InsertCommand.Parameters.Add(new SqlParameter("@Одобрение_сделки", SqlDbType.NVarChar, 300, "Одобрение_сделки"));
+                adOsnovnSd.InsertCommand.Parameters.Add(new SqlParameter("@ЕГРЮЛ_на_дату_подп", SqlDbType.NVarChar, 300, "ЕГРЮЛ_на_дату_подп"));
+                adOsnovnSd.InsertCommand.Parameters.Add(new SqlParameter("@Список_участн_на_дату", SqlDbType.NVarChar, 300, "Список_участн_на_дату"));
+                adOsnovnSd.InsertCommand.Parameters.Add(new SqlParameter("@Согласие_на_обремен", SqlDbType.NVarChar, 300, "Согласие_на_обремен"));
+                adOsnovnSd.Update(dataSet.Tables["OsnovnSd"]);
+            }
+        }
+
+
+
     }
 }

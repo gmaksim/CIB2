@@ -12,18 +12,27 @@ namespace NlgDBcredProg
 
         DataSet dataSet;
         SqlConnection connection = new SqlConnection(@"Data Source=.\cibEXPRESS; Initial Catalog=CredDogCIB; Integrated Security=True");
-        SqlDataAdapter adSpDSZalPor, adGrpObject, adDopSogZalPor, adObjData;
+        SqlDataAdapter adZalogPoruch,adSpDSZalPor, adGrpObject, adDopSogZalPor, adObjData;
         BindingSource bsSpDSZalPor, bsGrpObject, bsDopSogZalPor, bsObjData;
         DataGridView gdSpDSZalPor, gdGrpObject, gdDopSogZalPor, gdObjData;
 
         public Spid_ds_and_grob()
+        { }
+
+        public Spid_ds_and_grob(int trans2)
         {
             InitializeComponent();
 
-            adSpDSZalPor = new SqlDataAdapter("SELECT * FROM SpDSZalPor", connection);
-            adGrpObject = new SqlDataAdapter("SELECT * FROM GrpObject", connection);
+            adZalogPoruch = new SqlDataAdapter("SELECT * FROM ZalogPoruch where idZalPor=" + trans2.ToString(), connection);
+            adSpDSZalPor = new SqlDataAdapter("SELECT * FROM SpDSZalPor where id=" + trans2.ToString(), connection);
             adDopSogZalPor = new SqlDataAdapter("SELECT * FROM DopSogZalPor", connection);
+
+            adZalogPoruch = new SqlDataAdapter("SELECT * FROM ZalogPoruch where idZalPor=" + trans2.ToString(), connection);
+            adGrpObject = new SqlDataAdapter("SELECT * FROM GrpObject where id=" + trans2.ToString(), connection);
             adObjData = new SqlDataAdapter("SELECT * FROM ObjData", connection);
+
+
+
 
             dataSet = new DataSet();
             adSpDSZalPor.Fill(dataSet, "SpDSZalPor");

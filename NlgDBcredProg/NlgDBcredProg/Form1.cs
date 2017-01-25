@@ -14,6 +14,9 @@ namespace NlgDBcredProg
         SqlConnection connection = new SqlConnection(@"Data Source=.\cibEXPRESS; Initial Catalog=CredDogCIB; Integrated Security=True");
         SqlDataAdapter adOOO, adKredDog, adZaemwik, adKredDocum, adOsnSdelkVdch, adSpDopSog, adZalogPoruch,
                        adOsnovnSd, adSpDSZalPor, adGrpObject, adDocsZalPor, adDopSogZalPor, adObjData;
+
+ 
+
         BindingSource bsOOO, bsKredDog, bsZaemwik, bsKredDocum, bsOsnSdelkVdch, bsSpDopSog, bsZalogPoruch,
                       bsOsnovnSd, bsSpDSZalPor, bsGrpObject, bsDocsZalPor, bsDopSogZalPor, bsObjData;
         DataGridView gdOOO, gdKredDog, gdZaemwik, gdKredDocum, gdOsnSdelkVdch, gdZalogPoruch,
@@ -142,8 +145,8 @@ namespace NlgDBcredProg
             dataSet.Tables["Zaemwik"].Columns["id"].ColumnMapping = MappingType.Hidden;
             dataSet.Tables["KredDocum"].Columns["id"].ColumnMapping = MappingType.Hidden;
            dataSet.Tables["OsnSdelkVdch"].Columns["id"].ColumnMapping = MappingType.Hidden;
-           dataSet.Tables["ZalogPoruch"].Columns["idZalPor"].ColumnMapping = MappingType.Hidden;
-          dataSet.Tables["ZalogPoruch"].Columns["id"].ColumnMapping = MappingType.Hidden;
+        //   dataSet.Tables["ZalogPoruch"].Columns["idZalPor"].ColumnMapping = MappingType.Hidden;
+       //   dataSet.Tables["ZalogPoruch"].Columns["id"].ColumnMapping = MappingType.Hidden;
             dataSet.Tables["OsnovnSd"].Columns["id"].ColumnMapping = MappingType.Hidden;
             dataSet.Tables["DocsZalPor"].Columns["id"].ColumnMapping = MappingType.Hidden;
         }
@@ -170,8 +173,10 @@ namespace NlgDBcredProg
 
         private void spis_dop_sog_and__gr_obj_Click(object sender, EventArgs e) //button to open Spisok dop.sogl i grup.obj form
         {
-            Spid_ds_and_grob src = new Spid_ds_and_grob();
-            src.Show();
+            int trans2 = (int)gdZalogPoruch.CurrentRow.Cells[0].Value;
+
+            Spid_ds_and_grob SDSG = new Spid_ds_and_grob(trans2);
+            SDSG.Show();
         }
 
         private void gdZaemwik_CellContentClick(object sender, DataGridViewCellEventArgs e) //make clickable Zaemwik cells
