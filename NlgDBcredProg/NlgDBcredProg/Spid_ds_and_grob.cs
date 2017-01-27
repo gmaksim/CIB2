@@ -45,7 +45,7 @@ namespace NlgDBcredProg
             dataSet.Relations.Add("ZalogPoruch-SpDSZalPor", dataSet.Tables["ZalogPoruch"].Columns["idZalPor"], dataSet.Tables["SpDSZalPor"].Columns["id"]);
             dataSet.Relations.Add("ZalogPoruch-GrpObject", dataSet.Tables["ZalogPoruch"].Columns["idZalPor"], dataSet.Tables["GrpObject"].Columns["id"]);
             dataSet.Relations.Add("SpDSZalPor-DopSogZalPor", dataSet.Tables["SpDSZalPor"].Columns["idSpDSZP"], dataSet.Tables["DopSogZalPor"].Columns["id"], false);
-            dataSet.Relations.Add("GrpObject-ObjData", dataSet.Tables["GrpObject"].Columns["idGrObj"], dataSet.Tables["ObjData"].Columns["id"]);
+            dataSet.Relations.Add("GrpObject-ObjData", dataSet.Tables["GrpObject"].Columns["idGrObj"], dataSet.Tables["ObjData"].Columns["id"], false);
 
             bsZalogPoruch = new BindingSource(dataSet, "ZalogPoruch");
             bsSpDSZalPor = new BindingSource(dataSet, "SpDSZalPor");
@@ -129,6 +129,43 @@ namespace NlgDBcredProg
                 adDopSogZalPor.InsertCommand.Parameters.Add(new SqlParameter("@Список_участн_на_дату", SqlDbType.NVarChar, 300, "Список_участн_на_дату"));
                 adDopSogZalPor.InsertCommand.Parameters.Add(new SqlParameter("@Согласие_на_обремен", SqlDbType.NVarChar, 300, "Согласие_на_обремен"));
                 adDopSogZalPor.Update(dataSet.Tables["DopSogZalPor"]);
+            }
+        }
+
+        private void saveGrpObject_Click(object sender, EventArgs e) //save for GrpObject
+        {
+            using (SqlConnection connection = new SqlConnection(@"Data Source=.\cibEXPRESS;Initial Catalog=CredDogCIB;Integrated Security=True"))
+            {
+                connection.Open();
+                adGrpObject = new SqlDataAdapter("SELECT * FROM GrpObject;", connection);
+                SqlCommandBuilder commandBuilder = new SqlCommandBuilder(adGrpObject);
+                adGrpObject.InsertCommand = new SqlCommand("sp_GrpObject", connection);
+                adGrpObject.InsertCommand.CommandType = CommandType.StoredProcedure;
+                adGrpObject.InsertCommand.Parameters.Add(new SqlParameter("@Группы_объектов", SqlDbType.NVarChar, 50, "Группы_объектов"));
+                adGrpObject.InsertCommand.Parameters.Add(new SqlParameter("@id", SqlDbType.Int, 30, "id"));
+                SqlParameter parameter = adGrpObject.InsertCommand.Parameters.Add("@idGrObj", SqlDbType.Int, 10, "idGrObj");
+                parameter.Direction = ParameterDirection.Output;
+                adGrpObject.Update(dataSet.Tables["GrpObject"]);
+            }
+        }
+
+
+        private void saveObjData_Click(object sender, EventArgs e) //save for ObjData
+        {
+            using (SqlConnection connection = new SqlConnection(@"Data Source=.\cibEXPRESS;Initial Catalog=CredDogCIB;Integrated Security=True"))
+            {
+                connection.Open();
+                adObjData = new SqlDataAdapter("SELECT * FROM ObjData;", connection);
+                SqlCommandBuilder commandBuilder = new SqlCommandBuilder(adObjData);
+                adObjData.InsertCommand = new SqlCommand("sp_ObjData", connection);
+                adObjData.InsertCommand.CommandType = CommandType.StoredProcedure;
+                adObjData.InsertCommand.Parameters.Add(new SqlParameter("@id", SqlDbType.Int, 10, "id"));
+                adObjData.InsertCommand.Parameters.Add(new SqlParameter("@Выписки_ЕГРП", SqlDbType.NVarChar, 300, "Выписки_ЕГРП"));
+                adObjData.InsertCommand.Parameters.Add(new SqlParameter("@Свид_права_собст", SqlDbType.NVarChar, 300, "Свид_права_собст"));
+                adObjData.InsertCommand.Parameters.Add(new SqlParameter("@Договоры_куп_прод_обрем", SqlDbType.NVarChar, 300, "Договоры_куп_прод_обрем"));
+                adObjData.InsertCommand.Parameters.Add(new SqlParameter("@Кадастровый_пасп", SqlDbType.NVarChar, 300, "Кадастровый_пасп"));
+                adObjData.InsertCommand.Parameters.Add(new SqlParameter("@Фотографии", SqlDbType.NVarChar, 300, "Фотографии"));
+                adObjData.Update(dataSet.Tables["ObjData"]);
             }
         }
 

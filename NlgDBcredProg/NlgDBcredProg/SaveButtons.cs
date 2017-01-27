@@ -138,6 +138,24 @@ namespace NlgDBcredProg
         }
 
 
+        private void saveDocsZalPor_Click(object sender, EventArgs e) //save for DocsZalPor
+        {
+            using (SqlConnection connection = new SqlConnection(@"Data Source=.\cibEXPRESS;Initial Catalog=CredDogCIB;Integrated Security=True"))
+            {
+                connection.Open();
+                adDocsZalPor = new SqlDataAdapter("SELECT * FROM DocsZalPor;", connection);
+                SqlCommandBuilder commandBuilder = new SqlCommandBuilder(adDocsZalPor);
+                adDocsZalPor.InsertCommand = new SqlCommand("sp_DocsZalPor", connection);
+                adDocsZalPor.InsertCommand.CommandType = CommandType.StoredProcedure;
+                adDocsZalPor.InsertCommand.Parameters.Add(new SqlParameter("@id", SqlDbType.Int, 10, "id"));
+                adDocsZalPor.InsertCommand.Parameters.Add(new SqlParameter("@Паспорт", SqlDbType.NVarChar, 300, "Паспорт"));
+                adDocsZalPor.InsertCommand.Parameters.Add(new SqlParameter("@ЕГРЮЛ", SqlDbType.NVarChar, 300, "ЕГРЮЛ"));
+                adDocsZalPor.InsertCommand.Parameters.Add(new SqlParameter("@Участники", SqlDbType.NVarChar, 300, "Участники"));
+                adDocsZalPor.InsertCommand.Parameters.Add(new SqlParameter("@Заявка", SqlDbType.NVarChar, 300, "Заявка"));
+                adDocsZalPor.InsertCommand.Parameters.Add(new SqlParameter("@Анкета", SqlDbType.NVarChar, 300, "Анкета"));
+                adDocsZalPor.Update(dataSet.Tables["DocsZalPor"]);
+            }
+        }
 
     }
 }
