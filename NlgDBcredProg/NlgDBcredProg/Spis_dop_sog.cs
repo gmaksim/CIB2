@@ -10,7 +10,7 @@ namespace NlgDBcredProg
     {
         DataSet dataSet;
         SqlConnection connection = new SqlConnection(@"Data Source=.\cibEXPRESS; Initial Catalog=CredDogCIB; Integrated Security=True");
-        SqlDataAdapter adSpDopSog, adDopSog, adKredDog;
+        SqlDataAdapter adSpDopSog, adDopSog, adKredDog, adDocsZalPor, adZaemwik;
         BindingSource bsSpDopSog, bsDopSog, bsKredDog;
         DataGridView gdSpDopSog, gdDopSog;
 
@@ -42,14 +42,14 @@ namespace NlgDBcredProg
           bsSpDopSog = new BindingSource(bsKredDog, "KredDog-SpDopSog");
            bsDopSog = new BindingSource(bsSpDopSog, "SpDopSog-DopSog");
 
-            gdSpDopSog = new DataGridView(); //dg SpDopSog
+        /*    gdSpDopSog = new DataGridView(); //dg SpDopSog
             gdSpDopSog.Size = new Size(315, 315);
             gdSpDopSog.Location = new Point(5, 5);
             gdSpDopSog.DataSource = bsSpDopSog;
             gdDopSog = new DataGridView(); //dg DopSog
             gdDopSog.Size = new Size(600, 315);
             gdDopSog.Location = new Point(325, 5);
-            gdDopSog.DataSource = bsDopSog;
+            gdDopSog.DataSource = bsDopSog;*/
 
             this.Controls.AddRange(new Control[] { gdSpDopSog, gdDopSog });
 
@@ -64,41 +64,44 @@ namespace NlgDBcredProg
             Size = new Size(950, 400);
         }
 
-        private void saveSpDopSog_Click(object sender, EventArgs e) //save for SpDopSog
-        {
-            using (SqlConnection connection = new SqlConnection(@"Data Source=.\cibEXPRESS;Initial Catalog=CredDogCIB;Integrated Security=True"))
-            {
-                  connection.Open();
-                  adSpDopSog = new SqlDataAdapter("SELECT * FROM SpDopSog;", connection);
-                  SqlCommandBuilder commandBuilder = new SqlCommandBuilder(adSpDopSog);
-                  adSpDopSog.InsertCommand = new SqlCommand("sp_SpDopSog", connection);
-                  adSpDopSog.InsertCommand.CommandType = CommandType.StoredProcedure;
-                  adSpDopSog.InsertCommand.Parameters.Add(new SqlParameter("@Договор", SqlDbType.NVarChar, 50, "Договор"));
-                  adSpDopSog.InsertCommand.Parameters.Add(new SqlParameter("@Принят", SqlDbType.Date, 30, "Принят"));
-                  adSpDopSog.InsertCommand.Parameters.Add(new SqlParameter("@id", SqlDbType.Int, 30, "id"));
-                  SqlParameter parameter = adSpDopSog.InsertCommand.Parameters.Add("@idSpDpSg", SqlDbType.Int, 10, "idSpDpSg");
-                  parameter.Direction = ParameterDirection.Output;
-                  adSpDopSog.Update(dataSet.Tables["SpDopSog"]);
-            }
-        }
-
-        private void saveDopSog_Click(object sender, EventArgs e) //save for DopSog
+        private void saveZaemwik_Click(object sender, EventArgs e) //save for Zaemwik
         {
             using (SqlConnection connection = new SqlConnection(@"Data Source=.\cibEXPRESS;Initial Catalog=CredDogCIB;Integrated Security=True"))
             {
                 connection.Open();
-                adDopSog = new SqlDataAdapter("SELECT * FROM DopSog;", connection);
-                SqlCommandBuilder commandBuilder = new SqlCommandBuilder(adDopSog);
-                adDopSog.InsertCommand = new SqlCommand("sp_DopSog", connection);
-                adDopSog.InsertCommand.CommandType = CommandType.StoredProcedure;
-                adDopSog.InsertCommand.Parameters.Add(new SqlParameter("@id", SqlDbType.Int, 10, "id"));
-                adDopSog.InsertCommand.Parameters.Add(new SqlParameter("@Кредитный_дог", SqlDbType.NVarChar, 300, "Кредитный_дог"));
-                adDopSog.InsertCommand.Parameters.Add(new SqlParameter("@Одобрение_сделки", SqlDbType.NVarChar, 300, "Одобрение_сделки"));
-                adDopSog.InsertCommand.Parameters.Add(new SqlParameter("@ЕГРЮЛ_на_дату_подп", SqlDbType.NVarChar, 300, "ЕГРЮЛ_на_дату_подп"));
-                adDopSog.InsertCommand.Parameters.Add(new SqlParameter("@Список_участн_на_дату", SqlDbType.NVarChar, 300, "Список_участн_на_дату"));
-                adDopSog.Update(dataSet.Tables["DopSog"]);
+                adZaemwik = new SqlDataAdapter("SELECT * FROM Zaemwik;", connection);
+                SqlCommandBuilder commandBuilder = new SqlCommandBuilder(adZaemwik);
+                adZaemwik.InsertCommand = new SqlCommand("sp_Zaemwik", connection);
+                adZaemwik.InsertCommand.CommandType = CommandType.StoredProcedure;
+                adZaemwik.InsertCommand.Parameters.Add(new SqlParameter("@id", SqlDbType.Int, 10, "id"));
+                adZaemwik.InsertCommand.Parameters.Add(new SqlParameter("@Паспорт", SqlDbType.NVarChar, 300, "Паспорт"));
+                adZaemwik.InsertCommand.Parameters.Add(new SqlParameter("@ЕГРЮЛ", SqlDbType.NVarChar, 300, "ЕГРЮЛ"));
+                adZaemwik.InsertCommand.Parameters.Add(new SqlParameter("@Участники", SqlDbType.NVarChar, 300, "Участники"));
+                adZaemwik.InsertCommand.Parameters.Add(new SqlParameter("@Заявка", SqlDbType.NVarChar, 300, "Заявка"));
+                adZaemwik.InsertCommand.Parameters.Add(new SqlParameter("@Анкета", SqlDbType.NVarChar, 300, "Анкета"));
+                adZaemwik.Update(dataSet.Tables["Zaemwik"]);
             }
         }
 
+
+
+        private void saveDocsZalPor_Click(object sender, EventArgs e) //save for DocsZalPor
+        {
+            using (SqlConnection connection = new SqlConnection(@"Data Source=.\cibEXPRESS;Initial Catalog=CredDogCIB;Integrated Security=True"))
+            {
+                connection.Open();
+                adDocsZalPor = new SqlDataAdapter("SELECT * FROM DocsZalPor;", connection);
+                SqlCommandBuilder commandBuilder = new SqlCommandBuilder(adDocsZalPor);
+                adDocsZalPor.InsertCommand = new SqlCommand("sp_DocsZalPor", connection);
+                adDocsZalPor.InsertCommand.CommandType = CommandType.StoredProcedure;
+                adDocsZalPor.InsertCommand.Parameters.Add(new SqlParameter("@id", SqlDbType.Int, 10, "id"));
+                adDocsZalPor.InsertCommand.Parameters.Add(new SqlParameter("@Паспорт", SqlDbType.NVarChar, 300, "Паспорт"));
+                adDocsZalPor.InsertCommand.Parameters.Add(new SqlParameter("@ЕГРЮЛ", SqlDbType.NVarChar, 300, "ЕГРЮЛ"));
+                adDocsZalPor.InsertCommand.Parameters.Add(new SqlParameter("@Участники", SqlDbType.NVarChar, 300, "Участники"));
+                adDocsZalPor.InsertCommand.Parameters.Add(new SqlParameter("@Заявка", SqlDbType.NVarChar, 300, "Заявка"));
+                adDocsZalPor.InsertCommand.Parameters.Add(new SqlParameter("@Анкета", SqlDbType.NVarChar, 300, "Анкета"));
+                adDocsZalPor.Update(dataSet.Tables["DocsZalPor"]);
+            }
+        }
     }
 }

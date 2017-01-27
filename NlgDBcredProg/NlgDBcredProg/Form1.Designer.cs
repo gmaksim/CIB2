@@ -37,7 +37,6 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
-            this.button12 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -45,7 +44,6 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.button13 = new System.Windows.Forms.Button();
-            this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.button9 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -83,23 +81,23 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(414, 8);
+            this.button5.Location = new System.Drawing.Point(422, 8);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(24, 21);
             this.button5.TabIndex = 8;
             this.button5.Text = "С";
             this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.saveKredDog_Click);
+            this.button5.Click += new System.EventHandler(this.saveSpDopSog_Click);
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(660, 7);
+            this.button7.Location = new System.Drawing.Point(712, 9);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(23, 21);
             this.button7.TabIndex = 9;
             this.button7.Text = "С";
             this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.saveZaemwik_Click);
+            this.button7.Click += new System.EventHandler(this.saveDopSog_Click);
             // 
             // button8
             // 
@@ -141,16 +139,6 @@
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.saveOsnovnSd_Click);
             // 
-            // button12
-            // 
-            this.button12.Location = new System.Drawing.Point(468, 549);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(26, 21);
-            this.button12.TabIndex = 17;
-            this.button12.Text = "С";
-            this.button12.UseVisualStyleBackColor = true;
-            this.button12.Click += new System.EventHandler(this.saveDocsZalPor_Click);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -169,20 +157,20 @@
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label2.Location = new System.Drawing.Point(251, 13);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(157, 15);
+            this.label2.Size = new System.Drawing.Size(165, 15);
             this.label2.TabIndex = 19;
-            this.label2.Text = "Кредитный договор №";
+            this.label2.Text = "Список доп.соглашений";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(502, 13);
+            this.label3.Location = new System.Drawing.Point(502, 11);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(152, 15);
+            this.label3.Size = new System.Drawing.Size(204, 15);
             this.label3.TabIndex = 20;
-            this.label3.Text = "Документы заемщика";
+            this.label3.Text = "Дополнительное соглашение";
             // 
             // label4
             // 
@@ -227,17 +215,6 @@
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.saveOsnSdelkVdch_Click);
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label7.Location = new System.Drawing.Point(251, 551);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(211, 15);
-            this.label7.TabIndex = 26;
-            this.label7.Text = "Документы участников сделки";
-            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -275,7 +252,6 @@
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.label8);
-            this.Controls.Add(this.label7);
             this.Controls.Add(this.button13);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -283,7 +259,6 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button12);
             this.Controls.Add(this.button11);
             this.Controls.Add(this.button10);
             this.Controls.Add(this.button2);
@@ -312,7 +287,6 @@
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button button11;
-        private System.Windows.Forms.Button button12;
         private System.Windows.Forms.Label label1;
         protected internal System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label2;
@@ -321,7 +295,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button button13;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.TextBox textBox1;

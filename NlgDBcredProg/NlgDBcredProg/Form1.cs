@@ -13,14 +13,14 @@ namespace NlgDBcredProg
         DataSet dataSet;
         SqlConnection connection = new SqlConnection(@"Data Source=.\cibEXPRESS; Initial Catalog=CredDogCIB; Integrated Security=True");
         SqlDataAdapter adOOO, adKredDog, adZaemwik, adKredDocum, adOsnSdelkVdch, adSpDopSog, adZalogPoruch,
-                       adOsnovnSd, adSpDSZalPor, adGrpObject, adDocsZalPor, adDopSogZalPor, adObjData;
+                       adOsnovnSd, adSpDSZalPor, adGrpObject, adDocsZalPor, adDopSogZalPor, adObjData, adDopSog;
 
-
+  
 
         BindingSource bsOOO, bsKredDog, bsZaemwik, bsKredDocum, bsOsnSdelkVdch, bsSpDopSog, bsZalogPoruch,
-                      bsOsnovnSd, bsSpDSZalPor, bsGrpObject, bsDocsZalPor, bsDopSogZalPor, bsObjData;
+                      bsOsnovnSd, bsSpDSZalPor, bsGrpObject, bsDocsZalPor, bsDopSogZalPor, bsObjData, bsDopSog;
         DataGridView gdOOO, gdKredDog, gdZaemwik, gdKredDocum, gdOsnSdelkVdch, gdZalogPoruch,
-                     gdOsnovnSd, gdDocsZalPor;
+                     gdOsnovnSd, gdDocsZalPor, gdSpDopSog, gdDopSog;
 
         public Form1()
 
@@ -103,24 +103,35 @@ namespace NlgDBcredProg
 
             //DATA GRID LOCATION AND SIZE AREA
             gdOOO = new DataGridView(); //dg OOO
-            gdOOO.Size = new Size(245, 660);
+            gdOOO.Size = new Size(245, 320);
             gdOOO.Location = new Point(5, 35);
             gdOOO.DataSource = bsOOO;
+
             gdKredDog = new DataGridView(); //dg KredDog
-            gdKredDog.Size = new Size(245, 150);
-            gdKredDog.Location = new Point(255, 35);
-            gdKredDog.DataSource = bsKredDog;
-            gdZaemwik = new DataGridView(); //dg Zaemwik
+            gdKredDog.Size = new Size(245, 350);
+            gdKredDog.Location = new Point(5, 360);
+            gdKredDog.DataSource = bsKredDog; 
+        /*    gdZaemwik = new DataGridView(); //dg Zaemwik
             gdZaemwik.Size = new Size(545, 150);
             gdZaemwik.Location = new Point(505, 35);
-            gdZaemwik.DataSource = bsZaemwik;
+            gdZaemwik.DataSource = bsZaemwik;*/
+
+            gdSpDopSog = new DataGridView(); //dg SpDopSog
+            gdSpDopSog.Size = new Size(245, 150);
+            gdSpDopSog.Location = new Point(255, 35);
+            gdSpDopSog.DataSource = bsSpDopSog;
+            gdDopSog = new DataGridView(); //dg DopSog
+            gdDopSog.Size = new Size(545, 150);
+            gdDopSog.Location = new Point(505, 35);
+            gdDopSog.DataSource = bsDopSog;
+
             gdKredDocum = new DataGridView(); //dg KredDocum
             gdKredDocum.Size = new Size(245, 150);
-            gdKredDocum.Location = new Point(255, gdKredDog.Bottom + 30);
+            gdKredDocum.Location = new Point(255, gdSpDopSog.Bottom + 30);
             gdKredDocum.DataSource = bsKredDocum;
             gdOsnSdelkVdch = new DataGridView(); //dg OsnSdelkVdch
             gdOsnSdelkVdch.Size = new Size(450, 150);
-            gdOsnSdelkVdch.Location = new Point(505, gdZaemwik.Bottom + 30);
+            gdOsnSdelkVdch.Location = new Point(505, gdDopSog.Bottom + 30);
             gdOsnSdelkVdch.DataSource = bsOsnSdelkVdch;
             gdZalogPoruch = new DataGridView(); //dg ZalogPoruch
             gdZalogPoruch.Size = new Size(245, 150);
@@ -135,8 +146,10 @@ namespace NlgDBcredProg
             gdDocsZalPor.Location = new Point(255, gdZalogPoruch.Bottom + 30);
             gdDocsZalPor.DataSource = bsDocsZalPor;
 
-            this.Controls.AddRange(new Control[] { gdOOO, gdKredDog, gdZaemwik, gdKredDocum, gdOsnSdelkVdch, gdZalogPoruch, gdOsnovnSd, gdDocsZalPor }); //control with dg
-            this.gdZaemwik.CellContentClick += new DataGridViewCellEventHandler(this.gdZaemwik_CellContentClick); //clickable cells in Zaemwik
+
+
+            this.Controls.AddRange(new Control[] { gdDopSog, gdSpDopSog, gdOOO, gdKredDog, gdZaemwik, gdKredDocum, gdOsnSdelkVdch, gdZalogPoruch, gdOsnovnSd, gdDocsZalPor }); //control with dg
+           // this.gdZaemwik.CellContentClick += new DataGridViewCellEventHandler(this.gdZaemwik_CellContentClick); //clickable cells in Zaemwik
 
 
             //HIDDEN ID'S AREA
