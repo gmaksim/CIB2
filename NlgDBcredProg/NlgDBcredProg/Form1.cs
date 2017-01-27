@@ -14,6 +14,9 @@ namespace NlgDBcredProg
         SqlConnection connection = new SqlConnection(@"Data Source=.\cibEXPRESS; Initial Catalog=CredDogCIB; Integrated Security=True");
         SqlDataAdapter adOOO, adKredDog, adZaemwik, adKredDocum, adOsnSdelkVdch, adSpDopSog, adZalogPoruch,
                        adOsnovnSd, adSpDSZalPor, adGrpObject, adDocsZalPor, adDopSogZalPor, adObjData;
+
+
+
         BindingSource bsOOO, bsKredDog, bsZaemwik, bsKredDocum, bsOsnSdelkVdch, bsSpDopSog, bsZalogPoruch,
                       bsOsnovnSd, bsSpDSZalPor, bsGrpObject, bsDocsZalPor, bsDopSogZalPor, bsObjData;
         DataGridView gdOOO, gdKredDog, gdZaemwik, gdKredDocum, gdOsnSdelkVdch, gdZalogPoruch,
@@ -100,45 +103,44 @@ namespace NlgDBcredProg
 
             //DATA GRID LOCATION AND SIZE AREA
             gdOOO = new DataGridView(); //dg OOO
-            gdOOO.Size = new Size(315, 610);
-            gdOOO.Location = new Point(5, 5);
+            gdOOO.Size = new Size(245, 660);
+            gdOOO.Location = new Point(5, 35);
             gdOOO.DataSource = bsOOO;
             gdKredDog = new DataGridView(); //dg KredDog
-            gdKredDog.Size = new Size(300, 150);
-            gdKredDog.Location = new Point(325, 5);
+            gdKredDog.Size = new Size(245, 150);
+            gdKredDog.Location = new Point(255, 35);
             gdKredDog.DataSource = bsKredDog;
             gdZaemwik = new DataGridView(); //dg Zaemwik
-            gdZaemwik.Size = new Size(630, 150);
-            gdZaemwik.Location = new Point(630, 5);
+            gdZaemwik.Size = new Size(545, 150);
+            gdZaemwik.Location = new Point(505, 35);
             gdZaemwik.DataSource = bsZaemwik;
             gdKredDocum = new DataGridView(); //dg KredDocum
-            gdKredDocum.Size = new Size(330, 150);
-            gdKredDocum.Location = new Point(325, gdKredDog.Bottom + 50);
+            gdKredDocum.Size = new Size(245, 150);
+            gdKredDocum.Location = new Point(255, gdKredDog.Bottom + 30);
             gdKredDocum.DataSource = bsKredDocum;
             gdOsnSdelkVdch = new DataGridView(); //dg OsnSdelkVdch
-            gdOsnSdelkVdch.Size = new Size(530, 150);
-            gdOsnSdelkVdch.Location = new Point(680, gdZaemwik.Bottom + 50);
+            gdOsnSdelkVdch.Size = new Size(450, 150);
+            gdOsnSdelkVdch.Location = new Point(505, gdZaemwik.Bottom + 30);
             gdOsnSdelkVdch.DataSource = bsOsnSdelkVdch;
             gdZalogPoruch = new DataGridView(); //dg ZalogPoruch
-            gdZalogPoruch.Size = new Size(345, 150);
-            gdZalogPoruch.Location = new Point(325, gdKredDocum.Bottom + 50);
+            gdZalogPoruch.Size = new Size(245, 150);
+            gdZalogPoruch.Location = new Point(255, gdKredDocum.Bottom + 30);
             gdZalogPoruch.DataSource = bsZalogPoruch;
             gdOsnovnSd = new DataGridView(); //dg OsnovnSd
             gdOsnovnSd.Size = new Size(545, 150);
-            gdOsnovnSd.Location = new Point(700, gdOsnSdelkVdch.Bottom + 50);
+            gdOsnovnSd.Location = new Point(505, gdOsnSdelkVdch.Bottom + 30);
             gdOsnovnSd.DataSource = bsOsnovnSd;
             gdDocsZalPor = new DataGridView(); //dg DocsZalPor
-            gdDocsZalPor.Size = new Size(845, 150);
-            gdDocsZalPor.Location = new Point(325, gdZalogPoruch.Bottom + 50);
+            gdDocsZalPor.Size = new Size(550, 150);
+            gdDocsZalPor.Location = new Point(255, gdZalogPoruch.Bottom + 30);
             gdDocsZalPor.DataSource = bsDocsZalPor;
 
             this.Controls.AddRange(new Control[] { gdOOO, gdKredDog, gdZaemwik, gdKredDocum, gdOsnSdelkVdch, gdZalogPoruch, gdOsnovnSd, gdDocsZalPor }); //control with dg
             this.gdZaemwik.CellContentClick += new DataGridViewCellEventHandler(this.gdZaemwik_CellContentClick); //clickable cells in Zaemwik
 
+
             //HIDDEN ID'S AREA
-          dataSet.Tables["OOO"].Columns["IdOOO"].ColumnMapping = MappingType.Hidden;
-           // dataSet.Tables["KredDog"].Columns["id"].ColumnMapping = MappingType.Hidden;
-           // dataSet.Tables["KredDog"].Columns["idKredDog"].ColumnMapping = MappingType.Hidden;
+            dataSet.Tables["OOO"].Columns["IdOOO"].ColumnMapping = MappingType.Hidden;
             dataSet.Tables["Zaemwik"].Columns["id"].ColumnMapping = MappingType.Hidden;
             dataSet.Tables["KredDocum"].Columns["id"].ColumnMapping = MappingType.Hidden;
            dataSet.Tables["OsnSdelkVdch"].Columns["id"].ColumnMapping = MappingType.Hidden;
@@ -148,9 +150,12 @@ namespace NlgDBcredProg
             dataSet.Tables["DocsZalPor"].Columns["id"].ColumnMapping = MappingType.Hidden;
         }
 
+
+
+
         private void spis_dop_sog_Click(object sender, EventArgs e)
         {
-            int trans1 = (int)gdKredDog.CurrentRow.Cells[0].Value;
+            int trans1 = (int)gdKredDog.CurrentRow.Cells[2].Value;
            
             Spis_dop_sog SDS = new Spis_dop_sog(trans1);
             SDS.Show();
@@ -159,7 +164,7 @@ namespace NlgDBcredProg
         private void Form1_Load(object sender, EventArgs e)
         {
             StartPosition = FormStartPosition.WindowsDefaultBounds; //main form position and size
-            Size = new Size(1300, 900);
+            Size = new Size(1080, 780);
         }
 
         private void searchForm_Click(object sender, EventArgs e) //button to open Search form
@@ -183,6 +188,13 @@ namespace NlgDBcredProg
                 Process.Start(gdZaemwik.SelectedCells[0].Value.ToString());
             }
         }
+
+
+        private void textBox1_TextChanged_1(object sender, EventArgs e) //search OOO in main form
+        {
+            bsOOO.Filter = "Наименование LIKE '%' + '" + textBox1.Text + "%'"; //search in tables
+        }
+
 
     }
 }

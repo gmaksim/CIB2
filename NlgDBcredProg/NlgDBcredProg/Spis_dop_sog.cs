@@ -87,18 +87,16 @@ namespace NlgDBcredProg
             using (SqlConnection connection = new SqlConnection(@"Data Source=.\cibEXPRESS;Initial Catalog=CredDogCIB;Integrated Security=True"))
             {
                 connection.Open();
-                adSpDopSog = new SqlDataAdapter("SELECT * FROM DopSog;", connection);
-                SqlCommandBuilder commandBuilder = new SqlCommandBuilder(adSpDopSog);
-                adSpDopSog.InsertCommand = new SqlCommand("sp_DopSog", connection);
-                adSpDopSog.InsertCommand.CommandType = CommandType.StoredProcedure;
-                adSpDopSog.InsertCommand.Parameters.Add(new SqlParameter("@id", SqlDbType.Int, 10, "id"));
-                adSpDopSog.InsertCommand.Parameters.Add(new SqlParameter("@Кредитный_дог", SqlDbType.NVarChar, 300, "Кредитный_дог"));
-                adSpDopSog.InsertCommand.Parameters.Add(new SqlParameter("@Одобрение_сделки", SqlDbType.NVarChar, 300, "Одобрение_сделки"));
-                adSpDopSog.InsertCommand.Parameters.Add(new SqlParameter("@ЕГРЮЛ_на_дату_подп", SqlDbType.NVarChar, 300, "ЕГРЮЛ_на_дату_подп"));
-                adSpDopSog.InsertCommand.Parameters.Add(new SqlParameter("@Список_участн_на_дату", SqlDbType.NVarChar, 300, "Список_участн_на_дату"));
-             //   SqlParameter parameter = adSpDopSog.InsertCommand.Parameters.Add("@idINside", SqlDbType.Int, 10, "idINside");
-            //    parameter.Direction = ParameterDirection.Output;
-                adSpDopSog.Update(dataSet.Tables["DopSog"]);
+                adDopSog = new SqlDataAdapter("SELECT * FROM DopSog;", connection);
+                SqlCommandBuilder commandBuilder = new SqlCommandBuilder(adDopSog);
+                adDopSog.InsertCommand = new SqlCommand("sp_DopSog", connection);
+                adDopSog.InsertCommand.CommandType = CommandType.StoredProcedure;
+                adDopSog.InsertCommand.Parameters.Add(new SqlParameter("@id", SqlDbType.Int, 10, "id"));
+                adDopSog.InsertCommand.Parameters.Add(new SqlParameter("@Кредитный_дог", SqlDbType.NVarChar, 300, "Кредитный_дог"));
+                adDopSog.InsertCommand.Parameters.Add(new SqlParameter("@Одобрение_сделки", SqlDbType.NVarChar, 300, "Одобрение_сделки"));
+                adDopSog.InsertCommand.Parameters.Add(new SqlParameter("@ЕГРЮЛ_на_дату_подп", SqlDbType.NVarChar, 300, "ЕГРЮЛ_на_дату_подп"));
+                adDopSog.InsertCommand.Parameters.Add(new SqlParameter("@Список_участн_на_дату", SqlDbType.NVarChar, 300, "Список_участн_на_дату"));
+                adDopSog.Update(dataSet.Tables["DopSog"]);
             }
         }
 
