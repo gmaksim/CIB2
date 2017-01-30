@@ -34,7 +34,6 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -47,6 +46,9 @@
             this.label8 = new System.Windows.Forms.Label();
             this.button9 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.button12 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button6
@@ -108,16 +110,6 @@
             this.button8.Text = "С";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.saveKredDocum_Click);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(974, 232);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 108);
-            this.button2.TabIndex = 13;
-            this.button2.Text = "Список доп. соглашенй";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.spis_dop_sog_Click);
             // 
             // button10
             // 
@@ -243,12 +235,46 @@
             this.textBox1.TabIndex = 29;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged_1);
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.label7.Location = new System.Drawing.Point(10, 371);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(157, 15);
+            this.label7.TabIndex = 30;
+            this.label7.Text = "Кредитный договор №";
+            // 
+            // button12
+            // 
+            this.button12.Location = new System.Drawing.Point(174, 369);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(23, 21);
+            this.button12.TabIndex = 31;
+            this.button12.Text = "С";
+            this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.saveKredDog_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(943, 214);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 108);
+            this.button2.TabIndex = 32;
+            this.button2.Text = "Документы заемщика и участников сделки";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.DocumentsForm_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Cornsilk;
             this.ClientSize = new System.Drawing.Size(1068, 741);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button12);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.label8);
@@ -261,7 +287,6 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button11);
             this.Controls.Add(this.button10);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button5);
@@ -288,7 +313,6 @@
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button button11;
         private System.Windows.Forms.Label label1;
-        protected internal System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
@@ -298,6 +322,9 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.Button button2;
     }
 }
 

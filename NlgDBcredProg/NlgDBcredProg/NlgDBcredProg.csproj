@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DocumentsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DocumentsForm.Designer.cs">
+      <DependentUpon>DocumentsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -69,12 +75,9 @@
     <Compile Include="Spid_ds_and_grob.Designer.cs">
       <DependentUpon>Spid_ds_and_grob.cs</DependentUpon>
     </Compile>
-    <Compile Include="Spis_dop_sog.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Spis_dop_sog.Designer.cs">
-      <DependentUpon>Spis_dop_sog.cs</DependentUpon>
-    </Compile>
+    <EmbeddedResource Include="DocumentsForm.resx">
+      <DependentUpon>DocumentsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -92,9 +95,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Spid_ds_and_grob.resx">
       <DependentUpon>Spid_ds_and_grob.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Spis_dop_sog.resx">
-      <DependentUpon>Spis_dop_sog.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
