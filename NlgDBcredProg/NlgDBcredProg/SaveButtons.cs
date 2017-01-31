@@ -9,7 +9,7 @@ namespace NlgDBcredProg
 {
     public partial class Form1 : Form
     {
-
+        //CHANGE CONNECTION!!!
 
         private void saveOOO_Click(object sender, EventArgs e) //save for OOO
         {

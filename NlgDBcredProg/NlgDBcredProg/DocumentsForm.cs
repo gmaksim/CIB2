@@ -9,7 +9,7 @@ namespace NlgDBcredProg
     public partial class DocumentsForm : Form
     {
         DataSet dataSet;
-        SqlConnection connection = new SqlConnection(@"Data Source=.\cibEXPRESS; Initial Catalog=CredDogCIB; Integrated Security=True");
+        //SqlConnection connection = new SqlConnection(@"Data Source=.\cibEXPRESS; Initial Catalog=CredDogCIB; Integrated Security=True");
         SqlDataAdapter adOOO, adZaemwik, adZalogPoruch, adDocsZalPor;
           BindingSource bsOOO, bsZaemwik, bsZalogPoruch, bsDocsZalPor;
           DataGridView gdZaemwik, gdDocsZalPor;
@@ -26,10 +26,10 @@ namespace NlgDBcredProg
             this.trans2 = trans2;
 
 
-            adOOO = new SqlDataAdapter("SELECT * FROM OOO where idOOO=" + trans1.ToString(), connection);
-            adZaemwik = new SqlDataAdapter("SELECT * FROM Zaemwik", connection);
-            adZalogPoruch = new SqlDataAdapter("SELECT * FROM ZalogPoruch where idZalPor=" + trans2.ToString(), connection);
-            adDocsZalPor = new SqlDataAdapter("SELECT * FROM DocsZalPor", connection);
+            adOOO = new SqlDataAdapter("SELECT * FROM OOO where idOOO=" + trans1.ToString(), Program.connection);
+            adZaemwik = new SqlDataAdapter("SELECT * FROM Zaemwik", Program.connection);
+            adZalogPoruch = new SqlDataAdapter("SELECT * FROM ZalogPoruch where idZalPor=" + trans2.ToString(), Program.connection);
+            adDocsZalPor = new SqlDataAdapter("SELECT * FROM DocsZalPor", Program.connection);
 
 
 

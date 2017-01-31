@@ -11,7 +11,7 @@ namespace NlgDBcredProg
     {
 
         DataSet dataSet;
-        SqlConnection connection = new SqlConnection(@"Data Source=.\cibEXPRESS; Initial Catalog=CredDogCIB; Integrated Security=True");
+        //SqlConnection connection = new SqlConnection(@"Data Source=.\cibEXPRESS; Initial Catalog=CredDogCIB; Integrated Security=True");
         SqlDataAdapter adZalogPoruch,adSpDSZalPor, adGrpObject, adDopSogZalPor, adObjData;
         BindingSource bsZalogPoruch, bsSpDSZalPor, bsGrpObject, bsDopSogZalPor, bsObjData;
         DataGridView gdSpDSZalPor, gdGrpObject, gdDopSogZalPor, gdObjData;
@@ -23,13 +23,13 @@ namespace NlgDBcredProg
         {
             InitializeComponent();
 
-            adZalogPoruch = new SqlDataAdapter("SELECT * FROM ZalogPoruch where idZalPor=" + trans2.ToString(), connection);
-            adSpDSZalPor = new SqlDataAdapter("SELECT * FROM SpDSZalPor where id=" + trans2.ToString(), connection);
-            adDopSogZalPor = new SqlDataAdapter("SELECT * FROM DopSogZalPor", connection);
+            adZalogPoruch = new SqlDataAdapter("SELECT * FROM ZalogPoruch where idZalPor=" + trans2.ToString(), Program.connection);
+            adSpDSZalPor = new SqlDataAdapter("SELECT * FROM SpDSZalPor where id=" + trans2.ToString(), Program.connection);
+            adDopSogZalPor = new SqlDataAdapter("SELECT * FROM DopSogZalPor", Program.connection);
 
-            adZalogPoruch = new SqlDataAdapter("SELECT * FROM ZalogPoruch where idZalPor=" + trans2.ToString(), connection);
-            adGrpObject = new SqlDataAdapter("SELECT * FROM GrpObject where id=" + trans2.ToString(), connection);
-            adObjData = new SqlDataAdapter("SELECT * FROM ObjData", connection);
+            adZalogPoruch = new SqlDataAdapter("SELECT * FROM ZalogPoruch where idZalPor=" + trans2.ToString(), Program.connection);
+            adGrpObject = new SqlDataAdapter("SELECT * FROM GrpObject where id=" + trans2.ToString(), Program.connection);
+            adObjData = new SqlDataAdapter("SELECT * FROM ObjData", Program.connection);
 
 
 

@@ -8,6 +8,11 @@ namespace NlgDBcredProg
 {
     static class Program
     {
+        // DE public static string connectionIdPass = @"Data Source=.\cibEXPRESS ;Initial Catalog=CredDogCIB;User Id={Id};Password={Password};";
+        // DE public static string connection;
+
+        public static string connection;
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -16,7 +21,10 @@ namespace NlgDBcredProg
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+       
+            Application.Run(new AuthForm());
+   
+            
         }
     }
 

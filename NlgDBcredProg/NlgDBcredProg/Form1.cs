@@ -11,7 +11,7 @@ namespace NlgDBcredProg
 
     {
         DataSet dataSet;
-        SqlConnection connection = new SqlConnection(@"Data Source=.\cibEXPRESS; Initial Catalog=CredDogCIB; Integrated Security=True");
+        //SqlConnection connection = new SqlConnection(@"Data Source=.\cibEXPRESS; Initial Catalog=CredDogCIB; Integrated Security=True");
         SqlDataAdapter adOOO, adKredDog, adZaemwik, adKredDocum, adOsnSdelkVdch, adSpDopSog, adZalogPoruch,
                        adDopSog, adOsnovnSd, adSpDSZalPor, adGrpObject, adDocsZalPor, adDopSogZalPor, adObjData;
 
@@ -26,20 +26,20 @@ namespace NlgDBcredProg
             InitializeComponent();
 
             //SELECT FROM TABLES AREA 
-            adOOO = new SqlDataAdapter("SELECT * FROM OOO", connection);
-            adKredDog = new SqlDataAdapter("SELECT * FROM KredDog", connection);
-            adZaemwik = new SqlDataAdapter("SELECT * FROM Zaemwik", connection);
-            adKredDocum = new SqlDataAdapter("SELECT * FROM KredDocum", connection);
-            adOsnSdelkVdch = new SqlDataAdapter("SELECT * FROM OsnSdelkVdch", connection);
-            adSpDopSog = new SqlDataAdapter("SELECT * FROM SpDopSog", connection);
-            adZalogPoruch = new SqlDataAdapter("SELECT * FROM ZalogPoruch", connection);
-            adDopSog = new SqlDataAdapter("SELECT * FROM DopSog", connection);
-            adOsnovnSd = new SqlDataAdapter("SELECT * FROM OsnovnSd", connection);
-            adSpDSZalPor = new SqlDataAdapter("SELECT * FROM SpDSZalPor", connection);
-            adGrpObject = new SqlDataAdapter("SELECT * FROM GrpObject", connection);
-            adDocsZalPor = new SqlDataAdapter("SELECT * FROM DocsZalPor", connection);
-            adDopSogZalPor = new SqlDataAdapter("SELECT * FROM DopSogZalPor", connection);
-            adObjData = new SqlDataAdapter("SELECT * FROM ObjData", connection);
+            adOOO = new SqlDataAdapter("SELECT * FROM OOO", Program.connection);
+            adKredDog = new SqlDataAdapter("SELECT * FROM KredDog", Program.connection);
+            adZaemwik = new SqlDataAdapter("SELECT * FROM Zaemwik", Program.connection);
+            adKredDocum = new SqlDataAdapter("SELECT * FROM KredDocum", Program.connection);
+            adOsnSdelkVdch = new SqlDataAdapter("SELECT * FROM OsnSdelkVdch", Program.connection);
+            adSpDopSog = new SqlDataAdapter("SELECT * FROM SpDopSog", Program.connection);
+            adZalogPoruch = new SqlDataAdapter("SELECT * FROM ZalogPoruch", Program.connection);
+            adDopSog = new SqlDataAdapter("SELECT * FROM DopSog", Program.connection);
+            adOsnovnSd = new SqlDataAdapter("SELECT * FROM OsnovnSd", Program.connection);
+            adSpDSZalPor = new SqlDataAdapter("SELECT * FROM SpDSZalPor", Program.connection);
+            adGrpObject = new SqlDataAdapter("SELECT * FROM GrpObject", Program.connection);
+            adDocsZalPor = new SqlDataAdapter("SELECT * FROM DocsZalPor", Program.connection);
+            adDopSogZalPor = new SqlDataAdapter("SELECT * FROM DopSogZalPor", Program.connection);
+            adObjData = new SqlDataAdapter("SELECT * FROM ObjData", Program.connection);
 
 
             //CREATE DATASET WITH TABLES AREA 
@@ -158,10 +158,12 @@ namespace NlgDBcredProg
        //   dataSet.Tables["ZalogPoruch"].Columns["id"].ColumnMapping = MappingType.Hidden;
             dataSet.Tables["OsnovnSd"].Columns["id"].ColumnMapping = MappingType.Hidden;
             dataSet.Tables["DocsZalPor"].Columns["id"].ColumnMapping = MappingType.Hidden;
+           
+
         }
 
 
-       
+
 
         private void DocumentsForm_Click(object sender, EventArgs e)
         {
@@ -175,6 +177,8 @@ namespace NlgDBcredProg
         {
             StartPosition = FormStartPosition.WindowsDefaultBounds; //main form position and size
             Size = new Size(1080, 780);
+            
+
         }
 
         private void searchForm_Click(object sender, EventArgs e) //button to open Search form
