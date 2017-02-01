@@ -9,11 +9,10 @@ namespace NlgDBcredProg
 {
     public partial class Form1 : Form
     {
-        //CHANGE CONNECTION!!!
+        SqlConnection connection = new SqlConnection(Program.connection);
 
         private void saveOOO_Click(object sender, EventArgs e) //save for OOO
         {
-            using (SqlConnection connection = new SqlConnection(@"Data Source=.\cibEXPRESS;Initial Catalog=CredDogCIB;Integrated Security=True"))
             {
                 connection.Open();
                 adOOO = new SqlDataAdapter("SELECT * FROM OOO;", connection);
@@ -25,12 +24,12 @@ namespace NlgDBcredProg
                 SqlParameter parameter = adOOO.InsertCommand.Parameters.Add("@IdOOO", SqlDbType.Int, 10, "IdOOO");
                 parameter.Direction = ParameterDirection.Output;
                 adOOO.Update(dataSet.Tables["OOO"]);
+                connection.Close();
             }
         }
 
         private void saveKredDog_Click(object sender, EventArgs e) //save for KredDog
         {
-            using (SqlConnection connection = new SqlConnection(@"Data Source=.\cibEXPRESS;Initial Catalog=CredDogCIB;Integrated Security=True"))
             {
                 connection.Open();
                 adKredDog = new SqlDataAdapter("SELECT * FROM KredDog;", connection);
@@ -43,6 +42,7 @@ namespace NlgDBcredProg
                 SqlParameter parameter = adKredDog.InsertCommand.Parameters.Add("@idKredDog", SqlDbType.Int, 10, "idKredDog");
                 parameter.Direction = ParameterDirection.Output;
                 adKredDog.Update(dataSet.Tables["KredDog"]);
+                connection.Close();
             }
         }
 
@@ -50,7 +50,6 @@ namespace NlgDBcredProg
 
         private void saveKredDocum_Click(object sender, EventArgs e) //save for KredDocum
         {
-            using (SqlConnection connection = new SqlConnection(@"Data Source=.\cibEXPRESS;Initial Catalog=CredDogCIB;Integrated Security=True"))
             {
                 connection.Open();
                 adKredDocum = new SqlDataAdapter("SELECT * FROM KredDocum;", connection);
@@ -61,12 +60,12 @@ namespace NlgDBcredProg
                 adKredDocum.InsertCommand.Parameters.Add(new SqlParameter("@Оф_переписка", SqlDbType.NVarChar, 300, "Оф_переписка"));
                 adKredDocum.InsertCommand.Parameters.Add(new SqlParameter("@Судебные_решения", SqlDbType.NVarChar, 300, "Судебные_решения"));
                 adKredDocum.Update(dataSet.Tables["KredDocum"]);
+                connection.Close();
             }
         }
 
         private void saveOsnSdelkVdch_Click(object sender, EventArgs e) //save for OsnSdelkVdch
         {
-            using (SqlConnection connection = new SqlConnection(@"Data Source=.\cibEXPRESS;Initial Catalog=CredDogCIB;Integrated Security=True"))
             {
                 connection.Open();
                 adOsnSdelkVdch = new SqlDataAdapter("SELECT * FROM OsnSdelkVdch;", connection);
@@ -79,12 +78,12 @@ namespace NlgDBcredProg
                 adOsnSdelkVdch.InsertCommand.Parameters.Add(new SqlParameter("@ЕГРЮЛ_на_дату_подп", SqlDbType.NVarChar, 300, "ЕГРЮЛ_на_дату_подп"));
                 adOsnSdelkVdch.InsertCommand.Parameters.Add(new SqlParameter("@Список_участн_на_дату", SqlDbType.NVarChar, 300, "Список_участн_на_дату"));
                 adOsnSdelkVdch.Update(dataSet.Tables["OsnSdelkVdch"]);
+                connection.Close();
             }
         }
 
         private void saveZalogPoruch_Click(object sender, EventArgs e) //save for ZalogPoruch
         {
-            using (SqlConnection connection = new SqlConnection(@"Data Source=.\cibEXPRESS;Initial Catalog=CredDogCIB;Integrated Security=True"))
             {
                 connection.Open();
                 adZalogPoruch = new SqlDataAdapter("SELECT * FROM ZalogPoruch;", connection);
@@ -98,12 +97,12 @@ namespace NlgDBcredProg
                 SqlParameter parameter = adZalogPoruch.InsertCommand.Parameters.Add("@idZalPor", SqlDbType.Int, 10, "idZalPor");
                 parameter.Direction = ParameterDirection.Output;
                 adZalogPoruch.Update(dataSet.Tables["ZalogPoruch"]);
+                connection.Close();
             }
         }
 
         private void saveOsnovnSd_Click(object sender, EventArgs e) //save for OsnovnSd
         {
-            using (SqlConnection connection = new SqlConnection(@"Data Source=.\cibEXPRESS;Initial Catalog=CredDogCIB;Integrated Security=True"))
             {
                 connection.Open();
                 adOsnovnSd = new SqlDataAdapter("SELECT * FROM OsnovnSd;", connection);
@@ -117,18 +116,12 @@ namespace NlgDBcredProg
                 adOsnovnSd.InsertCommand.Parameters.Add(new SqlParameter("@Список_участн_на_дату", SqlDbType.NVarChar, 300, "Список_участн_на_дату"));
                 adOsnovnSd.InsertCommand.Parameters.Add(new SqlParameter("@Согласие_на_обремен", SqlDbType.NVarChar, 300, "Согласие_на_обремен"));
                 adOsnovnSd.Update(dataSet.Tables["OsnovnSd"]);
+                connection.Close();
             }
         }
 
-
-
-
-
-
-
         private void saveSpDopSog_Click(object sender, EventArgs e) //save for SpDopSog
         {
-            using (SqlConnection connection = new SqlConnection(@"Data Source=.\cibEXPRESS;Initial Catalog=CredDogCIB;Integrated Security=True"))
             {
                 connection.Open();
                 adSpDopSog = new SqlDataAdapter("SELECT * FROM SpDopSog;", connection);
@@ -141,12 +134,12 @@ namespace NlgDBcredProg
                 SqlParameter parameter = adSpDopSog.InsertCommand.Parameters.Add("@idSpDpSg", SqlDbType.Int, 10, "idSpDpSg");
                 parameter.Direction = ParameterDirection.Output;
                 adSpDopSog.Update(dataSet.Tables["SpDopSog"]);
+                connection.Close();
             }
         }
 
         private void saveDopSog_Click(object sender, EventArgs e) //save for DopSog
         {
-            using (SqlConnection connection = new SqlConnection(@"Data Source=.\cibEXPRESS;Initial Catalog=CredDogCIB;Integrated Security=True"))
             {
                 connection.Open();
                 adDopSog = new SqlDataAdapter("SELECT * FROM DopSog;", connection);
@@ -159,8 +152,8 @@ namespace NlgDBcredProg
                 adDopSog.InsertCommand.Parameters.Add(new SqlParameter("@ЕГРЮЛ_на_дату_подп", SqlDbType.NVarChar, 300, "ЕГРЮЛ_на_дату_подп"));
                 adDopSog.InsertCommand.Parameters.Add(new SqlParameter("@Список_участн_на_дату", SqlDbType.NVarChar, 300, "Список_участн_на_дату"));
                 adDopSog.Update(dataSet.Tables["DopSog"]);
+                connection.Close();
             }
         }
-
     }
 }

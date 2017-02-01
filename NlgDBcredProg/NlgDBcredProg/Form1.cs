@@ -11,17 +11,14 @@ namespace NlgDBcredProg
 
     {
         DataSet dataSet;
-        //SqlConnection connection = new SqlConnection(@"Data Source=.\cibEXPRESS; Initial Catalog=CredDogCIB; Integrated Security=True");
         SqlDataAdapter adOOO, adKredDog, adZaemwik, adKredDocum, adOsnSdelkVdch, adSpDopSog, adZalogPoruch,
                        adDopSog, adOsnovnSd, adSpDSZalPor, adGrpObject, adDocsZalPor, adDopSogZalPor, adObjData;
-
         BindingSource bsOOO, bsKredDog, bsZaemwik, bsKredDocum, bsOsnSdelkVdch, bsSpDopSog, bsZalogPoruch,
                       bsDopSog, bsOsnovnSd, bsSpDSZalPor, bsGrpObject, bsDocsZalPor, bsDopSogZalPor, bsObjData;
         DataGridView gdOOO, gdKredDog, gdKredDocum, gdOsnSdelkVdch, gdSpDopSog, gdZalogPoruch,
                      gdDopSog, gdOsnovnSd;
 
         public Form1()
-
         {
             InitializeComponent();
 
@@ -61,17 +58,16 @@ namespace NlgDBcredProg
 
             //RELATIONS IN DB AREA 
             dataSet.Relations.Add("OOO-KredDog", dataSet.Tables["OOO"].Columns["idOOO"], dataSet.Tables["KredDog"].Columns["id"]);
-          dataSet.Relations.Add("OOO-Zaemwik", dataSet.Tables["OOO"].Columns["idOOO"], dataSet.Tables["Zaemwik"].Columns["id"]);  //FIRST 
+            dataSet.Relations.Add("OOO-Zaemwik", dataSet.Tables["OOO"].Columns["idOOO"], dataSet.Tables["Zaemwik"].Columns["id"]);  //FIRST 
             dataSet.Relations.Add("KredDog-KredDocum", dataSet.Tables["KredDog"].Columns["idKredDog"], dataSet.Tables["KredDocum"].Columns["id"]);
             dataSet.Relations.Add("KredDog-OsnSdelkVdch", dataSet.Tables["KredDog"].Columns["idKredDog"], dataSet.Tables["OsnSdelkVdch"].Columns["id"]);
             dataSet.Relations.Add("KredDog-SpDopSog", dataSet.Tables["KredDog"].Columns["idKredDog"], dataSet.Tables["SpDopSog"].Columns["id"]);
             dataSet.Relations.Add("KredDog-ZalogPoruch", dataSet.Tables["KredDog"].Columns["idKredDog"], dataSet.Tables["ZalogPoruch"].Columns["id"]);
             dataSet.Relations.Add("SpDopSog-DopSog", dataSet.Tables["SpDopSog"].Columns["idSpDpSg"], dataSet.Tables["DopSog"].Columns["id"]); //false maybe
             dataSet.Relations.Add("ZalogPoruch-OsnovnSd", dataSet.Tables["ZalogPoruch"].Columns["idZalPor"], dataSet.Tables["OsnovnSd"].Columns["id"]);
-
             dataSet.Relations.Add("ZalogPoruch-SpDSZalPor", dataSet.Tables["ZalogPoruch"].Columns["idZalPor"], dataSet.Tables["SpDSZalPor"].Columns["id"]);
             dataSet.Relations.Add("ZalogPoruch-GrpObject", dataSet.Tables["ZalogPoruch"].Columns["idZalPor"], dataSet.Tables["GrpObject"].Columns["id"]);
-           dataSet.Relations.Add("ZalogPoruch-DocsZalPor", dataSet.Tables["ZalogPoruch"].Columns["idZalPor"], dataSet.Tables["DocsZalPor"].Columns["id"]);   //FIRST
+            dataSet.Relations.Add("ZalogPoruch-DocsZalPor", dataSet.Tables["ZalogPoruch"].Columns["idZalPor"], dataSet.Tables["DocsZalPor"].Columns["id"]);   //FIRST
             dataSet.Relations.Add("SpDSZalPor-DopSogZalPor", dataSet.Tables["SpDSZalPor"].Columns["idSpDSZP"], dataSet.Tables["DopSogZalPor"].Columns["id"]);   //TWICE
             dataSet.Relations.Add("GrpObject-ObjData", dataSet.Tables["GrpObject"].Columns["idGrObj"], dataSet.Tables["ObjData"].Columns["id"]);   //TWICE
 
@@ -110,12 +106,12 @@ namespace NlgDBcredProg
 
             //DATA GRID LOCATION AND SIZE AREA
             gdOOO = new DataGridView(); //dg OOO
-            gdOOO.Size = new Size(245, 320);
+            gdOOO.Size = new Size(245, 300);
             gdOOO.Location = new Point(5, 35);
             gdOOO.DataSource = bsOOO;
             gdKredDog = new DataGridView(); //dg KredDog
-            gdKredDog.Size = new Size(245, 350);
-            gdKredDog.Location = new Point(5, 360);
+            gdKredDog.Size = new Size(245, 150);
+            gdKredDog.Location = new Point(5, 395);
             gdKredDog.DataSource = bsKredDog; 
             gdSpDopSog = new DataGridView(); //dg SpDopSog
             gdSpDopSog.Size = new Size(245, 150);
@@ -176,9 +172,7 @@ namespace NlgDBcredProg
         private void Form1_Load(object sender, EventArgs e)
         {
             StartPosition = FormStartPosition.WindowsDefaultBounds; //main form position and size
-            Size = new Size(1080, 780);
-            
-
+            Size = new Size(1070, 620);
         }
 
         private void searchForm_Click(object sender, EventArgs e) //button to open Search form
