@@ -11,19 +11,19 @@ namespace NlgDBcredProg
     {
         SqlConnection connection = new SqlConnection(Program.connection);
 
-        private void saveOOO_Click(object sender, EventArgs e) //save for OOO
+        private void saveName_Click(object sender, EventArgs e) //save for Name
         {
             {
                 connection.Open();
-                adOOO = new SqlDataAdapter("SELECT * FROM OOO;", connection);
-                SqlCommandBuilder commandBuilder = new SqlCommandBuilder(adOOO);
-                adOOO.InsertCommand = new SqlCommand("sp_OOO", connection);
-                adOOO.InsertCommand.CommandType = CommandType.StoredProcedure;
-                adOOO.InsertCommand.Parameters.Add(new SqlParameter("@Наименование", SqlDbType.NVarChar, 50, "Наименование"));
-                adOOO.InsertCommand.Parameters.Add(new SqlParameter("@Принят", SqlDbType.Date, 30, "Принят"));
-                SqlParameter parameter = adOOO.InsertCommand.Parameters.Add("@IdOOO", SqlDbType.Int, 10, "IdOOO");
+                adName = new SqlDataAdapter("SELECT * FROM Name;", connection);
+                SqlCommandBuilder commandBuilder = new SqlCommandBuilder(adName);
+                adName.InsertCommand = new SqlCommand("sp_Name", connection);
+                adName.InsertCommand.CommandType = CommandType.StoredProcedure;
+                adName.InsertCommand.Parameters.Add(new SqlParameter("@Наименование", SqlDbType.NVarChar, 50, "Наименование"));
+                adName.InsertCommand.Parameters.Add(new SqlParameter("@Принят", SqlDbType.Date, 30, "Принят"));
+                SqlParameter parameter = adName.InsertCommand.Parameters.Add("@idName", SqlDbType.Int, 10, "idName");
                 parameter.Direction = ParameterDirection.Output;
-                adOOO.Update(dataSet.Tables["OOO"]);
+                adName.Update(dataSet.Tables["Name"]);
                 connection.Close();
             }
         }

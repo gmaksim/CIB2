@@ -9,8 +9,8 @@ namespace NlgDBcredProg
     public partial class DocumentsForm : Form
     {
         DataSet dataSet;
-        SqlDataAdapter adOOO, adZaemwik, adZalogPoruch, adDocsZalPor;
-        BindingSource bsOOO, bsZaemwik, bsZalogPoruch, bsDocsZalPor;
+        SqlDataAdapter adName, adZaemwik, adZalogPoruch, adDocsZalPor;
+        BindingSource bsName, bsZaemwik, bsZalogPoruch, bsDocsZalPor;
         DataGridView gdZaemwik, gdDocsZalPor;
         SqlConnection connection = new SqlConnection(Program.connection);
         private int trans1, trans2;
@@ -26,26 +26,26 @@ namespace NlgDBcredProg
             this.trans2 = trans2;
 
 
-            adOOO = new SqlDataAdapter("SELECT * FROM OOO where idOOO=" + trans1.ToString(), Program.connection);
+            adName = new SqlDataAdapter("SELECT * FROM Name where idName=" + trans1.ToString(), Program.connection);
             adZaemwik = new SqlDataAdapter("SELECT * FROM Zaemwik", Program.connection);
             adZalogPoruch = new SqlDataAdapter("SELECT * FROM ZalogPoruch where idZalPor=" + trans2.ToString(), Program.connection);
             adDocsZalPor = new SqlDataAdapter("SELECT * FROM DocsZalPor", Program.connection);
 
             dataSet = new DataSet();
-            adOOO.Fill(dataSet, "OOO");
+            adName.Fill(dataSet, "Name");
             adZaemwik.Fill(dataSet, "Zaemwik");
             adZalogPoruch.Fill(dataSet, "ZalogPoruch");
             adDocsZalPor.Fill(dataSet, "DocsZalPor");
 
-            dataSet.Relations.Add("OOO-Zaemwik", dataSet.Tables["OOO"].Columns["idOOO"], dataSet.Tables["Zaemwik"].Columns["id"], false);
+            dataSet.Relations.Add("Name-Zaemwik", dataSet.Tables["Name"].Columns["idName"], dataSet.Tables["Zaemwik"].Columns["id"], false);
             dataSet.Relations.Add("ZalogPoruch-DocsZalPor", dataSet.Tables["ZalogPoruch"].Columns["idZalPor"], dataSet.Tables["DocsZalPor"].Columns["id"], false);  
 
-            bsOOO = new BindingSource(dataSet, "OOO");
+            bsName = new BindingSource(dataSet, "Name");
             bsZaemwik = new BindingSource(dataSet, "Zaemwik");
             bsZalogPoruch = new BindingSource(dataSet, "ZalogPoruch");
             bsDocsZalPor = new BindingSource(dataSet, "DocsZalPor");
        
-            bsZaemwik = new BindingSource(bsOOO, "OOO-Zaemwik");
+            bsZaemwik = new BindingSource(bsName, "Name-Zaemwik");
             bsDocsZalPor = new BindingSource(bsZalogPoruch, "ZalogPoruch-DocsZalPor");
 
             gdZaemwik = new DataGridView(); //dg Zaemwik

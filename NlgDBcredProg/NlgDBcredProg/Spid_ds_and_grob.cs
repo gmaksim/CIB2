@@ -31,16 +31,12 @@ namespace NlgDBcredProg
             adGrpObject = new SqlDataAdapter("SELECT * FROM GrpObject where id=" + trans2.ToString(), Program.connection);
             adObjData = new SqlDataAdapter("SELECT * FROM ObjData", Program.connection);
 
-
-
-
             dataSet = new DataSet();
             adZalogPoruch.Fill(dataSet, "ZalogPoruch");
             adSpDSZalPor.Fill(dataSet, "SpDSZalPor");
             adGrpObject.Fill(dataSet, "GrpObject");
             adDopSogZalPor.Fill(dataSet, "DopSogZalPor");
             adObjData.Fill(dataSet, "ObjData");
-
 
             dataSet.Relations.Add("ZalogPoruch-SpDSZalPor", dataSet.Tables["ZalogPoruch"].Columns["idZalPor"], dataSet.Tables["SpDSZalPor"].Columns["id"]);
             dataSet.Relations.Add("ZalogPoruch-GrpObject", dataSet.Tables["ZalogPoruch"].Columns["idZalPor"], dataSet.Tables["GrpObject"].Columns["id"]);

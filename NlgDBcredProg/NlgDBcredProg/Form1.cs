@@ -11,11 +11,11 @@ namespace NlgDBcredProg
 
     {
         DataSet dataSet;
-        SqlDataAdapter adOOO, adKredDog, adZaemwik, adKredDocum, adOsnSdelkVdch, adSpDopSog, adZalogPoruch,
+        SqlDataAdapter adName, adKredDog, adZaemwik, adKredDocum, adOsnSdelkVdch, adSpDopSog, adZalogPoruch,
                        adDopSog, adOsnovnSd, adSpDSZalPor, adGrpObject, adDocsZalPor, adDopSogZalPor, adObjData;
-        BindingSource bsOOO, bsKredDog, bsZaemwik, bsKredDocum, bsOsnSdelkVdch, bsSpDopSog, bsZalogPoruch,
+        BindingSource bsName, bsKredDog, bsZaemwik, bsKredDocum, bsOsnSdelkVdch, bsSpDopSog, bsZalogPoruch,
                       bsDopSog, bsOsnovnSd, bsSpDSZalPor, bsGrpObject, bsDocsZalPor, bsDopSogZalPor, bsObjData;
-        DataGridView gdOOO, gdKredDog, gdKredDocum, gdOsnSdelkVdch, gdSpDopSog, gdZalogPoruch,
+        DataGridView gdName, gdKredDog, gdKredDocum, gdOsnSdelkVdch, gdSpDopSog, gdZalogPoruch,
                      gdDopSog, gdOsnovnSd;
 
         public Form1()
@@ -23,7 +23,7 @@ namespace NlgDBcredProg
             InitializeComponent();
 
             //SELECT FROM TABLES AREA 
-            adOOO = new SqlDataAdapter("SELECT * FROM OOO", Program.connection);
+            adName = new SqlDataAdapter("SELECT * FROM Name", Program.connection);
             adKredDog = new SqlDataAdapter("SELECT * FROM KredDog", Program.connection);
             adZaemwik = new SqlDataAdapter("SELECT * FROM Zaemwik", Program.connection);
             adKredDocum = new SqlDataAdapter("SELECT * FROM KredDocum", Program.connection);
@@ -41,7 +41,7 @@ namespace NlgDBcredProg
 
             //CREATE DATASET WITH TABLES AREA 
             dataSet = new DataSet();
-            adOOO.Fill(dataSet, "OOO");
+            adName.Fill(dataSet, "Name");
             adKredDog.Fill(dataSet, "KredDog");
             adZaemwik.Fill(dataSet, "Zaemwik");
             adKredDocum.Fill(dataSet, "KredDocum");
@@ -57,8 +57,8 @@ namespace NlgDBcredProg
             adObjData.Fill(dataSet, "ObjData");
 
             //RELATIONS IN DB AREA 
-            dataSet.Relations.Add("OOO-KredDog", dataSet.Tables["OOO"].Columns["idOOO"], dataSet.Tables["KredDog"].Columns["id"]);
-            dataSet.Relations.Add("OOO-Zaemwik", dataSet.Tables["OOO"].Columns["idOOO"], dataSet.Tables["Zaemwik"].Columns["id"]);  
+            dataSet.Relations.Add("Name-KredDog", dataSet.Tables["Name"].Columns["idName"], dataSet.Tables["KredDog"].Columns["id"]);
+            dataSet.Relations.Add("Name-Zaemwik", dataSet.Tables["Name"].Columns["idName"], dataSet.Tables["Zaemwik"].Columns["id"]);  
             dataSet.Relations.Add("KredDog-KredDocum", dataSet.Tables["KredDog"].Columns["idKredDog"], dataSet.Tables["KredDocum"].Columns["id"]);
             dataSet.Relations.Add("KredDog-OsnSdelkVdch", dataSet.Tables["KredDog"].Columns["idKredDog"], dataSet.Tables["OsnSdelkVdch"].Columns["id"]);
             dataSet.Relations.Add("KredDog-SpDopSog", dataSet.Tables["KredDog"].Columns["idKredDog"], dataSet.Tables["SpDopSog"].Columns["id"]);
@@ -72,7 +72,7 @@ namespace NlgDBcredProg
             dataSet.Relations.Add("GrpObject-ObjData", dataSet.Tables["GrpObject"].Columns["idGrObj"], dataSet.Tables["ObjData"].Columns["id"]);   
 
             //BIND.SOURCE AREA 
-            bsOOO = new BindingSource(dataSet, "OOO");
+            bsName = new BindingSource(dataSet, "Name");
             bsKredDog = new BindingSource(dataSet, "KredDog");
             bsSpDopSog = new BindingSource(dataSet, "SpDopSog");
             bsDopSog = new BindingSource(dataSet, "DopSog");
@@ -89,8 +89,8 @@ namespace NlgDBcredProg
             bsObjData = new BindingSource(dataSet, "ObjData");
 
             //BIND.SOURCE WITH RELATIONS AREA 
-            bsKredDog = new BindingSource(bsOOO, "OOO-KredDog");
-            bsZaemwik = new BindingSource(bsOOO, "OOO-Zaemwik");
+            bsKredDog = new BindingSource(bsName, "Name-KredDog");
+            bsZaemwik = new BindingSource(bsName, "Name-Zaemwik");
             bsSpDopSog = new BindingSource(bsKredDog, "KredDog-SpDopSog");
             bsKredDocum = new BindingSource(bsKredDog, "KredDog-KredDocum");
             bsOsnSdelkVdch = new BindingSource(bsKredDog, "KredDog-OsnSdelkVdch");
@@ -105,10 +105,10 @@ namespace NlgDBcredProg
             bsObjData = new BindingSource(bsGrpObject, "GrpObject-ObjData");
 
             //DATA GRID LOCATION AND SIZE AREA
-            gdOOO = new DataGridView(); //dg OOO
-            gdOOO.Size = new Size(245, 300);
-            gdOOO.Location = new Point(5, 35);
-            gdOOO.DataSource = bsOOO;
+            gdName = new DataGridView(); //dg OOO
+            gdName.Size = new Size(245, 300);
+            gdName.Location = new Point(5, 35);
+            gdName.DataSource = bsName;
             gdKredDog = new DataGridView(); //dg KredDog
             gdKredDog.Size = new Size(245, 150);
             gdKredDog.Location = new Point(5, 395);
@@ -141,12 +141,11 @@ namespace NlgDBcredProg
 
 
 
-            this.Controls.AddRange(new Control[] { gdDopSog, gdSpDopSog, gdOOO, gdKredDog, gdKredDocum, gdOsnSdelkVdch, gdZalogPoruch, gdOsnovnSd }); //control 
+            this.Controls.AddRange(new Control[] { gdDopSog, gdSpDopSog, gdName, gdKredDog, gdKredDocum, gdOsnSdelkVdch, gdZalogPoruch, gdOsnovnSd }); //control 
            // this.gdZaemwik.CellContentClick += new DataGridViewCellEventHandler(this.gdZaemwik_CellContentClick); //clickable cells in Zaemwik
 
 
             //HIDDEN ID'S AREA
-           // dataSet.Tables["OOO"].Columns["IdOOO"].ColumnMapping = MappingType.Hidden;
             dataSet.Tables["Zaemwik"].Columns["id"].ColumnMapping = MappingType.Hidden;
             dataSet.Tables["KredDocum"].Columns["id"].ColumnMapping = MappingType.Hidden;
            dataSet.Tables["OsnSdelkVdch"].Columns["id"].ColumnMapping = MappingType.Hidden;
@@ -163,8 +162,8 @@ namespace NlgDBcredProg
 
         private void DocumentsForm_Click(object sender, EventArgs e)
         {
-            int trans1 = (int)gdOOO.CurrentRow.Cells[0].Value;
-            int trans2 = (int)gdZalogPoruch.CurrentRow.Cells[0].Value;
+            int trans1 = (int)gdName.CurrentRow.Cells[2].Value;
+            int trans2 = (int)gdZalogPoruch.CurrentRow.Cells[3].Value;
             DocumentsForm SDS = new DocumentsForm(trans1, trans2);
             SDS.ShowDialog();
         }
@@ -183,7 +182,7 @@ namespace NlgDBcredProg
 
         private void spis_dop_sog_and__gr_obj_Click(object sender, EventArgs e) //button to open Spisok dop.sogl i grup.obj form
         {
-            int trans2 = (int)gdZalogPoruch.CurrentRow.Cells[0].Value;
+            int trans2 = (int)gdZalogPoruch.CurrentRow.Cells[3].Value;
             Spid_ds_and_grob SDSG = new Spid_ds_and_grob(trans2);
             SDSG.ShowDialog();
         }
@@ -199,7 +198,7 @@ namespace NlgDBcredProg
 
         private void textBox1_TextChanged_1(object sender, EventArgs e) //search OOO in main form
         {
-            bsOOO.Filter = "Наименование LIKE '%' + '" + textBox1.Text + "%'"; //search in tables
+            bsName.Filter = "Наименование LIKE '%' + '" + textBox1.Text + "%'"; //search in tables
         }
 
 

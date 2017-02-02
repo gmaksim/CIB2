@@ -23,7 +23,7 @@ namespace NlgDBcredProg
             // connection to SQL throw AutForm
             Program.connection = @"Data Source=.\cibEXPRESS; Initial Catalog=CredDogCIB; Integrated Security=True"; 
             SqlConnection connection = new SqlConnection(Program.connection);
-            Application.Run(new Form1());
+            Application.Run(new Search());
             // connection to SQL throw AutForm
         }
     }
