@@ -60,11 +60,11 @@ namespace NlgDBcredProg
 
             gdSpDSZalPor = new DataGridView(); //dg SpDSZalPor
             gdSpDSZalPor.Size = new Size(250, 250);
-            gdSpDSZalPor.Location = new Point(5, 5);
+            gdSpDSZalPor.Location = new Point(5, 50);
             gdSpDSZalPor.DataSource = bsSpDSZalPor;
             gdDopSogZalPor = new DataGridView(); //dg DopSogZalPor
             gdDopSogZalPor.Size = new Size(600, 250);
-            gdDopSogZalPor.Location = new Point(275, 5);
+            gdDopSogZalPor.Location = new Point(275, 50);
             gdDopSogZalPor.DataSource = bsDopSogZalPor;
             gdGrpObject = new DataGridView(); //dg GrpObject
             gdGrpObject.Size = new Size(250, 250);
@@ -88,12 +88,10 @@ namespace NlgDBcredProg
 
         private void Spid_ds_and_grob_Load(object sender, EventArgs e)
         {
-            StartPosition = FormStartPosition.WindowsDefaultBounds; //main form position and size
-            this.Left += 400;
-            Size = new Size(900, 700);
+            this.Location = new Point(0, 0);
+            this.Left += 100;
+            Size = new Size(900, 650);
         }
-
-
 
         private void saveSpDSZalPor_Click(object sender, EventArgs e) //save for SpDSZalPor
         {

@@ -20,7 +20,10 @@ namespace NlgDBcredProg
 
         private void AuthForm_Load(object sender, EventArgs e)
         {
-            StartPosition = FormStartPosition.CenterScreen; // position and size
+            this.Location = new Point(0, 0);
+            this.Left += 100;
+            this.Top += 100;
+            //Size = new Size(1070, 620);
         }
 
         private void auth_proc(object sender, EventArgs e) //for main program

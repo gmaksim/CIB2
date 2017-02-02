@@ -49,13 +49,12 @@ namespace NlgDBcredProg
             bsDocsZalPor = new BindingSource(bsZalogPoruch, "ZalogPoruch-DocsZalPor");
 
             gdZaemwik = new DataGridView(); //dg Zaemwik
-            gdZaemwik.Size = new Size(245, 150);
-            gdZaemwik.Location = new Point(255, 35);
+            gdZaemwik.Size = new Size(650, 150);
+            gdZaemwik.Location = new Point(5, 30);
             gdZaemwik.DataSource = bsZaemwik;
-
             gdDocsZalPor = new DataGridView(); //dg DocsZalPor
-            gdDocsZalPor.Size = new Size(245, 150);
-            gdDocsZalPor.Location = new Point(255, gdZaemwik.Bottom + 30);
+            gdDocsZalPor.Size = new Size(650, 150);
+            gdDocsZalPor.Location = new Point(5, gdZaemwik.Bottom + 30);
             gdDocsZalPor.DataSource = bsDocsZalPor;
 
             this.Controls.AddRange(new Control[] { gdZaemwik, gdDocsZalPor });
@@ -69,8 +68,9 @@ namespace NlgDBcredProg
 
         private void DocumentsForm_Load(object sender, EventArgs e)
         {
-            StartPosition = FormStartPosition.WindowsDefaultBounds; //main form position and size
-            Size = new Size(950, 400);
+            this.Location = new Point(0, 0);
+            this.Left += 100;
+            Size = new Size(680, 430);
         }
 
         private void saveZaemwik_Click(object sender, EventArgs e) //save for Zaemwik

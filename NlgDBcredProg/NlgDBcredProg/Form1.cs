@@ -3,7 +3,7 @@ using System.Data;
 using System.Windows.Forms;
 using System.Data.SqlClient;
 using System.Drawing;
-using System.Diagnostics; 
+using System.Diagnostics;
 
 namespace NlgDBcredProg
 {
@@ -58,18 +58,18 @@ namespace NlgDBcredProg
 
             //RELATIONS IN DB AREA 
             dataSet.Relations.Add("OOO-KredDog", dataSet.Tables["OOO"].Columns["idOOO"], dataSet.Tables["KredDog"].Columns["id"]);
-            dataSet.Relations.Add("OOO-Zaemwik", dataSet.Tables["OOO"].Columns["idOOO"], dataSet.Tables["Zaemwik"].Columns["id"]);  //FIRST 
+            dataSet.Relations.Add("OOO-Zaemwik", dataSet.Tables["OOO"].Columns["idOOO"], dataSet.Tables["Zaemwik"].Columns["id"]);  
             dataSet.Relations.Add("KredDog-KredDocum", dataSet.Tables["KredDog"].Columns["idKredDog"], dataSet.Tables["KredDocum"].Columns["id"]);
             dataSet.Relations.Add("KredDog-OsnSdelkVdch", dataSet.Tables["KredDog"].Columns["idKredDog"], dataSet.Tables["OsnSdelkVdch"].Columns["id"]);
             dataSet.Relations.Add("KredDog-SpDopSog", dataSet.Tables["KredDog"].Columns["idKredDog"], dataSet.Tables["SpDopSog"].Columns["id"]);
             dataSet.Relations.Add("KredDog-ZalogPoruch", dataSet.Tables["KredDog"].Columns["idKredDog"], dataSet.Tables["ZalogPoruch"].Columns["id"]);
-            dataSet.Relations.Add("SpDopSog-DopSog", dataSet.Tables["SpDopSog"].Columns["idSpDpSg"], dataSet.Tables["DopSog"].Columns["id"]); //false maybe
+            dataSet.Relations.Add("SpDopSog-DopSog", dataSet.Tables["SpDopSog"].Columns["idSpDpSg"], dataSet.Tables["DopSog"].Columns["id"]); 
             dataSet.Relations.Add("ZalogPoruch-OsnovnSd", dataSet.Tables["ZalogPoruch"].Columns["idZalPor"], dataSet.Tables["OsnovnSd"].Columns["id"]);
             dataSet.Relations.Add("ZalogPoruch-SpDSZalPor", dataSet.Tables["ZalogPoruch"].Columns["idZalPor"], dataSet.Tables["SpDSZalPor"].Columns["id"]);
             dataSet.Relations.Add("ZalogPoruch-GrpObject", dataSet.Tables["ZalogPoruch"].Columns["idZalPor"], dataSet.Tables["GrpObject"].Columns["id"]);
-            dataSet.Relations.Add("ZalogPoruch-DocsZalPor", dataSet.Tables["ZalogPoruch"].Columns["idZalPor"], dataSet.Tables["DocsZalPor"].Columns["id"]);   //FIRST
-            dataSet.Relations.Add("SpDSZalPor-DopSogZalPor", dataSet.Tables["SpDSZalPor"].Columns["idSpDSZP"], dataSet.Tables["DopSogZalPor"].Columns["id"]);   //TWICE
-            dataSet.Relations.Add("GrpObject-ObjData", dataSet.Tables["GrpObject"].Columns["idGrObj"], dataSet.Tables["ObjData"].Columns["id"]);   //TWICE
+            dataSet.Relations.Add("ZalogPoruch-DocsZalPor", dataSet.Tables["ZalogPoruch"].Columns["idZalPor"], dataSet.Tables["DocsZalPor"].Columns["id"]);   
+            dataSet.Relations.Add("SpDSZalPor-DopSogZalPor", dataSet.Tables["SpDSZalPor"].Columns["idSpDSZP"], dataSet.Tables["DopSogZalPor"].Columns["id"]);   
+            dataSet.Relations.Add("GrpObject-ObjData", dataSet.Tables["GrpObject"].Columns["idGrObj"], dataSet.Tables["ObjData"].Columns["id"]);   
 
             //BIND.SOURCE AREA 
             bsOOO = new BindingSource(dataSet, "OOO");
@@ -141,7 +141,7 @@ namespace NlgDBcredProg
 
 
 
-            this.Controls.AddRange(new Control[] { gdDopSog, gdSpDopSog, gdOOO, gdKredDog, gdKredDocum, gdOsnSdelkVdch, gdZalogPoruch, gdOsnovnSd }); //control with dg
+            this.Controls.AddRange(new Control[] { gdDopSog, gdSpDopSog, gdOOO, gdKredDog, gdKredDocum, gdOsnSdelkVdch, gdZalogPoruch, gdOsnovnSd }); //control 
            // this.gdZaemwik.CellContentClick += new DataGridViewCellEventHandler(this.gdZaemwik_CellContentClick); //clickable cells in Zaemwik
 
 
@@ -166,27 +166,26 @@ namespace NlgDBcredProg
             int trans1 = (int)gdOOO.CurrentRow.Cells[0].Value;
             int trans2 = (int)gdZalogPoruch.CurrentRow.Cells[0].Value;
             DocumentsForm SDS = new DocumentsForm(trans1, trans2);
-            SDS.Show();
+            SDS.ShowDialog();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            StartPosition = FormStartPosition.WindowsDefaultBounds; //main form position and size
+            this.Location = new Point(0, 0);
             Size = new Size(1070, 620);
         }
 
         private void searchForm_Click(object sender, EventArgs e) //button to open Search form
         {
             Search src = new Search();
-            src.Show();
+            src.ShowDialog();
         }
 
         private void spis_dop_sog_and__gr_obj_Click(object sender, EventArgs e) //button to open Spisok dop.sogl i grup.obj form
         {
             int trans2 = (int)gdZalogPoruch.CurrentRow.Cells[0].Value;
-
             Spid_ds_and_grob SDSG = new Spid_ds_and_grob(trans2);
-            SDSG.Show();
+            SDSG.ShowDialog();
         }
 
         private void gdZaemwik_CellContentClick(object sender, DataGridViewCellEventArgs e) //make clickable Zaemwik cells
