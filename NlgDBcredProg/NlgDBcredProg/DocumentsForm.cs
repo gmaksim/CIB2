@@ -64,6 +64,33 @@ namespace NlgDBcredProg
             //dataSet.Tables["DopSog"].Columns["id"].ColumnMapping = MappingType.Hidden;
         }
 
+        public DocumentsForm(int trans1)
+        {
+            InitializeComponent();
+
+            this.trans1 = trans1;
+
+            adName = new SqlDataAdapter("SELECT * FROM Name where idName=" + trans1.ToString(), Program.connection);
+            adZaemwik = new SqlDataAdapter("SELECT * FROM Zaemwik", Program.connection);
+
+            dataSet = new DataSet();
+            adName.Fill(dataSet, "Name");
+            adZaemwik.Fill(dataSet, "Zaemwik");
+
+            dataSet.Relations.Add("Name-Zaemwik", dataSet.Tables["Name"].Columns["idName"], dataSet.Tables["Zaemwik"].Columns["id"], false);
+
+            bsName = new BindingSource(dataSet, "Name");
+            bsZaemwik = new BindingSource(dataSet, "Zaemwik");
+
+            bsZaemwik = new BindingSource(bsName, "Name-Zaemwik");
+
+            gdZaemwik = new DataGridView(); //dg Zaemwik
+            gdZaemwik.Size = new Size(650, 150);
+            gdZaemwik.Location = new Point(5, 30);
+            gdZaemwik.DataSource = bsZaemwik;
+
+            this.Controls.AddRange(new Control[] { gdZaemwik });
+        }
 
 
         private void DocumentsForm_Load(object sender, EventArgs e)

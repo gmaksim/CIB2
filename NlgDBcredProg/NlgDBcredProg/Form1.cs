@@ -90,29 +90,29 @@ namespace NlgDBcredProg
             bsObjData = new BindingSource(bsGrpObject, "GrpObject-ObjData");
 
             //DATA GRID LOCATION AND SIZE AREA
-            gdName = new DataGridView(); //dg OOO
-            gdName.Size = new Size(245, 300);
+            gdName = new DataGridView(); //dg Name
+            gdName.Size = new Size(245, 500);
             gdName.Location = new Point(5, 35);
             gdName.DataSource = bsName;
             gdKredDog = new DataGridView(); //dg KredDog
             gdKredDog.Size = new Size(245, 150);
-            gdKredDog.Location = new Point(5, 395);
+            gdKredDog.Location = new Point(255, 35);
             gdKredDog.DataSource = bsKredDog; 
             gdKredDocum = new DataGridView(); //dg KredDocum
             gdKredDocum.Size = new Size(245, 150);
-            gdKredDocum.Location = new Point(255, 35);
+            gdKredDocum.Location = new Point(255, gdKredDog.Bottom + 30);
             gdKredDocum.DataSource = bsKredDocum;
             gdOsnSdelkVdch = new DataGridView(); //dg OsnSdelkVdch
             gdOsnSdelkVdch.Size = new Size(450, 150);
             gdOsnSdelkVdch.Location = new Point(505, 35);
             gdOsnSdelkVdch.DataSource = bsOsnSdelkVdch;
             gdZalogPoruch = new DataGridView(); //dg ZalogPoruch
-            gdZalogPoruch.Size = new Size(245, 150);
-            gdZalogPoruch.Location = new Point(255, gdKredDocum.Bottom + 30);
+            gdZalogPoruch.Size = new Size(345, 150);
+            gdZalogPoruch.Location = new Point(505, gdOsnSdelkVdch.Bottom + 30);
             gdZalogPoruch.DataSource = bsZalogPoruch;
             gdOsnovnSd = new DataGridView(); //dg OsnovnSd
-            gdOsnovnSd.Size = new Size(545, 150);
-            gdOsnovnSd.Location = new Point(505, gdOsnSdelkVdch.Bottom + 30);
+            gdOsnovnSd.Size = new Size(595, 140);
+            gdOsnovnSd.Location = new Point(255, gdKredDocum.Bottom + 30);
             gdOsnovnSd.DataSource = bsOsnovnSd;
 
 
@@ -139,16 +139,58 @@ namespace NlgDBcredProg
 
         private void DocumentsForm_Click(object sender, EventArgs e)
         {
+
             int trans1 = (int)gdName.CurrentRow.Cells[2].Value;
-            int trans2 = (int)gdZalogPoruch.CurrentRow.Cells[3].Value;
+            int trans2 = (int)gdZalogPoruch.CurrentRow.Cells[3].Value; //!
             DocumentsForm SDS = new DocumentsForm(trans1, trans2);
             SDS.ShowDialog();
+
+
+            //try
+            //{
+            //row count
+            /*     if (gdZalogPoruch.CurrentRow.Cells[0].Value != null) // trans1
+                 {
+                     MessageBox.Show("gdZalogPoruch.RowCount > 0", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                     if (gdName.CurrentRow.Cells[0].Value != null) //trans2
+                     {
+                         MessageBox.Show("gdName.RowCount > 0", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                         int trans1 = (int)gdName.CurrentRow.Cells[2].Value;
+                         DocumentsForm SDS = new DocumentsForm(trans1);
+                         SDS.ShowDialog();
+
+                     }
+                     else
+                     {
+                         MessageBox.Show("НЕ gdName.RowCount > 0", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                         int trans1 = (int)gdName.CurrentRow.Cells[2].Value;
+                         int trans2 = (int)gdZalogPoruch.CurrentRow.Cells[3].Value;
+                         DocumentsForm SDS = new DocumentsForm(trans1, trans2);
+                         SDS.ShowDialog();
+
+                     }
+
+                 }
+                 else
+                 {
+                     //MessageBox.Show("НЕ gdZalogPoruch.RowCount > 0", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                     MessageBox.Show("Вы не добавили договор", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                 } */
+            //}
+            //catch
+            //{
+            //    MessageBox.Show("Вы не добавили договор", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            //}
         }
+
+      
 
         private void Form1_Load(object sender, EventArgs e)
         {
             this.Location = new Point(0, 0);
-            Size = new Size(1070, 620);
+            Size = new Size(980, 620);
         }
 
         private void searchForm_Click(object sender, EventArgs e) //button to open Search form
@@ -159,9 +201,16 @@ namespace NlgDBcredProg
 
         private void spis_dop_sog_and__gr_obj_Click(object sender, EventArgs e) //button to open Spisok dop.sogl i grup.obj form
         {
-            int trans2 = (int)gdZalogPoruch.CurrentRow.Cells[3].Value;
-            Spid_ds_and_grob SDSG = new Spid_ds_and_grob(trans2);
-            SDSG.ShowDialog();
+            try
+            { 
+                int trans2 = (int)gdZalogPoruch.CurrentRow.Cells[3].Value;
+                Spid_ds_and_grob SDSG = new Spid_ds_and_grob(trans2);
+                SDSG.ShowDialog();
+            }
+            catch
+            {
+                MessageBox.Show("Нет данных по залогодателю/поручителю", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void gdZaemwik_CellContentClick(object sender, DataGridViewCellEventArgs e) //make clickable Zaemwik cells
@@ -176,6 +225,12 @@ namespace NlgDBcredProg
         private void textBox1_TextChanged_1(object sender, EventArgs e) //search OOO in main form
         {
             bsName.Filter = "Наименование LIKE '%' + '" + textBox1.Text + "%'"; //search in tables
+        }
+
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            connection.Close();
+            Application.Exit();
         }
 
 
