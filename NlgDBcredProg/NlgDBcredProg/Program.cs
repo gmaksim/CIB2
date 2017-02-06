@@ -18,7 +18,7 @@ namespace NlgDBcredProg
             Application.SetCompatibleTextRenderingDefault(false);
 
             // direct connection to AuthForm
-            //Application.Run(new AuthForm());
+            Application.Run(new AuthForm());
 
             // connection to SQL throw AutForm
             Program.connection = @"Data Source=.\cibEXPRESS; Initial Catalog=CredDogCIB; Integrated Security=True";
