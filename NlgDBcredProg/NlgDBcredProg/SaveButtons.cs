@@ -91,7 +91,7 @@ namespace NlgDBcredProg
                 adZalogPoruch.InsertCommand = new SqlCommand("sp_ZalogPoruch", connection);
                 adZalogPoruch.InsertCommand.CommandType = CommandType.StoredProcedure;
                 adZalogPoruch.InsertCommand.Parameters.Add(new SqlParameter("@id", SqlDbType.Int, 10, "id"));
-                adZalogPoruch.InsertCommand.Parameters.Add(new SqlParameter("@ФИО", SqlDbType.NVarChar, 50, "ФИО"));
+                adZalogPoruch.InsertCommand.Parameters.Add(new SqlParameter("@Наименование", SqlDbType.NVarChar, 50, "Наименование"));
                 adZalogPoruch.InsertCommand.Parameters.Add(new SqlParameter("@Тип_З_П", SqlDbType.NVarChar, 50, "Тип_З_П"));
                 adZalogPoruch.InsertCommand.Parameters.Add(new SqlParameter("@Принят", SqlDbType.Date, 30, "Принят"));
                 SqlParameter parameter = adZalogPoruch.InsertCommand.Parameters.Add("@idZalPor", SqlDbType.Int, 10, "idZalPor");

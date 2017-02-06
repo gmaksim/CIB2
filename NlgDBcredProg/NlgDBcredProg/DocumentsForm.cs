@@ -49,19 +49,18 @@ namespace NlgDBcredProg
             bsDocsZalPor = new BindingSource(bsZalogPoruch, "ZalogPoruch-DocsZalPor");
 
             gdZaemwik = new DataGridView(); //dg Zaemwik
-            gdZaemwik.Size = new Size(650, 150);
+            gdZaemwik.Size = new Size(545, 150);
             gdZaemwik.Location = new Point(5, 30);
             gdZaemwik.DataSource = bsZaemwik;
             gdDocsZalPor = new DataGridView(); //dg DocsZalPor
-            gdDocsZalPor.Size = new Size(650, 150);
+            gdDocsZalPor.Size = new Size(545, 150);
             gdDocsZalPor.Location = new Point(5, gdZaemwik.Bottom + 30);
             gdDocsZalPor.DataSource = bsDocsZalPor;
 
             this.Controls.AddRange(new Control[] { gdZaemwik, gdDocsZalPor });
 
-            //dataSet.Tables["SpDopSog"].Columns["idSpDpSg"].ColumnMapping = MappingType.Hidden;
-            //dataSet.Tables["SpDopSog"].Columns["id"].ColumnMapping = MappingType.Hidden;
-            //dataSet.Tables["DopSog"].Columns["id"].ColumnMapping = MappingType.Hidden;
+            gdDocsZalPor.ScrollBars = ScrollBars.Vertical;
+            gdZaemwik.ScrollBars = ScrollBars.Vertical;
         }
 
         public DocumentsForm(int trans1)
@@ -85,11 +84,13 @@ namespace NlgDBcredProg
             bsZaemwik = new BindingSource(bsName, "Name-Zaemwik");
 
             gdZaemwik = new DataGridView(); //dg Zaemwik
-            gdZaemwik.Size = new Size(650, 150);
+            gdZaemwik.Size = new Size(545, 150);
             gdZaemwik.Location = new Point(5, 30);
             gdZaemwik.DataSource = bsZaemwik;
 
             this.Controls.AddRange(new Control[] { gdZaemwik });
+
+            gdZaemwik.ScrollBars = ScrollBars.Vertical;
         }
 
 
@@ -97,7 +98,7 @@ namespace NlgDBcredProg
         {
             this.Location = new Point(0, 0);
             this.Left += 100;
-            Size = new Size(680, 430);
+            Size = new Size(575, 445);
         }
 
         private void saveZaemwik_Click(object sender, EventArgs e) //save for Zaemwik

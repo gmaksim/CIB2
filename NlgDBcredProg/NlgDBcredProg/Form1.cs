@@ -11,8 +11,8 @@ namespace NlgDBcredProg
 
     {
         DataSet dataSet;
-        SqlDataAdapter adName, adKredDog, adZaemwik, adKredDocum, adOsnSdelkVdch, adZalogPoruch, adOsnovnSd, adSpDSZalPor, adGrpObject, adDocsZalPor, adDopSogZalPor, adObjData;
-        BindingSource bsName, bsKredDog, bsZaemwik, bsKredDocum, bsOsnSdelkVdch, bsZalogPoruch, bsOsnovnSd, bsSpDSZalPor, bsGrpObject, bsDocsZalPor, bsDopSogZalPor, bsObjData;
+        SqlDataAdapter adName, adKredDog, adZaemwik, adKredDocum, adOsnSdelkVdch, adZalogPoruch, adOsnovnSd, adGrpObject, adDocsZalPor, adDopSogZalPor, adObjData;
+        BindingSource bsName, bsKredDog, bsZaemwik, bsKredDocum, bsOsnSdelkVdch, bsZalogPoruch, bsOsnovnSd, bsGrpObject, bsDocsZalPor, bsDopSogZalPor, bsObjData;
         DataGridView gdName, gdKredDog, gdKredDocum, gdOsnSdelkVdch, gdZalogPoruch, gdOsnovnSd;
 
         public Form1()
@@ -27,7 +27,6 @@ namespace NlgDBcredProg
             adOsnSdelkVdch = new SqlDataAdapter("SELECT * FROM OsnSdelkVdch", Program.connection);
             adZalogPoruch = new SqlDataAdapter("SELECT * FROM ZalogPoruch", Program.connection);
             adOsnovnSd = new SqlDataAdapter("SELECT * FROM OsnovnSd", Program.connection);
-            adSpDSZalPor = new SqlDataAdapter("SELECT * FROM SpDSZalPor", Program.connection);
             adGrpObject = new SqlDataAdapter("SELECT * FROM GrpObject", Program.connection);
             adDocsZalPor = new SqlDataAdapter("SELECT * FROM DocsZalPor", Program.connection);
             adDopSogZalPor = new SqlDataAdapter("SELECT * FROM DopSogZalPor", Program.connection);
@@ -43,7 +42,6 @@ namespace NlgDBcredProg
             adOsnSdelkVdch.Fill(dataSet, "OsnSdelkVdch");
             adZalogPoruch.Fill(dataSet, "ZalogPoruch");
             adOsnovnSd.Fill(dataSet, "OsnovnSd");
-            adSpDSZalPor.Fill(dataSet, "SpDSZalPor");
             adGrpObject.Fill(dataSet, "GrpObject");
             adDocsZalPor.Fill(dataSet, "DocsZalPor");
             adDopSogZalPor.Fill(dataSet, "DopSogZalPor");
@@ -56,10 +54,9 @@ namespace NlgDBcredProg
             dataSet.Relations.Add("KredDog-OsnSdelkVdch", dataSet.Tables["KredDog"].Columns["idKredDog"], dataSet.Tables["OsnSdelkVdch"].Columns["id"]);
             dataSet.Relations.Add("KredDog-ZalogPoruch", dataSet.Tables["KredDog"].Columns["idKredDog"], dataSet.Tables["ZalogPoruch"].Columns["id"]);
             dataSet.Relations.Add("ZalogPoruch-OsnovnSd", dataSet.Tables["ZalogPoruch"].Columns["idZalPor"], dataSet.Tables["OsnovnSd"].Columns["id"]);
-            dataSet.Relations.Add("ZalogPoruch-SpDSZalPor", dataSet.Tables["ZalogPoruch"].Columns["idZalPor"], dataSet.Tables["SpDSZalPor"].Columns["id"]);
+            dataSet.Relations.Add("ZalogPoruch-DopSogZalPor", dataSet.Tables["ZalogPoruch"].Columns["idZalPor"], dataSet.Tables["DopSogZalPor"].Columns["id"]);
             dataSet.Relations.Add("ZalogPoruch-GrpObject", dataSet.Tables["ZalogPoruch"].Columns["idZalPor"], dataSet.Tables["GrpObject"].Columns["id"]);
             dataSet.Relations.Add("ZalogPoruch-DocsZalPor", dataSet.Tables["ZalogPoruch"].Columns["idZalPor"], dataSet.Tables["DocsZalPor"].Columns["id"]);   
-            dataSet.Relations.Add("SpDSZalPor-DopSogZalPor", dataSet.Tables["SpDSZalPor"].Columns["idSpDSZP"], dataSet.Tables["DopSogZalPor"].Columns["id"]);   
             dataSet.Relations.Add("GrpObject-ObjData", dataSet.Tables["GrpObject"].Columns["idGrObj"], dataSet.Tables["ObjData"].Columns["id"]);   
 
             //BIND.SOURCE AREA 
@@ -70,7 +67,6 @@ namespace NlgDBcredProg
             bsOsnSdelkVdch = new BindingSource(dataSet, "OsnSdelkVdch");
             bsZalogPoruch = new BindingSource(dataSet, "ZalogPoruch");
             bsOsnovnSd = new BindingSource(dataSet, "OsnovnSd");
-            bsSpDSZalPor = new BindingSource(dataSet, "SpDSZalPor");
             bsGrpObject = new BindingSource(dataSet, "GrpObject");
             bsDocsZalPor = new BindingSource(dataSet, "DocsZalPor");
             bsDopSogZalPor = new BindingSource(dataSet, "DopSogZalPor");
@@ -83,10 +79,9 @@ namespace NlgDBcredProg
             bsOsnSdelkVdch = new BindingSource(bsKredDog, "KredDog-OsnSdelkVdch");
             bsZalogPoruch = new BindingSource(bsKredDog, "KredDog-ZalogPoruch");
             bsOsnovnSd = new BindingSource(bsZalogPoruch, "ZalogPoruch-OsnovnSd");
-            bsSpDSZalPor = new BindingSource(bsZalogPoruch, "ZalogPoruch-SpDSZalPor");
+            bsDopSogZalPor = new BindingSource(bsZalogPoruch, "ZalogPoruch-DopSogZalPor");
             bsGrpObject = new BindingSource(bsZalogPoruch, "ZalogPoruch-GrpObject");
             bsDocsZalPor = new BindingSource(bsZalogPoruch, "ZalogPoruch-DocsZalPor");
-            bsDopSogZalPor = new BindingSource(bsSpDSZalPor, "SpDSZalPor-DopSogZalPor");
             bsObjData = new BindingSource(bsGrpObject, "GrpObject-ObjData");
 
             //DATA GRID LOCATION AND SIZE AREA
@@ -115,27 +110,23 @@ namespace NlgDBcredProg
             gdOsnovnSd.Location = new Point(255, gdKredDocum.Bottom + 30);
             gdOsnovnSd.DataSource = bsOsnovnSd;
 
-
-
-
             this.Controls.AddRange(new Control[] { gdName, gdKredDog, gdKredDocum, gdOsnSdelkVdch, gdZalogPoruch, gdOsnovnSd }); //control 
-           // this.gdZaemwik.CellContentClick += new DataGridViewCellEventHandler(this.gdZaemwik_CellContentClick); //clickable cells in Zaemwik
 
+            //CLICKABLE DATA IN DATA GRID'S
+            //this.gdZaemwik.CellContentClick += new DataGridViewCellEventHandler(this.gdZaemwik_CellContentClick); //clickable cells in Zaemwik
 
             //HIDDEN ID'S AREA
             dataSet.Tables["Zaemwik"].Columns["id"].ColumnMapping = MappingType.Hidden;
             dataSet.Tables["KredDocum"].Columns["id"].ColumnMapping = MappingType.Hidden;
-           dataSet.Tables["OsnSdelkVdch"].Columns["id"].ColumnMapping = MappingType.Hidden;
-        //   dataSet.Tables["ZalogPoruch"].Columns["idZalPor"].ColumnMapping = MappingType.Hidden;
-       //   dataSet.Tables["ZalogPoruch"].Columns["id"].ColumnMapping = MappingType.Hidden;
+            dataSet.Tables["OsnSdelkVdch"].Columns["id"].ColumnMapping = MappingType.Hidden;
             dataSet.Tables["OsnovnSd"].Columns["id"].ColumnMapping = MappingType.Hidden;
             dataSet.Tables["DocsZalPor"].Columns["id"].ColumnMapping = MappingType.Hidden;
-           
-
+     
+            //HIDDEN SCROLLBARS AREA
+            gdKredDog.ScrollBars = ScrollBars.Vertical;
+            gdZalogPoruch.ScrollBars = ScrollBars.Vertical;
+            gdName.ScrollBars = ScrollBars.Vertical;
         }
-
-
-
 
         private void DocumentsForm_Click(object sender, EventArgs e)
         {
@@ -202,7 +193,7 @@ namespace NlgDBcredProg
         private void spis_dop_sog_and__gr_obj_Click(object sender, EventArgs e) //button to open Spisok dop.sogl i grup.obj form
         {
             try
-            { 
+            {
                 int trans2 = (int)gdZalogPoruch.CurrentRow.Cells[3].Value;
                 Spid_ds_and_grob SDSG = new Spid_ds_and_grob(trans2);
                 SDSG.ShowDialog();
@@ -213,7 +204,7 @@ namespace NlgDBcredProg
             }
         }
 
-        private void gdZaemwik_CellContentClick(object sender, DataGridViewCellEventArgs e) //make clickable Zaemwik cells
+        private void gdZaemwik_CellContentClick(object sender, DataGridViewCellEventArgs e) //make clickable cells
         {
 
             {
@@ -227,12 +218,11 @@ namespace NlgDBcredProg
             bsName.Filter = "Наименование LIKE '%' + '" + textBox1.Text + "%'"; //search in tables
         }
 
-        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e) // close application and connection to SQL
         {
             connection.Close();
             Application.Exit();
         }
-
 
     }
 }

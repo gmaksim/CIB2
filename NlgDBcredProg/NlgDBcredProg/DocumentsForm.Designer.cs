@@ -84,12 +84,12 @@
             this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label3.ForeColor = System.Drawing.Color.Tomato;
-            this.label3.Location = new System.Drawing.Point(5, 366);
+            this.label3.Location = new System.Drawing.Point(5, 368);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(655, 13);
+            this.label3.Size = new System.Drawing.Size(507, 26);
             this.label3.TabIndex = 22;
-            this.label3.Text = "ОБРАТИТЕ ВНИМАНИЕ! Отображенные выше документы касаются выделенного залогодателя/" +
-    "поручителя.";
+            this.label3.Text = "ОБРАТИТЕ ВНИМАНИЕ! \r\nОтображенные выше документы касаются выделенного залогодател" +
+    "я/поручителя.";
             // 
             // DocumentsForm
             // 
