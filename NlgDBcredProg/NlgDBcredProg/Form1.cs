@@ -14,6 +14,7 @@ namespace NlgDBcredProg
         SqlDataAdapter adName, adKredDog, adZaemwik, adKredDocum, adOsnSdelkVdch, adZalogPoruch, adOsnovnSd, adGrpObject, adDocsZalPor, adDopSogZalPor, adObjData;
         BindingSource bsName, bsKredDog, bsZaemwik, bsKredDocum, bsOsnSdelkVdch, bsZalogPoruch, bsOsnovnSd, bsGrpObject, bsDocsZalPor, bsDopSogZalPor, bsObjData;
         DataGridView gdName, gdKredDog, gdKredDocum, gdOsnSdelkVdch, gdZalogPoruch, gdOsnovnSd;
+        SqlConnection connection = new SqlConnection(Program.connection);
 
         public Form1()
         {
@@ -113,7 +114,9 @@ namespace NlgDBcredProg
             this.Controls.AddRange(new Control[] { gdName, gdKredDog, gdKredDocum, gdOsnSdelkVdch, gdZalogPoruch, gdOsnovnSd }); //control 
 
             //CLICKABLE DATA IN DATA GRID'S
-            //this.gdZaemwik.CellContentClick += new DataGridViewCellEventHandler(this.gdZaemwik_CellContentClick); //clickable cells in Zaemwik
+            this.gdOsnSdelkVdch.CellContentClick += new DataGridViewCellEventHandler(this.gdOsnSdelkVdch_CellContentClick);
+            this.gdKredDocum.CellContentClick += new DataGridViewCellEventHandler(this.gdKredDocum_CellContentClick);
+            this.gdOsnovnSd.CellContentClick += new DataGridViewCellEventHandler(this.gdOsnovnSd_CellContentClick);
 
             //HIDDEN ID'S AREA
             dataSet.Tables["Zaemwik"].Columns["id"].ColumnMapping = MappingType.Hidden;
@@ -121,7 +124,7 @@ namespace NlgDBcredProg
             dataSet.Tables["OsnSdelkVdch"].Columns["id"].ColumnMapping = MappingType.Hidden;
             dataSet.Tables["OsnovnSd"].Columns["id"].ColumnMapping = MappingType.Hidden;
             dataSet.Tables["DocsZalPor"].Columns["id"].ColumnMapping = MappingType.Hidden;
-     
+
             //HIDDEN SCROLLBARS AREA
             gdKredDog.ScrollBars = ScrollBars.Vertical;
             gdZalogPoruch.ScrollBars = ScrollBars.Vertical;
@@ -130,55 +133,29 @@ namespace NlgDBcredProg
 
         private void DocumentsForm_Click(object sender, EventArgs e)
         {
-
-            int trans1 = (int)gdName.CurrentRow.Cells[2].Value;
-            int trans2 = (int)gdZalogPoruch.CurrentRow.Cells[3].Value; //!
-            DocumentsForm SDS = new DocumentsForm(trans1, trans2);
-            SDS.ShowDialog();
-
-
-            //try
-            //{
-            //row count
-            /*     if (gdZalogPoruch.CurrentRow.Cells[0].Value != null) // trans1
-                 {
-                     MessageBox.Show("gdZalogPoruch.RowCount > 0", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
-                     if (gdName.CurrentRow.Cells[0].Value != null) //trans2
-                     {
-                         MessageBox.Show("gdName.RowCount > 0", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                         int trans1 = (int)gdName.CurrentRow.Cells[2].Value;
-                         DocumentsForm SDS = new DocumentsForm(trans1);
-                         SDS.ShowDialog();
-
-                     }
-                     else
-                     {
-                         MessageBox.Show("НЕ gdName.RowCount > 0", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                         int trans1 = (int)gdName.CurrentRow.Cells[2].Value;
-                         int trans2 = (int)gdZalogPoruch.CurrentRow.Cells[3].Value;
-                         DocumentsForm SDS = new DocumentsForm(trans1, trans2);
-                         SDS.ShowDialog();
-
-                     }
-
-                 }
-                 else
-                 {
-                     //MessageBox.Show("НЕ gdZalogPoruch.RowCount > 0", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                     MessageBox.Show("Вы не добавили договор", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-
-                 } */
-            //}
-            //catch
-            //{
-            //    MessageBox.Show("Вы не добавили договор", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-            //}
+            try // try take 2 arguments
+            {
+                int trans1 = (int)gdName.CurrentRow.Cells[2].Value;
+                int trans2 = (int)gdZalogPoruch.CurrentRow.Cells[3].Value;
+                DocumentsForm SDS = new DocumentsForm(trans1, trans2);
+                SDS.ShowDialog();
+            }
+            catch // if don't work
+            {
+                try // try take 1 arguments (always have)
+                {
+                    int trans1 = (int)gdName.CurrentRow.Cells[2].Value;
+                    DocumentsForm SDS = new DocumentsForm(trans1);
+                    SDS.ShowDialog();
+                }
+                catch // not possible varint
+                {
+                    MessageBox.Show("Вы не добавили договор", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+            }
         }
-
       
-
-        private void Form1_Load(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e) //main form position and size
         {
             this.Location = new Point(0, 0);
             Size = new Size(980, 620);
@@ -192,7 +169,7 @@ namespace NlgDBcredProg
 
         private void spis_dop_sog_and__gr_obj_Click(object sender, EventArgs e) //button to open Spisok dop.sogl i grup.obj form
         {
-            try
+            try // try take 1 argument
             {
                 int trans2 = (int)gdZalogPoruch.CurrentRow.Cells[3].Value;
                 Spid_ds_and_grob SDSG = new Spid_ds_and_grob(trans2);
@@ -204,18 +181,14 @@ namespace NlgDBcredProg
             }
         }
 
-        private void gdZaemwik_CellContentClick(object sender, DataGridViewCellEventArgs e) //make clickable cells
+        private void textBox1_TextChanged(object sender, EventArgs e) //search OOO in main form
         {
-
-            {
-                //Process.Start(gdZaemwik.SelectedCells[0].Value.ToString());
-            }
+            bsName.Filter = "Наименование LIKE '%' + '" + textBox1.Text + "%'"; 
         }
 
-
-        private void textBox1_TextChanged_1(object sender, EventArgs e) //search OOO in main form
+        private void textBox2_TextChanged(object sender, EventArgs e)
         {
-            bsName.Filter = "Наименование LIKE '%' + '" + textBox1.Text + "%'"; //search in tables
+            //trouble with int type
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e) // close application and connection to SQL
