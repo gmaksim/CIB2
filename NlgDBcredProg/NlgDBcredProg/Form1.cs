@@ -143,15 +143,22 @@ namespace NlgDBcredProg
             catch // if don't work
             {
 
-                if (gdName.CurrentRow.Cells[2].Value != null) // try take 1 arguments
+                try // try take 1 arguments
                 {
-                    int trans1 = (int)gdName.CurrentRow.Cells[2].Value;
-                    DocumentsForm SDS = new DocumentsForm(trans1);
-                    SDS.ShowDialog();
+                    if (gdName.CurrentRow.Cells[2].Value != null) // try take 1 arguments
+                    {
+                        int trans1 = (int)gdName.CurrentRow.Cells[2].Value;
+                        DocumentsForm SDS = new DocumentsForm(trans1);
+                        SDS.ShowDialog();
+                    }
+                    else 
+                    {
+                        MessageBox.Show("CIB 2016-2017", "About", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                    }
                 }
-                else // not possible variant
+                catch // if DB clear
                 {
-                    MessageBox.Show("Данных нет", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("В базе данных нет информации", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
             }
         }
