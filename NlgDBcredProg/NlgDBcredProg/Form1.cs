@@ -142,15 +142,16 @@ namespace NlgDBcredProg
             }
             catch // if don't work
             {
-                try // try take 1 arguments (always have)
+
+                if (gdName.CurrentRow.Cells[2].Value != null) // try take 1 arguments
                 {
                     int trans1 = (int)gdName.CurrentRow.Cells[2].Value;
                     DocumentsForm SDS = new DocumentsForm(trans1);
                     SDS.ShowDialog();
                 }
-                catch // not possible varint
+                else // not possible variant
                 {
-                    MessageBox.Show("Вы не добавили договор", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("Данных нет", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
             }
         }

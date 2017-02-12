@@ -2,7 +2,6 @@
 using System.Data;
 using System.Windows.Forms;
 using System.Data.SqlClient;
-using System.Drawing;
 using System.Diagnostics;
 
 namespace NlgDBcredProg
@@ -43,8 +42,6 @@ namespace NlgDBcredProg
                 connection.Close();
             }
         }
-
-
 
         private void saveKredDocum_Click(object sender, EventArgs e) //save for KredDocum
         {

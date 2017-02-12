@@ -21,9 +21,9 @@ namespace NlgDBcredProg
             Application.Run(new AuthForm());
 
             // connection to SQL throw AutForm
-            Program.connection = @"Data Source=.\cibEXPRESS; Initial Catalog=CredDogCIB; Integrated Security=True";
-            SqlConnection connection = new SqlConnection(Program.connection);
-            Application.Run(new Form1());
+            //Program.connection = @"Data Source=.\cibEXPRESS; Initial Catalog=CredDogCIB; Integrated Security=True";
+            //SqlConnection connection = new SqlConnection(Program.connection);
+            //Application.Run(new Form1());
             // connection to SQL throw AutForm
         }
     }

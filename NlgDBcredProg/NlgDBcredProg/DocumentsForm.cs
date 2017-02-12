@@ -95,7 +95,6 @@ namespace NlgDBcredProg
             this.Controls.AddRange(new Control[] { gdZaemwik });
 
             this.gdZaemwik.CellContentClick += new DataGridViewCellEventHandler(this.gdZaemwik_CellContentClick);
-            this.gdDocsZalPor.CellContentClick += new DataGridViewCellEventHandler(this.gdDocsZalPor_CellContentClick);
 
             gdZaemwik.ScrollBars = ScrollBars.Vertical;
         }
