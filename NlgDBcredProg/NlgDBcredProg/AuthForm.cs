@@ -28,7 +28,7 @@ namespace NlgDBcredProg
         private void auth_proc(object sender, EventArgs e) //for main program
         {
 
-            Program.connection = @"Data Source=.\cibEXPRESS ;Initial Catalog=CredDogCIB;User Id=" + textBox1.Text + ";Password=" + textBox2.Text + ";"; // connection to SQL
+            Program.connection = @"Data Source=NEWSQL\CIBEXPRESS,56819 ;Initial Catalog=CredDogCIB;User Id=" + textBox1.Text + ";Password=" + textBox2.Text + ";"; // connection to SQL
             int j = 1;
             try
             {
