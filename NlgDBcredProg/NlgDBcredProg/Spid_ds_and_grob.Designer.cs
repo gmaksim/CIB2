@@ -115,7 +115,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "Spid_ds_and_grob";
-            this.Text = "CIB - Список доп.согл. и групп объектов";
+            this.Text = "Банк - Список доп.согл. и групп объектов";
             this.Load += new System.EventHandler(this.Spid_ds_and_grob_Load);
             this.Click += new System.EventHandler(this.saveObjData_Click);
             this.ResumeLayout(false);

@@ -116,7 +116,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DocumentsForm";
-            this.Text = "CIB - Документы";
+            this.Text = "Банк - Документы";
             this.Load += new System.EventHandler(this.DocumentsForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
