@@ -88,7 +88,7 @@ namespace NlgDBcredProg
                 adZalogPoruch.InsertCommand.Parameters.Add(new SqlParameter("@id", SqlDbType.Int, 10, "id"));
                 adZalogPoruch.InsertCommand.Parameters.Add(new SqlParameter("@Наименование", SqlDbType.NVarChar, 50, "Наименование"));
                 adZalogPoruch.InsertCommand.Parameters.Add(new SqlParameter("@Тип_З_П", SqlDbType.NVarChar, 50, "Тип_З_П"));
-                adZalogPoruch.InsertCommand.Parameters.Add(new SqlParameter("@Принят", SqlDbType.Date, 30, "Принят"));
+                adZalogPoruch.InsertCommand.Parameters.Add(new SqlParameter("@Паспорт_ИНН", SqlDbType.NVarChar, 50, "Паспорт_ИНН"));
                 SqlParameter parameter = adZalogPoruch.InsertCommand.Parameters.Add("@idZalPor", SqlDbType.Int, 10, "idZalPor");
                 parameter.Direction = ParameterDirection.Output;
                 adZalogPoruch.Update(dataSet.Tables["ZalogPoruch"]);

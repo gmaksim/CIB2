@@ -11,6 +11,7 @@ namespace NlgDBcredProg
         DataSet dataSet;
         SqlDataAdapter adName, adKredDog, adZalogPoruch;
         BindingSource bsName, bsKredDog, bsZalogPoruch;
+
         DataGridView gdName, gdKredDog, gdZalogPoruch;
 
         public Search()
@@ -68,6 +69,11 @@ namespace NlgDBcredProg
         private void textBox1_TextChanged(object sender, EventArgs e) //search by Name
         {
             bsZalogPoruch.Filter = "Наименование LIKE '%' + '" + textBox1.Text + "%'"; 
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+           bsZalogPoruch.Filter = "Паспорт_ИНН LIKE '%' + '" + textBox2.Text + "%'";
         }
     }
 }
