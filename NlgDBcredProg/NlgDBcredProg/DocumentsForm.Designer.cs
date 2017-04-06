@@ -64,9 +64,9 @@
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label2.Location = new System.Drawing.Point(6, 6);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(236, 15);
+            this.label2.Size = new System.Drawing.Size(139, 15);
             this.label2.TabIndex = 20;
-            this.label2.Text = "Документы заемщика по договору";
+            this.label2.Text = "Borrower documents";
             // 
             // label1
             // 
@@ -75,9 +75,9 @@
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.label1.Location = new System.Drawing.Point(6, 187);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(203, 15);
+            this.label1.Size = new System.Drawing.Size(104, 15);
             this.label1.TabIndex = 21;
-            this.label1.Text = "Документы участника сделки";
+            this.label1.Text = "P/G documents";
             // 
             // label3
             // 
@@ -87,10 +87,9 @@
             this.label3.ForeColor = System.Drawing.Color.Tomato;
             this.label3.Location = new System.Drawing.Point(5, 368);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(507, 26);
+            this.label3.Size = new System.Drawing.Size(430, 26);
             this.label3.TabIndex = 22;
-            this.label3.Text = "ОБРАТИТЕ ВНИМАНИЕ! \r\nОтображенные выше документы касаются выделенного залогодател" +
-    "я/поручителя.";
+            this.label3.Text = "NOTE!\r\nThe documents shown above relate to the designated pledgor / guarantor.";
             // 
             // label4
             // 
@@ -113,9 +112,10 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "DocumentsForm";
-            this.Text = "CIB - Документы";
+            this.Text = "LA | Documents";
             this.Load += new System.EventHandler(this.DocumentsForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
